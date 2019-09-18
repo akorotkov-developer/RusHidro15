@@ -1,0 +1,125 @@
+{reduce:space}
+{mask:main}
+{#
+
+
+<script>
+	$(document).ready(function(){
+		$('#regform').validate({
+			rules:{
+				name:'required',
+				email:{
+					required: true,
+					email:true
+				},
+				captcha:'required',
+				password:'required',
+				password2:{
+					equalTo: '#password'
+				}
+			},
+			messages:{
+				name:"Введите Ф.И.О.",
+				email:{
+					required: "Введите email",
+					email:"Неправильно введен адрес электронной почты"
+				},
+				captcha:"Введите код с картинки",
+				password:"Введите пароль",
+				password2:{
+					equalTo:'Пароли не совпадают'
+				}
+			}
+		});
+	});
+</script>
+<style>
+label.error{
+	color:red;
+	size:4;
+}
+</style>
+#}
+
+													
+													
+							{text}
+								
+						{set:send:1}<br><br><font size='4' color='green'>Вы успешно зарегестрировались. На ваш email отправлено письмо для подтверждения регистрации</font>{/set}
+						{mis:send:1}
+						<div class="feedback-wrapper">
+						
+							
+						
+							<h3>Регистрация</h3>
+							{set:send:2}<font size='4' color='red'>Код с картинки введен не правильно</font>{/set}
+							{set:send:3}<font size='4' color='red'>Произошла ошибка, попробуйте регистрацию позже. Просим прощения за неудобства, мы уже работаем над устранением данной проблемы</font>{/set}
+							{set:send:4}<font size='4' color='red'>Пользователь с таким адресом электронной почты уже существует.</font>{/set}
+							<p><span class="red">*</span> поля, обязательные для заполнения</p>
+							
+							<form method="post" action="" name="regform" id='regform'>
+								<table class="feedback">
+									<tr>
+										<td class="left">ФИО <span class="red">*</span></td>
+										<td class="right">
+											<input type="text" name="name" id='name' value="{name}" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">Телефон</td>
+										<td class="right">
+											<input type="text" name="phone" id='phone' value="{phone}" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">E-mail <span class="red">*</span></td>
+										<td class="right">
+											<input type="text" name="email" id='email' value="{email}" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">Адрес</td>
+										<td class="right">
+											<input type="text" name="addres" id='addres' value="{addres}" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">Пароль <span class="red">*</span></td>
+										<td class="right">
+											<input type="text" name="password" id='password' value="" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">Повторите пароль <span class="red">*</span></td>
+										<td class="right">
+											<input type="text" name="password2" id='password2' value="" maxlength="" />
+										</td>
+									</tr>
+									<tr>
+										<td class="left">
+											Введите код с картинки <span class="red">*</span>
+										</td>
+										<td class="right">
+										
+											<table>
+												<tr>
+													<td><img src="/libs/captcha/captcha.php" class="antispam" /></td>
+													<td><input type="text" id='captcha' name='captcha' class="antispam"/></td>
+												</tr>
+											</table>										
+											
+											
+										</td>
+									</tr>									
+									<tr>
+										<td class="left"></td>
+										<td class="right">
+											<input type="submit" class="submit" name="" value="Отправить" />
+										</td>
+									</tr>
+								</table>
+							</form>
+						
+						</div>
+                    {/mis}
+{/mask}

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<!--#misc::head#-->
+</head>
+
+<body>   
+
+<div class="inner-container">
+	
+	<a href="/?mobile=1" class="logo"></a>
+	
+	<div class="menu-hamburger" onclick="hamburgerPopup.addClass('active'); $('body').addClass('noscroll');"><span></span><span></span><span></span></div>
+	
+	<div class="menu-hamburger-popup" id="hamburger-popup" >
+		<div class="menu-hamburger-close" onclick="hamburgerPopup.removeClass('active'); $('body').removeClass('noscroll');"><span></span><span></span></div>
+		<div class="menu-hamburger-content">
+			<div class="menu-hamburger-item"><a href="/?mobile=1#page1">РусГидро в цифрах</a></div>
+			<div class="menu-hamburger-item"><a href="/?mobile=1#page2">История РусГидро</a></div>
+			<div class="menu-hamburger-item"><a href="/?mobile=1#page3">Компания сегодня</a></div>
+			<div class="menu-hamburger-item"><a href="/?mobile=1#page4">Добрые дела</a></div>
+			<div class="menu-hamburger-item"><a href="/?mobile=1#page5">Трудовые династии</a></div>
+			<div class="menu-hamburger-link"><a href="/news?mobile=1">Новости</a></div>
+			<div class="menu-hamburger-link"><a href="/konkursy?mobile=1">Конкурсы</a></div>
+		</div>
+	</div>
+	
+	<div class="inner-content">		
+		<!--#control::content#-->
+	</div>
+	
+</div>
+   
+<!--#misc::showvar# var=counters -->
+   
+</body>
+</html>

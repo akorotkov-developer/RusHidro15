@@ -1,0 +1,28 @@
+{reduce:space}
+{mask:main}
+
+		{set:item}
+		<div class="submenu">
+
+			{item}
+		
+		</div>
+		{/set}
+		
+{/mask}
+
+
+			{mask:item}
+				{set:link:link}<span><a href="{url}">{name}</a></span>{/}
+				{set:link:nolink}<span><strong>{name}</strong></span>{/}
+				{set:link:stronglink}<span><strong><a href="{url}">{name}</a></strong></span>{/}
+				
+				{mis:link:link}
+					{set:item}
+					<div class="submenu2">
+						{item}
+					</div>	
+					{/}				
+				{/}
+				
+			{/mask}

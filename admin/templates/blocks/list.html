@@ -1,0 +1,727 @@
+{reduce:space} {mask:main}
+<script language="javascript">
+<!--
+
+var divInv='';
+
+
+function checked_all_number()		{
+	var k = 0;
+	var arr = document.getElementsByTagName('input');
+	for (i = 0; i < arr.length; i++)		{
+		var a = arr[i];
+		if (a.id.substr(0, 10) == 'massblock_')	{
+			if (a.checked)	{
+				k++;
+			}
+		}
+	}
+
+	if (k > 0)		{
+		$('opergroupdiv').style.display = 'block';
+	}	else	{
+		$('opergroupdiv').style.display = 'none';
+	}
+	$('number_selected_checkbox').innerHTML = 'Выделено '+k;
+}
+
+
+function checked_all()		{
+	var elem = $('checked_all_checkbox');
+
+	var arr = document.getElementsByTagName('input');
+	for (i = 0; i < arr.length; i++)		{
+		var a = arr[i];
+		if (a.id.substr(0, 10) == 'massblock_')	{
+			a.checked = elem.checked;
+		}
+	}
+
+	checked_all_number();
+}
+
+{#
+XY = {x:0, y:0};
+
+function getElementPosition(elemId)
+{
+
+    var elem_1 = document.getElementById(elemId);
+
+	//alert (elem_1);
+	//return;
+
+    var w_1 = elem_1.offsetWidth;
+    var h_1 = elem_1.offsetHeight;
+	
+    var l_1 = 0;
+    var t_1 = 0;
+	
+    while (elem_1)
+    {
+        l_1 += elem_1.offsetLeft;
+        t_1 += elem_1.offsetTop;
+        elem_1 = elem_1.offsetParent;
+    }
+
+    return {"left":l_1, "offsetY":t_1, "width": w_1, "height":h_1};
+}
+
+
+
+function mousePageXY(e)
+{
+  var x = 0, y = 0;
+
+  if (!e) e = window.event;
+
+  if (e.pageX || e.pageY)
+  {
+    x = e.pageX;
+    y = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+  {
+    x = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft) - document.documentElement.clientLeft;
+    y = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop) - document.documentElement.clientTop;
+	//y = y +  document.body.scrollTop;
+  }
+
+	//offY = e.offsetY;
+
+  return {"x":x, "y":y};
+}
+
+
+
+function tmove(n)
+{
+	offXY = getElementPosition(n.id);
+
+	 $('divcursor').style.top = XY.y; // + document.body.scrollTop - offXY.offsetY;
+	 xx = XY.x - 27;
+	 if (xx < 15) xx = 15;
+
+	yy = XY.y - offXY.offsetY;
+
+	 if (yy < 7)	{ $('im').src= 'img/bg-top.gif'; $('divcursor').style.top = XY.y - 2; }
+	 if (yy > 15)	{ $('im').src= 'img/bg-bottom.gif'; $('divcursor').style.top = XY.y - 10;  }
+	 $('divcursor').style.left =xx;
+}
+
+
+
+function move()
+{
+  contexthide();
+  $('divcursor').style.display = '';
+  $('mcparent').value = $('blockid').value;			
+}
+// ---------------------------------------
+// Стилевые функции.
+// ---------------------------------------
+function pTrOver(n)
+{
+	n.style.backgroundColor = '#f7f7f7';
+	wascolor = n.style.color;
+	n.style.color = '000000';
+}
+function pTrOut(n)
+{
+	n.style.backgroundColor = '';
+	n.style.color = wascolor;
+}
+// ---------------------------------------
+// Контекстное меню.
+// ---------------------------------------			
+function context(id)
+{
+  $('blockid').value = $(id).id; // Выдаём на редактирование блок id
+  $('popup').style.left = XY.x-10;// + document.body.scrollTop;
+  $('popup').style.top = XY.y-10;
+  $('popup').style.display = '';
+
+}
+function contexthide()
+{
+  $('popup').style.display = 'none';
+}
+
+
+
+
+// ---------------------------------------
+// Создание нового блока.
+// ---------------------------------------	
+
+#}
+function add_new()
+{
+location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=add'+ '{//filter/urlfilter}';
+}
+function edit()
+{
+  location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=edit&blockid='+$('blockid').value + '{//filter/urlfilter}';
+}
+
+function copy()
+{
+  location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=copy&blockid='+$('blockid').value
+}
+
+
+
+function hide_block()
+{
+location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=hide&blockid='+$('blockid').value + '{//filter/urlfilter}';
+}
+function del()
+{
+ if(window.confirm('Вы действительно хотите удалить блок?'))location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=del&blockid='+$('blockid').value + '{//filter/urlfilter}';
+}
+
+function press(id)
+{
+
+	//n = document.getElementById(id);
+	offXY = getElementPosition(id);
+	yy = XY.y - offXY.offsetY;
+
+//	alert (yy);
+
+ $('blockid').value = $(id).id; // Выдаём на редактирование блок id
+ if($('divcursor').style.display=='' && $('mcparent').value!==id)
+ {
+	
+  	 if (yy < 7)location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&actions=mup&copymove=0&mcparent='+$('mcparent').value+'&blockid='+$('blockid').value + '{//filter/urlfilter}';
+	 if (yy > 15) location.href='block.php?cparent='+$('cparent').value+'&copymove=1&btmplate='+$('btmplate').value+'&actions=mdown&mcparent='+$('mcparent').value+'&blockid='+$('blockid').value + '{//filter/urlfilter}';
+ }
+  $('mcparent').value='';
+  $('divcursor').style.display='none';
+}
+
+{#
+// -------------------------------------------------------------------]
+// Меняем шаблон блока.
+function changebtempl(btempl)
+{
+ location.href='block.php?cparent='+$('cparent').value+'&btmplate='+btempl;
+}
+function changesort(filterkey)
+{
+ location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&filterkey='+filterkey;
+}
+function changesortby(sortby)
+{
+ location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&filterby='+sortby;
+}
+
+function find()
+{
+ location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value+'&findmy='+$('findmy').value+'&findin='+$('filterkey').value;
+}
+
+
+
+
+
+	function vis_csv()		{
+		if ( $('csv_form').style.display == 'block')		{
+			$('csv_form').style.display = 'none';
+		}	else	{
+			$('csv_form').style.display = 'block';
+		}
+	}
+
+
+
+
+
+
+#}
+//-->
+
+</script>
+<!-------------------------------------------------------------------------->
+
+
+{set://redirect}
+<script>
+	//alert ('{//redirect}'+'{//filter/urlfilter}');
+	window.location.href='{//redirect}'+'{//filter/urlfilter}';
+</script>
+{/set}
+
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div>
+												<h1  style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />Редактирование&nbsp;блоков</h1>
+												<h2>&nbsp;</h2>
+												<div class="nav">
+													
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+{if:{//cat_filtr/unvis_option_block} != 1}
+<table style="width:400px" cellpadding="0" cellspacing="0"	>
+<tr>
+<td >
+</td>
+
+
+
+<td>
+{if:{csv/is}==1}
+			<div class="csv_block" onClick=""><a href="#" title="Загрузить csv" onClick="vis_csv(); return false;">Загрузить csv</a></div>
+{/if}
+</td>
+
+
+</tr>
+</table>
+{/if}
+
+
+
+
+{if:{csv/is}==1}
+
+<div id="csv_form" style="{if:{csv/upload}!=1}display:none{/if}" class="csv_div">
+	
+	{mask:csv}
+		{set:errors}
+			<div style="padding-left:20px; padding-bottom:10px; color:red">
+			{mask:errors}
+				{error}
+			{/mask}
+			</div>
+		{/set}
+	{/mask}
+
+
+<form name="import_csv" method="post" enctype="multipart/form-data" action="block.php?cparent={cparent}">
+<input type="hidden" name="import_csv_true" value="true" />
+<table cellspacing="10">
+<tr>
+<td>Файл:</td>
+<td><input type="file" name="csv_file" /></td>
+</tr>
+<tr>
+<td>Режим:</td>
+<td>
+	<select name="csv_regime">
+		<option value="add" {if:{csv/regime}=='add'}selected{/if}>добавление</option>
+		<option value="merge" {if:{csv/regime}=='merge'}selected{/if}>только обновление</option>
+		<option value="delete" {if:{csv/regime}=='delete'}selected{/if}>удалить все данные</option>
+	</select>
+</td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="Загрузить" ></td>
+</tr>
+</table>
+</form>
+
+
+</div>
+{/if}
+{if:{//canmove}}
+<script type="text/javascript">
+	_jQuery(document).ready(function($) {
+
+		/*$('#divtable tbody').sortable({ axis: "y", cancel: '.id, .name, .block-options, .check',
+			update: function(event,ui) {
+				var id = ui.item.data('id');
+				var mcparent = id;
+				_jQuery('#blockid').val(ui.item.prev().length ? ui.item.prev().data('id') : ui.item.next().data('id'));
+				data = _jQuery(document.blockform).serialize();
+				if (ui.item.prev().length) {
+					actions = 'mdown';
+					data += '&copymove=1';
+				} else {
+					data += '&copymove=0';
+					actions = 'mup';
+				}
+				data = data.replace('actions=', 'actions=' + actions);
+				data += '&mcparent=' + mcparent;
+				_jQuery.get('block.php', data);
+			},
+			activate: function(event, ui) {
+				$(ui.placeholder).html(ui.item.html());
+			}
+
+		});*/
+		/*stop - функция для аякса перезагрузки списка*/
+
+		$('#divtable .item input:checked').each(function(){ $(this).parents('tr').toggleClass('checked')  })
+		$('#divtable .item input:checkbox').click(function(){ $(this).parents('tr').toggleClass('checked') })
+
+		$('#checked_all_checkbox').click(function(){
+			if( $(this).is(':checked')) { $(this).parents('table').next('.list-wrapper').find('tr').addClass('checked') }
+			else { $(this).parents('table').next('.list-wrapper').find('tr').removeClass('checked') }
+		})
+	});
+</script>
+<style>
+	.ui-sortable-helper {
+		position:initial !important;
+		display:none;
+	}
+	.ui-sortable-placeholder {
+		visibility: visible !important;
+	}
+	td.move > span {
+		cursor:move;
+	}
+</style>
+{/}
+
+
+<form method="post" name="blockform" action="block.php?cparent={cparent}&btmplate={btmplate}">
+<table class="in_cont" cellpadding="0" cellspacing="0" style="width:100%"  >
+            	<tr>
+                	<td align="center" style="width:80%" valign="top">
+                        <div class="with_page">
+				<!--выбор типов блоков-->
+				<div class="type-list">
+					<div class="title">Тип блоков</div>
+					{mask:blocks}{if:{//superadmin} || !{super_only}}
+					<a href="#" onclick="changebtempl('{btempl}')" class="{if:{//superadmin} && {super_only} && {btempl}!={//btmplate}}zero{/}{if:{btempl}!={//btmplate}}{/}{if:{btempl}=={//btmplate}}active{/if}"><span>{btemplname}</span> ({count}) {if:{//superadmin}} ({btempl}){/}</a>
+					{/}{/mask}
+				</div>
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+						<th style="padding: 0">
+							<div class="block-new"><a href="#" onclick="add_new(); return false;" title="Новый блок"><span>Новый блок</span></a></div>
+						</th>
+						<th style="width:80%; text-align:right; padding: 0 10px 0 0; vertical-align: bottom">
+									Выводить на страницу по:&nbsp;
+									{mask:filter}
+										{mask:limit_arr}
+											{if: {//filter/limit} == {limit} }
+												<strong>{limit}</stong></strong>
+											{/if}
+											{if: {//filter/limit} != {limit} }
+												<a href="{//filter/preurl}{php}str_replace('f_page', 'f_page1', str_replace('f_limit', 'f_limit1', {//filter/urlfilter}) ){/php}&f_limit={limit}">{limit}</a>
+											{/if}
+											{mis:_last}&nbsp;|&nbsp;{/mis}
+										{/mask}
+									{/mask}
+								</th>
+				                                </tr>	    
+<tr>
+						<td colspan="2" style="border:none; text-align:left">
+{set:page}
+<p class="pad">Показано записей {start}-
+{if:{numall} >= {stop}}
+	{stop}
+{/if}
+{if:{numall} < {stop}}
+	{numall}
+{/if}
+ (всего {numall})</p>
+{/set}
+</td>
+</tr>
+</table>
+<!-------------------------------------------------------------------------->
+{set:alert}<font color="red"><br><br><b>{alert}</b></font>{/set}
+<input type="hidden" name="blockid" id="blockid">
+<input type="hidden" name="parent" id="parent" value="{parent}">
+<input type="hidden" name="btmplate" id="btmplate" value="{btmplate}">
+<input type="hidden" name="cparent" id="cparent" value="{cparent}">
+<input type="hidden" name="mcparent" id="mcparent" >
+<input type="hidden" name="actions" value="">
+				<div id="divtable" class="list-wrapper">
+					<table  class="table-list">
+{set:blocklist}
+						<thead><tr>
+							<th class="id">ID</th>
+							{if:{//cat_filtr/unvis_option_block} != 1}{mask:table_hr}
+							<th class="name">{title}</th>
+							{/mask}{/if}
+							{if:{//cat_filtr/unvis_option_block} == 1}{mask:table_hr}
+							<th nowrap="nowrap" style="background: #e7e7e7;" class="name">{title}</th>
+	{/mask}
+							<th nowrap="nowrap" style="background: #e7e7e7; width:90%" class="name">путь</th>
+{/if}
+							<th class="block-options"><label for="checked_all_checkbox" style="cursor:pointer;">Выделить&nbsp;все</label></th>
+							<th class="check"><input type="checkbox" id="checked_all_checkbox" onclick="checked_all();" /></th>
+						</tr></thead>
+						<tbody>{mask:blocklist}
+						<tr id="{id}" data-id="{id}" class="item" {if:{//canedit}} {if:{//cat_filtr/unvis_option_block} != 1}oncontextmenu="context(this.id); return false"{/if} onmousemove="tmove(this)"  onMouseOver="pTrOver(this); contexthide()" onMouseOut="pTrOut(this);" onclick="press(this.id)"{/if}>
+							<td class="id {if:{visible}!=1}gray{/if}">{id}</td>
+{mask:table_name}
+							<td nowrap="nowrap" class="name">
+							{set:data}<a href="?cparent={//cparent}&btmplate={//btmplate}&actions=edit&blockid={../id}" style="text-decoration:none" onclick="{if:{//canedit}}$('blockid').value = '{../id}'; edit();{/if} return false;" class="{if:{../visible}!=1}gray{/if}">{data}</a>{/}
+	{mis:data}&nbsp;{/mis}
+	</td>
+{/mask}
+							<td class="block-options">
+								{if:{//canedit}}<a class="redact" title="редактировать" onclick="$('blockid').value = {id}; edit();"></a>{/}
+								{if:{//canhide}}<a class="hide {*{if:!{visible}}hidden{/}*}" title="скрыть/показать" onclick="$('blockid').value = {id}; hide_block();"></a>{/}
+								{if:{//cancopy}}<a class="copy" title="копировать" onclick="$('blockid').value = {id}; copy();"></a>{/}
+								{if:{//candel}}<a class="delete" title="удалить" onclick="$('blockid').value = {id}; del();"></a>{/}
+							</td>
+							{if:{//cat_filtr/unvis_option_block} == 1}<td><small>{path}</small></td>{/if}
+							<td class="check"><input type="checkbox" id="massblock_{id}" name="massblock[{id}]" value="{id}" onclick="checked_all_number();" /></td>
+</tr>
+						{/mask}</tbody>
+					{/set}
+					</table>
+				</div>
+{set:page}
+						<table style="paddin:0px; margin:0px">
+								<tr >
+									<td style="border: none; font-size: 11px;">Страницы:</td>
+						<td style="width:99%; border: none; font-size: 11px;">{mask:page}
+							{set:current}{title}{/set}
+							{mis:current}<a href="{url}{php}str_replace('f_page', 'f_page1', {//filter/urlfilter}){/php}">{title}</a>{/mis}
+											&nbsp; 
+						{/mask}</td>
+								</tr>
+						</table>
+{/set}
+		</div>
+		</td>
+                        <td class="r_cont" style="width:30%">
+							<script>
+									function open_param()		{
+										if ($('form_open_param').style.display == 'none')		{
+											$('form_open_param').style.display = 'block';
+											$('f_openparam').value = '1';
+										}	else	{
+											$('form_open_param').style.display = 'none';
+											$('f_openparam').value = '0';
+										}
+									}
+									function set_value(id, value)	{
+										$(id).value = value;
+									}
+									function put_cat_filtr_catid()		{
+											var string = '';
+											var clear_tree = false;
+											for (i = 0; i < $('cat_filtr_cat').options.length; i++)		{
+												var opt = $('cat_filtr_cat').options[i];
+												if ( (i == 0) &&  (opt.selected == true) )	{
+													clear_tree = true;
+												}
+												if ( ( i > 0) && (clear_tree == true) ) 	{
+													opt.selected = false;
+												}
+												if (opt.disabled == true)	{
+													opt.selected = false;
+												}
+											}
+											for (i = 0; i < $('cat_filtr_cat').options.length; i++)		{
+												var opt = $('cat_filtr_cat').options[i];
+
+												if (opt.disabled == false)	{
+													if (opt.selected == true)	{
+														string += opt.value + ';';
+													}
+												}
+											}
+											$('f_cat_filtr_catid').value = string;
+									}
+							</script>
+							<input type="hidden" name="f_openparam" id="f_openparam" value="{//filter/s_openparam}" />
+							{mask:filter}
+                            <div class="rblock block_gray roll" >
+								<div class="first" ><a href="#" class="roller" onClick="open_param(); return false;">Фильтр списка</a></div>
+								<div class="body" id="form_open_param" {if:{//filter/s_openparam} == '0'}style="display:none"{/if} {if:{//filter/s_openparam} == '1'}style="display:block"{/if} >
+								<div style="padding: 0; margin: 10px;" >
+								{if:{//cat_filtr/is}==1}
+									<h4>Искать в папках:</h4>
+									<input type="hidden" name="f_cat_filtr_catid" id="f_cat_filtr_catid" value="{//filter/cat_filtr_catid}" />
+									<select id="cat_filtr_cat" name="cat_filtr_cat" size="{//cat_filtr/select_size}" style="width:200px; font-size:{//cat_filtr/font_size}" multiple onClick="put_cat_filtr_catid();">
+										<option value="0" {if:{//filter/cat_filtr_catid}=='0;'}selected{/if}>во всех папках</option>
+										<option value="-" disabled>- - - - - - - - - - - - - - - - - -</option>
+									{mask://cat_filtr}
+									{mask:items}
+										{item}
+									{/mask}
+									{/mask}
+									
+
+									</select>
+								{/if}
+								{set:s_field}
+								{mask:s_field}
+					{set:datakey:date}<h4>{title}:</h4>{/set}
+					{set:datakey:int}<h4>{title}:</h4>{/set}
+					{set:datakey:double}<h4>{title}:</h4>{/set}
+					{set:datakey:text}<h4>{title}:</h4>{/set}
+					{set:datakey:textarea}<h4>{title}:</h4>{/set}
+					{set:datakey:html}<h4>{title}:</h4>{/set}
+					{set:datakey:select}<h4>{title}:</h4>{/set}
+					{set:datakey:checkbox}<h4>{title}:</h4>{/set}
+					{set:datakey:idnumber}<h4>{title}:</h4>{/set}
+									{set:datakey:int}
+									<table border="0" class="simple">
+									<tr>
+										<td>от:</td>
+										<td class="w100"><input type="text" size="10" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" >&nbsp;({value_min})</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>до:&nbsp;</td>
+										<td><input type="text" size="10" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  >&nbsp;({value_max})</td>
+										<td></td>
+									</tr>
+									</table>
+									{/set}
+									{set:datakey:double}
+									<table border="0" class="simple">
+									<tr>
+										<td>от:</td>
+										<td class="w100"><input type="text" size="10" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" >&nbsp;({value_min})</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>до:&nbsp;</td>
+										<td><input type="text" size="10" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  >&nbsp;({value_max})</td>
+										<td></td>
+									</tr>
+									</table>
+									{/set}
+									{set:datakey:date}
+									<table border="0" class="simple">
+									<tr>
+										<td>с:</td>
+										<td class="w100"><input type="text" class="w100" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" readonly></td>
+										<td><img src="img/calendar.gif" alt="" class="calendar" onclick="popUpCalendar(this, document.getElementById('a{_rank}_1'), 'dd.mm.yyyy','left');return false;" height="20" width="34" style="cursor:pointer"></td>
+									</tr>
+									<tr>
+										<td>по:&nbsp;</td>
+										<td><input type="text" class="w100" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  readonly></td>
+										<td><img src="img/calendar.gif" alt="" class="calendar" onclick="popUpCalendar(this, document.getElementById('a{_rank}_2'), 'dd.mm.yyyy','left');return false;" height="20" width="34" style="cursor:pointer"></td>
+									</tr>
+									</table>
+									{set:year}
+									<div class="roll" id="f_sea_{key}_advanced" onClick="if (this.className == 'rollout')	{ this.className = 'roll' } else { this.className = 'rollout' }; ">
+										<div class="arrow"><a class="false" href="#" onclick="return false;">По месяцам</a></div>
+										<div class="hidden">
+											{mask:year}
+											<h5>{year}</h5>
+											<p>
+												{mask:month}
+														<a href="#" onClick="set_value('a{../../_rank}_1', '{dayleft}'); set_value('a{../../_rank}_2', '{dayright}'); return false;">{title}</a>{mis:_last},{/mis}
+												{/mask}
+											</p>
+											{/mask}
+											<hr />
+										</div>
+									</div>
+									{/set}
+									{/set}
+					{set:datakey:text}<input type="text" class="w100" name="f_sea_{key}" value="{php}htmlspecialchars({value}){/php}">{/set}
+					{set:datakey:textarea}<input type="text" class="w100" name="f_sea_{key}" value="{value}">{/set}
+					{set:datakey:html}<input type="text" class="w100" name="f_sea_{key}" value="{value}">{/set}
+					{set:datakey:select}{html_form}{/set}
+					{set:datakey:checkbox}{html_form}{/set}
+					{set:datakey:idnumber}<input type="text" class="w100" name="f_sea_{key}" value="{value}">{/set}
+								{/mask}
+								<table border="0" class="simple">
+								<tr>
+									<td>Показывать:</td>
+									<td>
+										<select name="f_vis">
+											<option value="-1" {if: {//filter/vis} == '-1' }selected{/if}>все</option>
+											<option value="-10" {if: {//filter/vis} == '0' }selected{/if}>скрытые</option>
+											<option value="1" {if: {//filter/vis} == '1' }selected{/if}>активные</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Выводить по:</td>
+									<td>
+										<select name="f_limit">
+											{mask:limit_arr}
+											<option value="{limit}" {if: {//filter/limit} == {limit}}selected{/if}>{limit}</option>
+										{/mask}
+										</select>
+									</td>
+								</tr>
+								</table>								
+								{/set}
+								<hr />
+								<div style="width: 100%;">
+									<div class="save"><input type="submit" value="Найти"></div> <div class="cancel"><input type="button" value="Cброс" onClick="document.location.href='{preurl}';"></div>
+								</div>
+								</div>
+								</div>
+                                <div class="last">&nbsp;</div>
+                            </div>
+							<div style="height:20px"></div>
+							{/mask}
+                            <div class="func" id="opergroupdiv" style="display:none">
+                                <div class="first"><a class="green" href="#" title="" onClick="document.blockform.actions.value='groupvis'; document.blockform.submit(); return false;">показать</a><br /><a href="#" title="" onClick="document.blockform.actions.value='grouphid'; document.blockform.submit(); return false;">скрыть</a><a class="red" href="#" title="" onClick="if (window.confirm('Вы действительно хотите удалить группу блоков?'))	{ document.blockform.actions.value='groupdel'; document.blockform.submit(); } return false;">удалить</a></div><hr />
+                                <div class="last" id="number_selected_checkbox">Выделено 0</div>
+                            </div>
+                        </td>
+		</tr>
+		</table>
+ </form>
+					<div style="position:absolute;display:none;" id="divcursor"><img id="im" border=0 style="cursor:hand;filter:alpha(opacity=100)" src="img/bg-top.gif"></div>
+
+					 <div style="position:absolute;display:none;width=135px;left:10px;top:10px" id="popup" class="service">
+
+                                             <div class="bg">
+                                                <div class="bg2">
+												
+												{if:{canedit}}
+                                                    <div onclick="edit();" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Редактировать</a></div>
+												{/if}
+												{if:{canmove}}
+													<div onclick="move();return false;" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Переместить</a></div>
+												{/if}
+												{if:{cancopy}}
+                                                    <div onclick="copy();return false;" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Создать копию</a></div>
+												{/if}
+												{if:{canhide}}
+                                                    <div onclick="hide_block();" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="#" title="" onClick="return false;">Скрыть/показать</a></div>
+                                                {/if}
+												{if:{candel}}
+                                                    <div class="last"  onclick="del();"  onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Удалить</a></div>
+												{/if}
+                                                </div>
+                                            </div>
+
+
+			
+			</div>
+			
+<script>
+
+document.onmousemove = function(event) {
+      var event = event || window.event;
+	  XY = mousePageXY(event);
+      //document.body.innerHTML = "x = " + mousePageXY(event).x + ", y = " + mousePageXY(event).y;
+}
+
+</script>
+{/mask}
+	{mask:item}
+			<option value="{id}" {mis:flag}disabled style="color:#999"{/mis} {set:selected}selected{/set}>{repeat:{level}-{//cat_filtr/level}-1}&nbsp;&nbsp;&nbsp;{/repeat}{name}</option>
+			{item}
+	{/mask}

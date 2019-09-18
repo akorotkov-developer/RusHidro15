@@ -1,0 +1,212 @@
+{reduce:space}
+{mask:main}
+
+
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div >
+												<h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />{if:{id}>0}Редактирование{/if}{if:{id} < 1}Добавление{/if}&nbsp;шаблона&nbsp;блока</h1>
+												
+												<h2></h2>
+												
+												<div class="nav">
+													
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+
+        	<table cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td class="block_work">
+                    	<div >
+            				<div class="blue">
+
+                                <img class="blue_tl" src="img/blue_tl.gif" width="10" height="10" alt="" />
+                                <img class="blue_tr" src="img/blue_tr.gif" width="10" height="10" alt="" />
+                                <img class="blue_bl" src="img/blue_bl.gif" width="10" height="10" alt="" />
+                                <img class="blue_br" src="img/blue_br.gif" width="10" height="10" alt="" />
+
+	<table cellpadding="0" cellspacing="0" border="0">
+
+
+	<form action="s_bltempl_edit.php#bottom_page" method="post" enctype="multipart/form-data" name="form1">
+	<input type="hidden" name="nfields" value="{nfields}">
+	<input type="hidden" name="parent" value="{parent}">
+	<input type="hidden" name="makecopy" value="{makecopy}">
+	<input type="hidden" name="oldbkey" value="{key}">
+	<input type="hidden" name="removefield" value="0">
+
+	<input type="hidden" name="add2" value="0">
+
+	<tr  >
+		<th><label for="name">Название:</label></th>
+		<td ><input class="input" size=70 type="text" name="name" id="name" maxlength=255 value="{php}htmlspecialchars({name}){/php}"></td>
+	</tr>
+	<tr  >
+		<th><label for="key">Ключ:</label></th>
+		<td ><input class="input" size=70 type="text" name="key" id="key" maxlength=255 value="{php}htmlspecialchars({key}){/php}"></td>
+	</tr>
+	<tr  >
+		<th><label for="candel">Право на удаление:</label></th>
+		<td ><input class="input" type="checkbox" name="candel" id="candel" value="1"{if:{candel} > 0} checked{/if}></td>
+	</tr>
+	<tr  >
+		<th><label for="canedit">Право на редактирование:</label></th>
+		<td ><input class="input" type="checkbox" name="canedit" id="canedit" value="1"{if:{canedit} > 0} checked{/if}></td>
+	</tr>
+	<tr  >
+		<th><label for="canadd">Право на создание:</label></th>
+		<td ><input class="input" type="checkbox" name="canadd" id="canadd" value="1"{if:{canadd} > 0} checked{/if}></td>
+	</tr>
+	<tr  >
+		<th><label for="cancopy">Право на копирование:</label></th>
+		<td ><input class="input" type="checkbox" name="cancopy" id="cancopy" value="1"{if:{cancopy} > 0} checked{/if}></td>
+	</tr>
+	<tr  >
+		<th><label for="canmove">Право на перенос:</label></th>
+		<td ><input class="input" type="checkbox" name="canmove" id="canmove" value="1"{if:{canmove} > 0} checked{/if}></td>
+	</tr>
+	<tr  >
+		<th><label for="canhide">Право на скрытие/показ:</label></th>
+		<td ><input class="input" type="checkbox" name="canhide" id="canhide" value="1"{if:{canhide} > 0} checked{/if}></td>
+	</tr>
+
+
+
+	{if:{num_datatypes} >0}
+		{if:{nfields} > 0}
+
+		<tr >
+			<td colspan=2 >
+				&nbsp;
+			</td>
+		</tr>
+		<tr >
+			<td colspan=2 bgcolor="#EEEEEE">
+				<p></p>
+				<table cellspacing=0 cellpadding=3 border=0 width=90%>
+
+					<tr >
+						<td width=1%><b>Поля:</b></td>
+						<td width=10%>имя</td>
+						<td width=10%>ключ</td>
+						<td width=15%>тип данных</td>
+						<td width=10%>по умолчанию</td>
+						<td width=20%>служебная информация</td>
+						<td width=10%>аттрибуты</td>
+						<td width=1%>сорт.</td>
+						<td width=1%>неред.</td>
+						<td width=1%>отобр.</td>
+						<td width=10% >&nbsp;</td>
+					</tr>
+
+					
+			
+				{mask:nfield}
+				<tr  >
+
+					<td  align="left"  valign=center nowrap><b>Поле N {i}:&nbsp;</b></td>
+					<td><input style="width:100%" class="input" type="text" name="nfieldn{i}" size=20 value="{php}htmlspecialchars({nfieldn}){/php}"></td>
+
+					<td>
+					<input style="width:100%" class="input" type="text" name="nfieldk{i}" size=20 value="{php}htmlspecialchars({nfieldk}){/php}">
+
+					<input type="hidden" name="old_name_f[{php}htmlspecialchars({nfieldk}){/php}]" value="{php}htmlspecialchars({nfieldk}){/php}">
+
+					<input type="hidden" name="old_nfieldk{i}" value="{php}htmlspecialchars({nfieldk}){/php}">
+					</td>
+
+					<td><select style="width:100%" class="input" name="nfield{i}">
+						{mask:row}
+							<option value="{php}htmlspecialchars({row[key]}){/php}" {selected}>
+								{php}strip_tags({row[name]}){/php} ({php}htmlspecialchars({row[key]}){/php})
+							</option>
+						{/mask}
+						</select>
+					</td>
+
+					<td><input style="width:100%" class="input" type="text" name="nfieldd{i}" size=35 value="{php}htmlspecialchars({nfieldd}){/php}"></td>
+
+					<td><input style="width:100%" class="input" type="text" name="nfieldc{i}" size=35 value="{php}htmlspecialchars({nfieldc}){/php}"></td>
+
+					<td><input style="width:100%" class="input" type="text" name="nfielda{i}" size=35 	value="{php}htmlspecialchars({nfielda}){/php}"></td>
+
+					<td align="center"><input style="width:30px" class="input" type="text" name="nfieldsort{i}" size="3" value="{php}{i}*10{/php}"></td>
+
+					<td><input type="checkbox" name="nfieldr{i}" class="input" value="1"{if:{nfieldr} > 0}    checked{/if}></td>
+					<td><input type="checkbox" name="nfields{i}" class="input" value="1"{if:{nfields} > 0}  checked{/if}></td>
+					<td><input class="input"  type="button" value="убрать" onClick="javascript:document.form1.removefield.value={i};document.form1.submit();return false;"></td>
+				</tr>
+				{/mask}
+
+
+				</table>
+			</td>
+		</tr>
+		{/if}
+	{/if}
+
+
+	<!--tr bgcolor="#EEEEEE">
+		<td align="left" colspan=2><input style="width: 150px; height: 30px; font-weight: bold;" class="input" type="submit" name="add" value="{if:{id}>0}Сохранить{/if} {if:{id} < 1}Добавить{/if}">&nbsp;&nbsp;
+
+		<INPUT name="Submit2" type="button" class="input" style="width: 100px; height: 30px;" value="Отмена" onclick="javascript:location.href='s_bltempl.php?parent={parent}';return false;">&nbsp;&nbsp;
+		<INPUT name="Submit3" type="button" class="input" style="width: 100px; height: 30px;" value="Добавить поле" onclick="document.form1.nfields.value++;document.form1.submit();return false;">&nbsp;&nbsp;
+		</td>
+	</tr//-->
+
+
+
+	</table>
+
+<p></p>
+                                <a name="bottom_page"></a>
+								<table align="center" style="width:300px">
+									<tr>
+									<td>
+                                	<div class="save" ><input type="submit"  name="add" value="{if:{id}>0}Сохранить{/if} {if:{id} < 1}Добавить{/if}" /></div>
+									</td>
+
+									<td>
+                                	<div class="save" ><input type="button"  value="Применить" onClick="document.form1.add2.value='1';  document.form1.submit(); return false;" /></div>
+									</td>
+
+									<td>
+                                	<div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="javascript:location.href='s_bltempl.php?parent={parent}';return false;"  /></div>
+									</td>
+									<td>
+									<div class="save" ><input name="Submit3" type="button" value="Добавить поле" onclick="document.form1.nfields.value++;document.form1.submit();return false;" /></div>
+
+									</td>
+									</tr>
+								</table>
+                              	</div>
+
+	</form>
+
+            			</div>
+            		</td>
+                    <td class="block" style="width:10%">
+            		</td>
+                </tr>
+            </table>
+
+{/mask}

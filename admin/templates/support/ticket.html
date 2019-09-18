@@ -1,0 +1,94 @@
+{reduce:space}
+{mask:main}
+<!-------------------------------------------------------------------------->
+<div class="options">
+    <div class="bg_b">
+        <div class="bg_l">
+            <div class="bg_r">
+                <div class="bg_tr">
+                    <div class="bg_tl">
+                        <div class="bg_bl">
+                            <div class="bg_br">
+                                <div>
+                                    <h1 style="width:60%; "><img src="http://cms.smhost.ru/admin/img/ico_file.gif"
+                                                                 width="16" height="20" alt=""/>Заявка №{ticketID}</h1>
+                                    <h2>&nbsp;</h2>
+                                    <div class="nav">
+                                    </div>
+                                    <span class="clear"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=======SUPPORT=====-->
+<div class="support-block">
+    {set:success}<h4 style="color:green">Комментарий успешно добавлен</h4>{/}
+    <div class="info">
+        {set:created}<div class="item">
+            <span class="name">Дата создания:</span>
+            <span class="data">{created}</span>
+        </div>{/}
+        {set:name}<div class="item">
+            <span class="name">Имя:</span>
+            <span class="data">{name}</span>
+        </div>{/}
+        {set:email}<div class="item">
+            <span class="name">E-mail:</span>
+            <span class="data">{email}</span>
+        </div>{/}
+        {set:phone}<div class="item">
+            <span class="name">Телефон:</span>
+            <span class="data">{phone}</span>
+        </div>{/}
+    </div>
+
+    <div class="subtitle">Тема: {subject}</div>
+    <div class="support-list">
+
+        {mask:msg}<div class="item">
+            <div class="date">{created} <span class="name">{../name}</span></div>
+            <div class="text">{php}{message}{/}</div>
+        {set:attach}{mask:attach}{set:file}<div class="file"><a href="{file}" target="_blank"><i></i>{file_name}</a></div>{/}{/}{/}
+        </div>{mask:resp}
+        <div class="item answer">
+            <div class="date">{created} <span class="name">{staff_name}</span></div>
+            <div class="text">{php}{response}{/}</div>
+            {set:attach}{mask:attach}{set:file}<div class="file"><a href="{file}" target="_blank"><i></i>{file_name}</a></div>{/}{/}{/}
+        </div>{/}{/}
+    </div>
+    <form method="post" action="support.php?action=add&id={ticket_id}" enctype="multipart/form-data">
+
+    <div class="support-form">
+            <div class="item">
+                <div class="name">Текст:</div>
+                <div class="input"><textarea name="text"></textarea></div>
+            </div>
+            <div class="item">
+                <div class="name">Файл:</div>
+                <div class="input">
+                    <input type="file" name="attach[]"/>
+                </div>
+                <button type="button" onclick="_jQuery(this).prev().children().eq(0).clone(false).val('').appendTo(_jQuery(this).prev());">Добавить файл</button>
+            </div>
+    </div>
+
+    <table align="center" style="width:auto">
+        <tr>
+            <td>
+                <div class="save"><input type="submit" disabled id="add_button_submit" name="add" value="Добавить"/>
+                </div>
+            </td>
+            <td style="width: 10px"></td>
+            <td>
+                <div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="location.assign('support.php');"/></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+{/mask}

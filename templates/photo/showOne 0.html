@@ -1,0 +1,36 @@
+{reduce:space}
+{mask:main}
+
+
+		{html}
+
+		<div class="photoalbum">
+			
+			{mask:item}
+			<div class="item">
+				<a href="/images/2/{img}" rel="gallery" title="{title}"><img src="/images/1/{img}" alt="{title}" /></a>
+				<span>{title}</span>
+			</div>
+			{/mask}        
+
+		</div>
+		
+
+		{set:navigation}        
+		<div class="pages">
+			<span class="title">Страницы:</span>
+			{mask:navigation}
+				{mis:current}<span><a href="{url}">{title}</a></span>{/}
+				{set:current}<span class="active"><a>{title}</a></span>{/}
+			{/mask}
+		</div>
+		
+		<div class="prevnext">
+			{set:url_prev}<span class="prev"></span><a href="{url_prev}">Предыдущая</a>{set:url_next}<span class="cp"></span>{/}{/}{set:url_next}<a href="{url_next}">Следующая</a><span class="next"></span>{/}
+		</div>
+		{/set}
+
+		
+        <div class="backLink"><span>&larr;</span><a href="{backurl}">Вернуться к списку альбомов</a></div>
+
+{/mask}

@@ -1,0 +1,18 @@
+{reduce:space}
+{mask:main}
+
+	{set:pricelist}
+	<div class="priceList">
+		<span class="title">Прайс-лист</span>
+		<div class="ico {filetype}"><!--классы xls, zip, doc, jpg, pdf, pps, rtf, exe-->                                                    	
+			<span class="illustr"></span>
+			<a href="/files/{pricelist}">Скачать полный прайс-лист</a>
+			<span class="size">{ext}, {sizekb} кб</span>
+		</div>
+		
+		<div class="addtext">Цены в прайс-листе актуальны на {filedate}</div>
+		
+	</div>
+	{/set}
+	
+{/mask}

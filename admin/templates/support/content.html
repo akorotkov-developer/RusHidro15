@@ -1,0 +1,82 @@
+{reduce:space}
+{mask:main}
+<div class="options">
+    <div class="bg_b">
+        <div class="bg_l">
+            <div class="bg_r">
+                <div class="bg_tr">
+                    <div class="bg_tl">
+                        <div class="bg_bl">
+                            <div class="bg_br">
+                                <div>
+                                    <h1 style="width:60%; "><img src="http://cms.smhost.ru/admin/img/ico_file.gif"
+                                                                 width="16" height="20" alt=""/>Список заявок</h1>
+                                    <h2>&nbsp;</h2>
+                                    <div class="nav">
+                                    </div>
+                                    <span class="clear"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<table style="width:400px" cellpadding="0" cellspacing="0"	>
+    <tr>
+        <td >
+            <div class="new_block"><a href="#" onclick="location.assign('support.php?action=new');" title="Новый блок">Новая заявка</a></div>
+        </td>
+    </tr>
+</table>
+<table class="in_cont" cellpadding="0" cellspacing="0" style="width:100%">
+    <tr>
+        <td align="center" style="width:80%" valign="top">
+
+            <div class="with_page">
+                <div class="type-list">
+                    <div class="title">Статус заявок</div>
+                    <a class="{set:status:open}active{/}" href="?status=open"><span>Открытые</span> ({set:count/open}{open}{/}{mis:count/open}0{/})</a>
+                    <a class="{set:status:closed}active{/}" href="?status=closed"><span>Закрытые</span> ({set:count/closed}{closed}{/}{mis:count/closed}0{/})</a>
+                </div>
+
+                {set:error}<h4 style="color:red">Произошла ошибка</h4>{/}
+                {set:success}<h4 style="color:green">Заявка успешно создана</h4>{/}
+
+                {set:result}<table style="width:100%;" border="0" cellspacing="0" cellpadding="1" id="divtable">
+                    <tbody>
+                    <tr>
+                        <th class="left" style="width:1% !important;"></th>
+                        <th style="background: #e7e7e7;">№</th>
+                        <th nowrap="nowrap" style="background: #e7e7e7; ">Тема</th>
+                        <th nowrap="nowrap" style="background: #e7e7e7; ">Имя</th>
+                        <th nowrap="nowrap" style="background: #e7e7e7; ">E-mail</th>
+                        <th nowrap="nowrap" style="background: #e7e7e7; ">Время создания</th>
+                        <th nowrap="nowrap" style="background: #e7e7e7; ">Время последнего ответа</th>
+                        <th class="right"></th>
+                    </tr>
+                    {mask:result}
+                    <tr id="{id}" style="cursor:pointer">
+                        <td style="width:1% !important; padding-right:0px; padding-left:7px;">
+                            <img src="img/ico_file.gif" width="16" height="20" alt="">
+                        </td>
+                        <td><a href="support.php?action=view&id={ticket_id}">{ticketID}</a></td>
+                        <td nowrap="nowrap"><a href="support.php?action=view&id={ticket_id}">{subject}</a></td>
+                        <td nowrap="nowrap">{name}</td>
+                        <td nowrap="nowrap">{email}</td>
+                        <td nowrap="nowrap">{created}</td>
+                        <td nowrap="nowrap">{lastresponse}</td>
+                        <td></td>
+                    </tr>{/}
+                    </tbody>
+                </table>{/}
+                {mis:result}
+                <p>Список заявок пуст</p>
+                {/}
+            </div>
+        </td>
+    </tr>
+</table>
+{/mask}

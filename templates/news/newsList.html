@@ -1,0 +1,28 @@
+{reduce:space}
+{mask:main}
+
+		<h1>Новости</h1>                    
+		
+		<div class="news-list">
+			{mask:item}
+			<div class="news-list-item">
+				<div class="news-list-date">{date_1}</div>
+				<div class="news-list-title"><a href="{url}">{title}</a></div>
+			</div>
+			{/mask}
+			
+			{set:navigation}        
+			<div class="pages">			
+				{mask:navigation}
+					{mis:current}<span><a href="{url}">{title}</a></span>{/}
+					{set:current}<span class="active"><a>{title}</a></span>{/}
+				{/mask}
+				{set:url_next}<span class="next"><a href="{url_next}">Далее</a></span>{/}
+			</div>
+			{/set}
+			
+		</div>	
+
+		
+	
+{/mask}

@@ -1,0 +1,62 @@
+.dropzone {
+	position: relative;
+    text-align: left;
+    /*height: 400px;*/
+}
+
+.dropzone img.preview {
+    outline: 1px solid #cbcfd4;
+}
+
+#dropzone {
+	display: none;
+	background: rgba(153,198,128,0.4);
+    border: 2px dashed #99c680;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #99c680;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.dropzone tr.load {
+    background: #f9f9f9;
+}
+
+.dropzone tr a {
+    color: #ff0000;
+}
+
+.hover {
+    display: block;
+}
+
+#dropzone span {
+	display: block;
+}
+
+.dropzoneInput {
+    width: 100%;
+}
+
+.dropzone td p {
+    margin: 0;
+    color: #274c5e;
+}
+
+.dropzone p {
+    margin: 10px 0 !important;
+}
+
+.dropzone p.bottomText {
+   color: #737373;
+}
+
+.dropzone .right {
+    width: 60px !important
+}

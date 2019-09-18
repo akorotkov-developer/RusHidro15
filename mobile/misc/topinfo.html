@@ -1,0 +1,22 @@
+{reduce:space}
+{mask:main}
+{set:item}
+	<div id="index-illustration">
+	{mask:item}	
+		<div class="illustration{set:_first} active{/}" style="background-image: url(/images/1/{img})" id="image{image}"></div>	
+	{/}
+	</div>
+	
+	<div class="info-block-slider">
+		<div id="info-block-slider" class="owl-carousel">
+			{mask:item}
+			<div class="info-block-slider_item" data-image="image{image}">
+				<span>{title}</span>
+				{power}
+			</div>
+			{/mask}						
+		</div>
+	</div>
+	
+{/set}					
+{/mask}

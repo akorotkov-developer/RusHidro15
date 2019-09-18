@@ -1,0 +1,49 @@
+@media (max-width: 1750px) {
+	.history-dots-over { max-width: 1000px }
+}
+
+@media (max-width: 1370px) {
+	.dynasty-scroll { height: 300px }
+	.dynasty-scroll-gt { height: 300px }
+}
+
+@media (max-height: 900px) {
+	.dynasty-list { min-height: 0 }
+	.dynasty-list-item { min-height: 100px;  }
+	.dynasty-scroll { height: 300px }
+	.dynasty-scroll-gt { height: 300px }
+	
+	.dynasty-list-item i { bottom: 20px; }
+	.dynasty-list-item:after { bottom: 20px; }
+	.owl-item:nth-child(2) .dynasty-list-item:before { bottom: 20px; }
+	.dynasty-list-dots { bottom: 20px; }
+	
+	#historyhydro-list .dynasty-list-item i { bottom: 20px; }
+	#historyhydro-list .dynasty-list-item:after { bottom: 20px; }
+	#historyhydro-list .owl-item:nth-child(2) .dynasty-list-item:before { bottom: 20px; }
+	#historyhydro-list .dynasty-list-dots { bottom: 20px; }
+	.stations-popup-img img { max-height: 640px }
+	.stations-speech-text { height: 560px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

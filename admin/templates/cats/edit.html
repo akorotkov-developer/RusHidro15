@@ -1,0 +1,208 @@
+{reduce:space}
+{mask:main}
+
+<!--
+onBlur=\"document.getElementById('".htmlspecialchars($name)."_hid"."').value=ifr".htmlspecialchars($name).".GetContents();\"
+//-->
+
+<script>
+
+	function check_iframe()		{
+
+		var arr = document.getElementsByTagName('iframe');
+		for (i = 0; i < arr.length; i++)		{
+			var id = arr[i].id;
+			if (id.substr(0, 7) == 'ifrdata')	{
+				var id2 = id + '_hid';				
+				document.getElementById(id2).value = document.getElementById(id).contentWindow.GetContents();
+				//alert (document.getElementById(id2).value);
+			}
+		}
+		//alert (arr.length);
+
+		//alert ('d');
+		return true;
+	}
+</script>
+
+
+
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div >
+												<h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />{if:{id}>0}Редактирование{/if}{if:{id} < 1}Добавление{/if}&nbsp;папки</h1>
+												
+												<h2></h2>
+												
+												<div class="nav">
+													
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+
+			{set:urlforid}
+				<table style="width:400px; margin-top:3px"  ><tr><td style="width:5%; padding-left:5px; font-size: 11px;">Ссылка:</td><td style="width:55%; font-size: 11px;">/{urlforid}</td></tr></table>
+			{/set}
+
+
+			{if:{id} > 0}
+			{set:row[canaddbl]:1}
+				<div class="new_block" style="margin-top:5px"><a href="block.php?cparent={id}" title="Список блоков">Перейти&nbsp;к&nbsp;блокам</a></div>
+				
+			{/set}
+			{/if}
+
+        	<table cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td class="block_work">
+                    	<div >
+            				<div class="blue" >
+
+                                <img class="blue_tl" src="img/blue_tl.gif" width="10" height="10" alt="" />
+                                <img class="blue_tr" src="img/blue_tr.gif" width="10" height="10" alt="" />
+                                <img class="blue_bl" src="img/blue_bl.gif" width="10" height="10" alt="" />
+                                <img class="blue_br" src="img/blue_br.gif" width="10" height="10" alt="" />
+
+
+
+	<table cellpadding="0" cellspacing="0" border="0">
+
+
+	<form action="cat_edit.php" method="post" enctype="multipart/form-data"  name="form1" onSubmit="return check_iframe();">
+	<input type="hidden" name="parent" value="{parent}">
+	<input type="hidden" name="id" value="{id}">
+
+
+	<tr >
+		<th><b>Название:</b></th>
+		<td ><input class="input" size=70 type="text" name="cat_name" maxlength=255 value="{php}htmlspecialchars({cr[name]}){/php}" {if:{row[canedit]} != '1'} {if:{row[caneditname]} != '1'} {if:{user_is_super} == 0} {if:{id} > 0}   disabled {/if}{/if}{/if}{/if}></td>
+	</tr>
+
+	{set:user_is_super}
+	<tr >
+		<th><b>Ключ:</b></td>
+		<td ><input class="input" size=70 type="text" name="cat_key" maxlength=255 value="{php}htmlspecialchars({cr[key]}){/php}" ></td>
+	</tr>
+	{/set}
+	{mis:user_is_super}
+		<input type="hidden" name="cat_key" value="{php}htmlspecialchars({cr[key]}){/php}">
+	{/mis}
+
+
+	<tr  >
+		<th><b>Шаблон папки:</b></td>
+		<td >
+
+		<!-- mis change_template //-->
+		{if:{id} > 0}
+			{mis:user_is_super}
+				<input type="hidden" name="template" value="{php}htmlspecialchars({cr[template]}){/php}">
+				<select disabled class="input" style="width:300px" ><option>{php}htmlspecialchars({disabled_select}){/php}</option></select>
+			{/mis}
+		{/if}
+
+	
+
+		{set:change_template}
+			<select name="template" class="input" style="width:300px" >
+				{mask:mtempl}
+				<option value="{php}htmlspecialchars({row[key]}){/php}" {if:{cr[template]} == {row[key]}} selected {/if}>
+				{php}strip_tags({row[name]}){/php}
+				{set:user_is_super} ({php}htmlspecialchars({row[key]}){/php}) {/set}</option>
+
+				{/mask}
+			</select>
+		{/set}
+		</td>
+	</tr>
+
+	<input type="hidden" name="templateinc" value="<?=htmlspecialchars({cr[templateinc]})?>">
+
+
+
+
+
+
+	{set:edit_fields}
+
+		{mask:field}
+				  <tr>
+					<th style="padding-left:0px"><nobr>{php}htmlspecialchars({rowd[name]}){/php}:
+					
+					{set:readonly}<br><font color="#C00000"><b>только чтение</b></font>{/set}
+					
+
+					{set:user_is_super}
+						<div><b><font color="green">{rowd[key]}</font></b></div>
+					{/set}
+					</th>
+
+					<td valign=top >
+						{s}
+						<input type="hidden" name="data{i}key" value="{php}htmlspecialchars({rowd[key]}){/php}">
+					</td>
+				  </tr>
+		{/mask}
+
+	{/set}
+
+
+	</table>
+
+<p></p>
+
+                                <a name="bottom_page"></a>
+
+
+					{set:b_save}
+								<table align="center" style="width:100px">
+									<tr>
+									<td>
+                                	<div class="save" ><input type="submit" disabled name="add" id="add_button_submit" value="{if:{id}>0}Сохранить{/if} {if:{id} < 1}Добавить{/if}" /></div>
+									</td>
+
+									
+									</tr>
+								</table>
+					{/set}
+
+</TD>
+	
+                    <td class="block" style="width:10%">
+            		</td>
+
+                </tr>
+            </table>
+
+
+
+                              
+	</form>
+<script>
+	//document.form1.onsubmit='return check_iframe();';
+	//document.form1.add.disabled=false;
+
+</script>
+
+
+
+
+{/mask}

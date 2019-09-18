@@ -1,0 +1,28 @@
+{mask:main}
+<div class="stations-popup-right-close"></div>
+<div class="stations-popup-in{mis:gallery} nopadd{/}">
+	<div class="stations-popup-close"></div>	
+	<div class="stations-popup-title">{title}</div>
+	{set:gallery}
+	<div class="gallery-right">
+		<div class="gallery-right-in">
+			{mask:gallery}
+			<div class="gallery-right-item"><a href="/images/2/{img}" class="fancybox" title="{title}" style="background-image: url(/images/1/{img})" ></a><img src="/styles/img/preloader.gif" alt="" /></div>
+			{/mask}
+		</div>							
+	</div>
+	{mis:alone:1}
+	<div class="gallery-right-nav">
+		<div class="gallery-nav-prev disabled"><i></i></div>
+		<div class="gallery-nav-counter">
+			<span>01</span> / <span>{gsize}</span>
+		</div>
+		<div class="gallery-nav-next"><i></i></div>
+	</div>
+	{/}
+	{/set}
+	<div class="stations-popup-text">
+		{html}
+	</div>			
+</div>
+{/mask}

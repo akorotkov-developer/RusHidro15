@@ -1,0 +1,78 @@
+{reduce:space}
+{mask:main}
+<div class="options">
+    <div class="bg_b">
+        <div class="bg_l">
+            <div class="bg_r">
+                <div class="bg_tr">
+                    <div class="bg_tl">
+                        <div class="bg_bl">
+                            <div class="bg_br">
+                                <div>
+                                    <h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt=""/>{title}
+                                    </h1>
+
+                                    <h2></h2>
+
+                                    <div class="nav"></div>
+                                    <span class="clear"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{set:error}<div style="color:red">
+    <h4>Ошибка</h4>
+    {set:error:2}Предыдущая операция по БД еще не завершена{/}
+    {set:error:3}Файл загрузился неудачно{/}
+</div>{/}
+
+<div style="color:blue">
+    <h4>Состояние</h4>
+
+    {state}
+</div>
+
+{set:script:1}
+<script>
+    setTimeout(function () {
+        location.reload();
+    }, 5000);
+</script>
+{/}
+
+<div>
+    <form action="db.php?action=import" method="post" enctype="multipart/form-data">
+
+        <fieldset>
+            <label for="file">SQL дамп</label>
+            <input type="file" name="sql" value="" id="file"/>
+        </fieldset>
+
+        <input type="submit" value="Импортировать"/>
+    </form>
+</div>
+
+<div>
+    <form action="db.php?action=export" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <label for="tables">Таблицы</label>
+            <select name="tables" id="tables" multiple size="20">
+                {mask:table}
+                <option value="{name}">{name}</option>
+                {/}
+            </select>
+            <button type="button" onclick="_jQuery('#tables option').attr('selected', 'selected');">Выделить все
+            </button>
+            <p>Если ни одной не выбрано, будет экспортирована БД целиком</p>
+        </fieldset>
+        <input type="submit" value="Экспортировать"/>
+    </form>
+</div>
+
+{/mask}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<!--#misc::head#-->
+</head>
+
+<body>   
+  
+<div class="container page1">	
+	
+	<a class="logo" ></a>
+	
+	<div class="landing-menu">
+		<div class="landing-menu-cursor"></div>
+		<div class="landing-menu-item active">РусГидро – 15 лет!</div>
+		<div class="landing-menu-item">История РусГидро</div>
+		<div class="landing-menu-item">География РусГидро</div>
+		<div class="landing-menu-item">Добрые дела</div>
+		<div class="landing-menu-item">Трудовые династии</div>
+	</div>
+	
+	<div class="menu-hamburger" onclick="hamburgerPopup.addClass('active')"><span></span><span></span><span></span></div>
+	
+	<div class="menu-hamburger-popup" id="hamburger-popup" >
+		<div class="menu-hamburger-close" onclick="hamburgerPopup.removeClass('active')" ><span></span><span></span></div>
+		<div class="menu-hamburger-content">
+			<div class="menu-hamburger-item">РусГидро – 15 лет!</div>
+			<div class="menu-hamburger-item">История РусГидро</div>
+			<div class="menu-hamburger-item">География РусГидро</div>
+			<div class="menu-hamburger-item">Добрые дела</div>
+			<div class="menu-hamburger-item">Трудовые династии</div>
+			<div class="menu-hamburger-link"><a href="/news">Новости</a></div>
+			<div class="menu-hamburger-link"><a href="/konkursy">Конкурсы</a></div>
+		</div>
+	</div>
+	
+	<a class="scroll-next"></a>
+	
+	<div class="stations-popup" id="directorSpeech">
+		<div class="stations-popup-right-close"></div>
+		<div class="stations-popup-in nopadd">
+			<div class="stations-popup-close"></div>	
+			<div class="stations-popup-title np">&nbsp;</div>
+			
+			<div class="stations-popup-text">
+				<div class="stations-popup-img"><img src="/tmp/director.jpg" /></div>
+				<div class="stations-popup-speech">
+					<h3><b>Уважаемые друзья, коллеги!</b></h3>
+					<div class="stations-speech-text flexcroll" >
+						<!--#misc::showvar# var=director_text -->
+					</div>
+				</div>	
+			</div>			
+		</div>
+	</div>		
+	
+	<div class="landing-page active" id="start-page">
+	
+		<div class="header">			
+			
+			<div class="top-text"><!--#misc::showvar# var=slogan --></div>
+			
+			<div class="top-reliz">
+				<a><span class="top-reliz-image" style="background-image: url(/tmp/topreliz.jpg)"></span>Обращение Председателя Правления - Генерального директора<br> ПАО «РусГидро»</a>
+			</div>
+			
+		</div>
+		
+		<div class="column">
+			
+			<div class="info-block">			
+				
+				<!--#misc::topinfo#-->
+				
+				<!--#news::mainblock#-->
+				
+			</div>
+			
+			<div class="footer-block">
+			
+				<!--#contest::mainlist#-->
+				
+				<!--#news::mainlist#-->
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<!--#historyhydro::page#-->
+	
+	<!--#statuspage::page#-->	
+	
+	<!--#gooddeeds::page#-->
+	
+	<!--#dynasty::page#-->
+	
+	
+	
+</div>
+  
+<!--#misc::showvar# var=counters -->
+  
+</body>
+</html>

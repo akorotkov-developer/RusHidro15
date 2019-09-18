@@ -1,0 +1,190 @@
+{reduce:space}
+{mask:main}
+
+<script>
+
+	function check_iframe()		{
+
+		var arr = document.getElementsByTagName('iframe');
+		for (i = 0; i < arr.length; i++)		{
+			var id = arr[i].id;
+			if (id.substr(0, 7) == 'ifrdata')	{
+				var id2 = id + '_hid';
+				document.getElementById(id2).value = document.getElementById(id).contentWindow.GetContents();
+				//alert (document.getElementById(id2).value);
+			}
+		}
+		//alert (arr.length);
+
+		//alert ('d');
+		return true;
+	}
+</script>
+
+<script language="javascript">
+<!--
+function back_b()
+{
+ location.href='block.php?cparent='+$('cparent').value+'&btmplate='+$('btmplate').value +'{//filter/urlfilter}';
+}
+
+//-->
+</script>
+<script language="javascript" type="text/javascript" src="js/popcalendar.js"></script>
+<!-------------------------------------------------------------------------->
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div >
+												<h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />{name}</h1>
+
+												<h2></h2>
+
+												<div class="nav">
+
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+
+
+
+
+<!-------------------------------------------------------------------------->
+
+
+
+        	<table cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td class="block_work">
+                    	<div >
+            				<div class="blue" >
+
+                                <img class="blue_tl" src="img/blue_tl.gif" width="10" height="10" alt="" />
+                                <img class="blue_tr" src="img/blue_tr.gif" width="10" height="10" alt="" />
+                                <img class="blue_bl" src="img/blue_bl.gif" width="10" height="10" alt="" />
+                                <img class="blue_br" src="img/blue_br.gif" width="10" height="10" alt="" />
+
+		{set:alert}
+			<font color="red"><b>{alert}</b></font>
+		{/set}
+
+
+	<table cellpadding="0" cellspacing="0" border="0">
+
+
+<form action="block.php?actions={action}&cparent={cparent}&btmplate={btmplate}&blockid={id}{//filter/urlfilter}" method="POST"  enctype="multipart/form-data" name="form1" onSubmit="return check_iframe();">
+
+<input type="hidden" name="blockid" id="blockid" value="{blockid}">
+<input type="hidden" name="btmplate" id="btmplate" value="{btmplate}">
+<input type="hidden" name="cparent" id="cparent" value="{cparent}">
+<input type="hidden" name="add2"  value="0">
+
+{mask:values}
+   <tr><th style="padding-left:0px"><nobr><label {if:{datatkey}=='text'}for="data{_index}text"{/if}{if:{datatkey}=='int'}for="data{_index}text"{/if}{if:{datatkey}=='double'}for="data{_index}text"{/if}{if:{datatkey}=='textarea'}for="mydata{_index}"{/if}{if:{datatkey}=='checkbox'}for="data{_index}checkbox"{/if}>{name}:</label></nobr>
+   {if:{//superadmin}}<br><b><font color="green">{key}</font></b>{/if}</th>
+   <td valign=top >
+	{value}<input type="hidden" name="dat[]" value="{key}"><input type="hidden" name="dkey[]" value="{datatkey}"></td></tr>
+{/mask}
+
+
+                                <a name="bottom_page"></a>
+								<table align="center" {if:{id}>0}style="width:300px"{/if} {if:{id} < 1}style="width:230px"{/if}>
+									<tr>
+									<td>
+                                	<div class="save" ><input type="submit" disabled id="add_button_submit" name="add" value="{if:{id}>0}Сохранить{/if} {if:{id} < 1}Добавить{/if}" /></div>
+									</td>
+
+
+									{if:{id}>0}
+									<td>
+                                	<div class="save" ><input type="button" disabled id="add2_button_submit" value="Применить" onClick="document.form1.add2.value='1'; check_iframe(); document.form1.submit(); return false;" /></div>
+									</td>
+									{/if}
+
+									<td>
+                                	<div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="back_b();"  /></div>
+									</td>
+
+									</tr>
+								</table>
+                              	</div>
+
+
+<input type="hidden" name="f_openparam" id="f_openparam" value="{//filter/s_openparam}" />
+<input type="hidden" name="f_page" id="f_page" value="{//filter/page}" />
+<input type="hidden" name="f_cat_filtr_catid" id="f_cat_filtr_catid" value="{//filter/cat_filtr_catid}" />
+
+<div style="display:none">
+{mask:filter}
+	{mask:s_field}
+
+									{set:datakey:int}
+										<input type="text" class="w100" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" readonly>
+										<input type="text" class="w100" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  readonly>
+									{/set}
+
+									{set:datakey:double}
+										<input type="text" class="w100" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" readonly>
+										<input type="text" class="w100" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  readonly>
+									{/set}
+
+									{set:datakey:date}
+										<input type="text" class="w100" name="f_sea_{key}_1"  value="{value_1}" id="a{_rank}_1" readonly>
+										<input type="text" class="w100" id="a{_rank}_2" name="f_sea_{key}_2" value="{value_2}"  readonly>
+									{/set}
+
+									{set:datakey:text}
+										<input type="text" class="w100" name="f_sea_{key}" value="{php}htmlspecialchars({value}){/php}">
+									{/set}
+
+									{set:datakey:textarea}
+										<input type="text" class="w100" name="f_sea_{key}" value="{value}">
+									{/set}
+
+									{set:datakey:html}
+										<input type="text" class="w100" name="f_sea_{key}" value="{value}">
+									{/set}
+	{/mask}
+
+										<select name="f_vis">
+											<option value="-1" {if: {//filter/vis} == '-1' }selected{/if}>все</option>
+											<option value="-10" {if: {//filter/vis} == '0' }selected{/if}>скрытые</option>
+											<option value="1" {if: {//filter/vis} == '1' }selected{/if}>активные</option>
+										</select>
+
+										<select name="f_limit">
+											{mask:limit_arr}
+											<option value="{limit}" {if: {//filter/limit} == {limit}}selected{/if}>{limit}</option>
+										{/mask}
+{/mask}
+</div>
+
+</form>
+
+							</table>
+
+						</div></div>
+					</td>
+                    <td class="block" style="width:10%">
+            		</td>
+
+                </tr>
+            </table>
+{/mask}

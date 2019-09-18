@@ -1,0 +1,112 @@
+{reduce:space}
+{mask:main}
+<h1>{title}</h1>
+<!--<script>
+{#
+$(function(){
+	$('body').on('click','.voting-item-button', function(){
+		vid = $(this).data('id');
+		genre = $(this).data('genre');
+		vparent = $('#'+vid);	
+		if(!vparent.hasClass('voted')) {
+			$('.voting-video').hide();		
+			$('#voting-popup').fadeIn(); 
+			$('.voting-alert').show();
+		}
+	})
+	
+	$('#vsubmit').on('click',function(){
+		
+		$(this).parent().hide(); 	
+		popupdestroy();
+		tid = vid.replace('vote','');		
+		data = {'id':tid,'genre':genre};
+		$.ajax({
+			type: "POST", 
+			url: "/ajax/voteadd.php", 
+			data: data,
+			dataType: 'json',
+			success: function(data) {
+				if(data['bcount']) { vparent.find('.voting-item-count2 span').text(data['bcount']); vparent.addClass('voted');}
+				else {alert(data['message'])}				
+			}
+		});			
+		
+	})
+	
+	$('.voting-item-image').on('click',function(){
+		data = {'id':$(this).data('id')};
+		$.ajax({
+			type: "POST", 
+			url: "/ajax/voteinfo.php", 
+			data: data,
+			dataType: 'json',
+			success: function(data) {							
+				$('#ajaxData').html(data);
+			}
+		});			
+	
+		$('#voting-popup').fadeIn(); 
+		$('.voting-video').show();		
+	})
+	
+	
+})	
+
+function popupdestroy() {
+	$('#voting-popup').fadeOut(); 
+	$('.voting-video').hide();	
+	$('#ajaxData').html('');
+}
+
+#}
+</script>-->
+<script>
+addEventListener("DOMContentLoaded", () => {
+  const sliders = document.querySelectorAll(".command-list_in"),
+        collator = new Intl.Collator(["en", "ru"], { numeric: true }),
+        comparator = (a, b) => collator.compare(
+        a.querySelector("[title]").title,
+        b.querySelector("[title]").title);
+       for(const slider of sliders) {
+         slider.append(...[...slider.children].sort(comparator))
+       }
+})
+  </script>
+<div class="command-list"><div class="command-list_in">	
+	{mask:item}{if: {img}}     	
+	<div class="command-one">
+		<div class="command-image"><a href="/images/0/{img}" class="fancybox" rel="gallery" title="{title}"><figure><img src="/images/1/{img}" alt="" title=""/></figure></a></div>
+		<div class="foto-title2">{title}
+        	<div class="voting-item-link2 voting-item-button2" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
+            <div class="voting-item-count2"><span>{count}</span><i></i></div>            
+        </div>
+        
+				<!--<div class="voting-item-link">-->
+					<!--<a href="{org_link}">{org}</a>
+					<div class="voting-item-link voting-item-button" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
+				</div>-->        
+	</div>
+	{/}{/mask}	
+	
+
+	<!--<div class="foto-list"><div class="foto-list_in">
+		{mask:item}{if: {img}}
+		<div class="command-image"><a href="/images/0/{img}" class="fancybox" rel="gallery" title="{title}"><img src="/images/1/{img}" alt="" /></a></div>
+        <div class="foto-title">{title}</div>
+		{/}{/mask}-->
+	</div></div>
+
+	<!--<div class="pager">
+		{set:navigation}
+			{mask:navigation}
+			{set:current}<a class="active">{title}</a>{/}
+			{mis:current}<a href="{url}">{title}</a>{/}
+			{/mask}
+		{/set}
+		&nbsp;
+	</div>-->
+	<div class="back-link rightpos">
+		<a href="{backurl}"><span></span> К списку альбомов</a>
+	</div>
+{/mask}

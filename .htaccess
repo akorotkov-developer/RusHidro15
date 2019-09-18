@@ -1,0 +1,21 @@
+#AuthName "Welcome!" 
+#AuthType Basic
+#AuthUserFile /home/rushydro15/rushydro15.ru/www/.htpasswd
+#require valid-user
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteBase /
+
+RedirectMatch 403 /\.(bash|git|hg|log|svn|swp|tar)
+
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+RewriteRule ^$ inner.php
+RewriteRule ^(.+str=.*)$ inner.php?path=$1 [L]
+RewriteRule ^([^\.]+)$ inner.php?path=$1 [QSA]

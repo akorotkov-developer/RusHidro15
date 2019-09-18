@@ -1,0 +1,65 @@
+{reduce:space}
+{mask:main}
+
+{#
+<script type="text/javascript">
+$ = _jQuery;
+$(document).ready(function(){
+    $('[name="dt_start"], [name="dt_end"]').datepicker({changeMonth: true, changeYear: true, yearRange: '-10:c'});
+});
+</script>
+#}
+
+
+    <h1>Журнал событий</h1>
+        
+    <form method="get" name="formlog">
+        <input type="hidden" id="page" name="page" value="0">
+        <table class="logtable">
+            <tr>
+                <th>Логин</th>
+                <th>Период</th>
+                <th>IP</th>
+                <th>Действие</th>
+                <th></th>
+            </tr>					
+            <tr>
+                <td><select name="user"><option value="">---</option>{mask:user}<option value="{user}" {set:checked}selected{/}>{user}</option>{/mask}</select></td>
+                <td>
+                    с <input type="text" name="dt_start" value="{dt_start}" class="input_date" />
+                    по <input type="text" name="dt_end" value="{dt_end}" class="input_date" />
+                </td>
+                <td></td>							
+                <td><select name="action"><option value="">---</option>{mask:actions}<option value="{value}" {set:checked}selected{/}>{title}</option>{/mask}</select></td>
+                <td></td>							
+            </tr>
+            <tr>
+                <td colspan="5" class="filter-bottom"><input type="submit" class="button_large" value="Применить фильтр"></td>
+            </tr>
+            {mask:logs}
+            <tr>
+                <td>{user}</td>
+                <td>{dt_1}</td>
+                <td>{ip}</td>
+                <td>
+                    {action_title}
+                    {mis:bid:0}[{bid}] [{btype}]{/}
+                    {set:link}<a href="{link}" target="_blank">{/}{info}{set:link}</a>{/}
+                </td>
+                <td></td>
+            </tr>
+            {/mask}						
+        </table>
+
+        <br />
+        {set:pages}Страницы: 
+        {mask:pages}
+            {mis:current}<a href="#" onclick="document.getElementById('page').value='{num}';document.formlog.submit();">{title}</a>{/}
+            {set:current}<b>{title}</b>{/}
+        {/mask}
+        {/set}
+
+    </form>
+
+
+{/mask}

@@ -1,0 +1,112 @@
+{reduce:space}
+{mask:main}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+
+<HEAD>
+<TITLE>Система администрирования сайта - SoftMajor - 1</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="styles/main.css" rel="stylesheet" type="text/css">
+<LINK href="styles/styles.css" rel="stylesheet" type="text/css">
+
+<script>
+
+	function check_iframe()		{
+
+		var arr = document.getElementsByTagName('iframe');
+		for (i = 0; i < arr.length; i++)		{
+			var id = arr[i].id;
+			if (id.substr(0, 7) == 'ifrdata')	{
+				var id2 = id + '_hid';				
+				document.getElementById(id2).value = document.getElementById(id).contentWindow.GetContents();
+				//alert (document.getElementById(id2).value);
+			}
+		}
+		//alert (arr.length);
+
+		//alert ('d');
+		return true;
+	}
+</script>
+
+<script language="javascript" type="text/javascript" src="js/popcalendar.js"></script>	
+<script language="javascript">
+<!--
+
+
+
+
+{#
+// ---------------------------------------
+// Центральная функция определения.
+// ---------------------------------------
+function $(id)
+{
+   return document.getElementById(id);
+}
+
+
+function back_b()
+{
+ location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&blockid='+$('blockid').value+'&parent='+$('parent').value
+}
+// = document.body.offsetHeight+100
+#}
+//-->
+</script>
+</HEAD>
+
+<body  onload="parent.document.getElementById('itemframe{template}').height = $('divtable').offsetHeight+150" bgcolor="#e4e4e4" style="background: #fff url(../img/e.gif); width:100%; min-width:300px;">
+
+
+
+<table class="center" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+    	<td class="cont"  style="padding:5px">
+			<div id="div_cont" style="padding:0px">
+
+<table class="in_cont" cellpadding="0" cellspacing="0" border="0" style="width:100%; padding-top:0px; margin-top:0px"  >
+<tr>
+<td align="center" style="padding:0px" valign="top">
+
+<div class="with_page"  style="padding:0px" >
+
+
+
+<form action="item_edit.php?action={action}&blockparent={blockparent}&template={template}&parent={parent}&blockid={bid}" method="POST"  enctype="multipart/form-data" name="form1"  onSubmit="return check_iframe();">
+<input type="hidden" name="blockid" id="blockid">
+<input type="hidden" name="parent" id="parent" value="{parent}">
+<input type="hidden" name="template" id="template" value="{template}">
+<input type="hidden" name="blockparent" id="blockparent" value="{blockparent}">
+
+<table cellpadding="0" cellspacing="0" border="0" >
+
+<tr><th>{if:!{blockparent}}Для создания вложений необходимо сохранить блок {/if}</td></tr>
+{if:{blockparent}}
+{mask:values}
+   <tr><th width="100px">
+	{name}{if:{//superadmin}}<br><font color="green">{key}</font>{/if}</th>
+	<th style="text-align:left !important;" >
+	{value}<input type="hidden" name="dat[]" value="{key}"><input type="hidden" name="dkey[]" value="{datatkey}"></th></tr>
+{/mask}
+
+
+{/if}
+</TABLE>
+<p align="left"><input type="submit" value="Сохранить">&nbsp;<input type="button" onclick="back_b();" value="<= Вернуться к списку"></p>
+</form>
+
+</div>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+
+
+</BODY>
+</HTML>
+{/mask}

@@ -1,0 +1,22 @@
+{reduce:space}
+{mask:main}
+<div><img src='http://cms.smhost.ru/img/cms.jpg' width='78' height='105' /></div>
+<center>
+<table cellpadding='5' cellspacing='0' border='0'>
+	{set:url}
+		<tr>
+			<td colspan='2'><center>Если вы не делали запрос на восстановление пароля и получили это письмо, просто проигнорируйте его. 
+			Если вы хотите изменить пароль на сайте {site}, то пройдите по ссылке ниже</center></td>
+		</tr>
+		<tr>
+			<td colspan='2'><center>{url}</center></td>
+		</tr>
+	{/set}
+	{set:password}
+		<tr>
+			<td colspan='2'><center>Ваш новый пароль для входа на сайт {site}: <strong>{password}</strong></center></td>
+		</tr>
+	{/set}
+</table>
+</center>
+{/mask}

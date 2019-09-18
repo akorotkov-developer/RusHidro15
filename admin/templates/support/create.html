@@ -1,0 +1,74 @@
+{reduce:space}
+{mask:main}
+<div class="options">
+    <div class="bg_b">
+        <div class="bg_l">
+            <div class="bg_r">
+                <div class="bg_tr">
+                    <div class="bg_tl">
+                        <div class="bg_bl">
+                            <div class="bg_br">
+                                <div>
+                                    <h1 style="width:60%; "><img src="http://cms.smhost.ru/admin/img/ico_file.gif"
+                                                                 width="16" height="20" alt=""/>Создать заявку</h1>
+                                    <h2>&nbsp;</h2>
+                                    <div class="nav">
+                                    </div>
+                                    <span class="clear"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=======SUPPORT=====-->
+<div class="support-block">
+    <form method="post" enctype="multipart/form-data" action="support.php?action=create">
+        <div class="support-form">
+            <div class="item">
+                <div class="name">Имя *:</div>
+                <div class="input"><input type="text" name="name" size="80" required/></div>
+            </div>
+            <div class="item">
+                <div class="name">E-mail *:</div>
+                <div class="input"><input type="text" name="email" size="80" required/></div>
+            </div>
+            <div class="item">
+                <div class="name">Телефон:</div>
+                <div class="input"><input type="text" name="phone" size="80"/></div>
+            </div>
+            <div class="item">
+                <div class="name">Тема *:</div>
+                <div class="input"><input type="text" name="subj" size="80" required/></div>
+            </div>
+            <div class="item">
+                <div class="name">Текст *:</div>
+                <div class="input"><textarea name="text" cols="40" rows="30" required></textarea></div>
+            </div>
+            <div class="item">
+                <div class="name">Файл:</div>
+                <div class="input">
+                    <input type="file" name="attach[]"/>
+                </div>
+                <button type="button" onclick="_jQuery(this).prev().children().eq(0).clone(false).val('').appendTo(_jQuery(this).prev());">Добавить файл</button>
+            </div>
+        </div>
+
+        <table align="center" style="width:auto">
+            <tr>
+                <td>
+                    <div class="save"><input type="submit" disabled id="add_button_submit" name="add" value="Добавить"/>
+                    </div>
+                </td>
+                <td style="width: 10px"></td>
+                <td>
+                    <div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="document.location.assign('/admin/support.php');"/></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{/mask}

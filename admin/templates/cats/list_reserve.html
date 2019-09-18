@@ -1,0 +1,398 @@
+{reduce:space}
+{mask:main}
+
+<SCRIPT language="JavaScript" type="text/JavaScript">
+bpressedr = '';
+flint = 0;
+
+{#
+
+function TrRightClick(n) {
+
+
+	if (bpressed != '') {
+		if (bpressed == n.id) {
+			document.all(bpressed).style.backgroundColor = "#E0E0E0";
+			divcursor.style.visibility = 'hidden';
+			bpressed = '';
+			if (flint > 0) {clearInterval(flint);};
+		} else {
+			if (bpressedr == 'copy') {s = 'скопировать';};
+			if (bpressedr == 'move') {s = 'переместить';};
+			if (confirm('Вы действительно хотите ' + s + ' папку?')) {
+				if (flint > 0) {clearInterval(flint);};
+				yy = event.offsetY;
+				if (yy < 7) {document.selparent.copymove.value = 0;}
+				else if (yy > 12) {document.selparent.copymove.value = 1;}
+				else {document.selparent.copymove.value = 2;};
+				if (bpressedr == 'copy') {document.selparent.copy.value = n.id.substr(2);};
+				if (bpressedr == 'move') {document.selparent.move.value = n.id.substr(2);};
+				document.selparent.parent2.value = bpressed.substr(2);
+				document.selparent.submit();
+			};
+		};
+	} else {
+		TrClick(n);
+		popup.style.left = event.x - 10;
+		popup.style.top = event.y + document.body.scrollTop - 10;
+		popup.style.visibility = 'visible';
+	};
+	return false;
+}
+function TrOver(n) {
+	if ((popup.style.visibility == 'hidden') && (bpressed == '')) {
+		if (bpressed != document.selparent.parent2.value) {
+			document.all(document.selparent.parent2.value).style.backgroundColor = "";
+		};
+		document.selparent.parent2.value = n.id;
+		//if (bpressed != n.id) n.style.backgroundColor = "#E0E0E0";
+	};
+}
+
+im0 = new Image; im0.src = '{base_url}img/spacer.gif';
+im1 = new Image; im1.src = '{base_url}img/bg-top.gif';
+im2 = new Image; im2.src = '{base_url}img/bg-bottom.gif';
+im3 = new Image; im3.src = '{base_url}img/ico-page-add2.gif';
+im4 = new Image; im4.src = '{base_url}img/spacer.gif';
+
+imTDspacer = new Image; imTDspacer.src = '{base_url}img/spacer.gif';
+imTDm1 = new Image; imTDm1.src = '{base_url}img/m1.gif';
+imTDm2 = new Image; imTDm2.src = '{base_url}img/m2.gif';
+imTDm3 = new Image; imTDm3.src = '{base_url}img/m3.gif';
+imTDm4 = new Image; imTDm4.src = '{base_url}img/m4.gif';
+imTDm1_plus = new Image; imTDm1_plus.src = '{base_url}img/m1_plus.gif';
+imTDm2_plus = new Image; imTDm2_plus.src = '{base_url}img/m2_plus.gif';
+//imTDm3_plus = new Image; imTDm3_plus.src = '{base_url}img/m3_plus.gif';
+//imTDm4_plus = new Image; imTDm4_plus.src = '{base_url}img/m4_plus.gif';
+imTDm1_minus = new Image; imTDm1_minus.src = '{base_url}img/m1_minus.gif';
+imTDm2_minus = new Image; imTDm2_minus.src = '{base_url}img/m2_minus.gif';
+//imTDm3_minus = new Image; imTDm3_minus.src = '{base_url}img/m3_minus.gif';
+//imTDm4_minus = new Image; imTDm4_minus.src = '{base_url}img/m4_minus.gif';
+
+imAdd = new Image; imAdd.src = '{base_url}img/ico-add.gif';
+imEdit = new Image; imEdit.src = '{base_url}img/ico-edit.gif';
+imEditbl = new Image; imEditbl.src = '{base_url}img/ico-editbl.gif';
+imCopy = new Image; imCopy.src = '{base_url}img/ico-copy-s.gif';
+imMove = new Image; imMove.src = '{base_url}img/ico-move.gif';
+imHide = new Image; imHide.src = '{base_url}img/ico-hide.gif';
+imDel = new Image; imDel.src = '{base_url}img/ico-del.gif';
+
+imAddS = new Image; imAddS.src = '{base_url}img/ico-add-s.gif';
+imEditS = new Image; imEditS.src = '{base_url}img/ico-edit-s.gif';
+imEditblS = new Image; imEditblS.src = '{base_url}img/ico-editbl-s.gif';
+imCopyS = new Image; imCopyS.src = '{base_url}img/ico-copy-s.gif';
+imMoveS = new Image; imMoveS.src = '{base_url}img/ico-move-s.gif';
+imHideS = new Image; imHideS.src = '{base_url}img/ico-hide-s.gif';
+imDelS = new Image; imDelS.src = '{base_url}img/ico-del-s.gif';
+
+documenty = -1;
+function TrMove(n) {
+	if (bpressed != '') {
+		yy = event.offsetY;
+		n.style.borderWidth = 1;
+		if (bpressed != n.id) {
+			if ((yy < 7) && (n.id != 'tr0')) {
+				if (divcursor.document.all('im').src != im1.src)
+					divcursor.document.all('im').src = im1.src;
+				divcursor.style.top = event.y + document.body.scrollTop - event.offsetY - 2;
+			} else if ((yy > 12) && (n.id != 'tr0')) {
+				if (divcursor.document.all('im').src != im2.src)
+					divcursor.document.all('im').src = im2.src;
+				divcursor.style.top = event.y + document.body.scrollTop - event.offsetY + 7;
+			} else if (n.id != 'tr0') {
+				if (divcursor.document.all('im').src != im3.src)
+					divcursor.document.all('im').src = im3.src;
+				divcursor.style.top = event.y + document.body.scrollTop - event.offsetY - 2;
+			};
+			documenty = event.y + document.body.scrollTop;
+			xx = event.x - 27;
+			if (xx < 15) xx = 15;
+			divcursor.style.left = xx;
+		} else {
+			documenty = -1;
+			divcursor.document.all('im').src = im4.src;
+		};
+		divcursor.document.all('im').filters[0].opacity = 100;
+		if (flint > 0) {clearInterval(flint);};
+		flint = setInterval("javascript:if (divcursor.document.all('im').filters[0].opacity == 100) {divcursor.document.all('im').filters[0].opacity = 15;} else {divcursor.document.all('im').filters[0].opacity = 100;};", 200);
+	};
+}
+function bpress(oper) {
+	divHide();
+	bpressedr = oper;
+	bpressed = document.selparent.parent2.value;
+	divcursor.document.all('im').src = im4.src;
+	divcursor.style.visibility = 'visible';
+	document.all(bpressed).style.backgroundColor = "#F0F0F0";
+}
+function TrOut(n) {
+}
+
+
+#}
+
+{#
+function TrClick(n) {
+	id = n.id.substr(2);
+	n.style.backgroundColor = "#E0E0E0";
+#}
+	{if:{tree_count} > 0}
+		for (i = 0; i <= {tree_count}; i++) 
+		{#
+		{	
+			if (document.selparent.parent[i].value == id) {document.selparent.parent[i].checked = true;};	
+		};
+		#}
+	{/if}
+
+
+	if ((id != 0){scaneditbl}) {
+		document.all('aEditbl').style.color = "#000000";
+		document.all('iEditbl').src = imEditbl.src;
+	} else {
+		document.all('aEditbl').style.color = "#808080";
+		document.all('iEditbl').src = imEditblS.src;
+	};
+
+	if (true{scandel}) {
+		document.all('aDel').style.color = "#000000";
+		document.all('iDel').src = imDel.src;
+	} else {
+		document.all('aDel').style.color = "#808080";
+		document.all('iDel').src = imDelS.src;
+	};
+
+	if (true{scanaddcat}) {
+		document.all('aAdd').style.color = "#000000";
+		document.all('iAdd').src = imAdd.src;
+	} else {
+		document.all('aAdd').style.color = "#808080";
+		document.all('iAdd').src = imAddS.src;
+	};
+
+	if ((id != 0){scanedit}) {
+		document.all('aEdit').style.color = "#000000";
+		document.all('iEdit').src = imEdit.src;
+	} else {
+		document.all('aEdit').style.color = "#808080";
+		document.all('iEdit').src = imEditS.src;
+	};
+
+	if ((id != 0){scanhide}) {
+		document.all('aHide').style.color = "#000000";
+		document.all('iHide').src = imHide.src;
+	} else {
+		document.all('aHide').style.color = "#808080";
+		document.all('iHide').src = imHideS.src;
+	};
+
+	if ((id != 0){scancopy}{scancopy_22}) {
+		document.all('aCopy').style.color = "#000000";
+		document.all('iCopy').src = imCopy.src;
+	} else {
+		document.all('aCopy').style.color = "#808080";
+		document.all('iCopy').src = imCopyS.src;
+	};
+
+
+
+	if ((id != 0){scanmove}{scanmove_22}) {
+		document.all('aMove').style.color = "#000000";
+		document.all('iMove').src = imMove.src;
+	} else {
+		document.all('aMove').style.color = "#808080";
+		document.all('iMove').src = imMoveS.src;
+	};
+}
+
+function onclickEditbl(s) {
+	if ((bpressed == '') && (document.selparent.parent2.value.substr(2) != 0){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scaneditbl}){/php}) {
+
+		{if:{tree_count} > 0}
+			for (i = 0; i <= {tree_count}; i++) 
+			{#
+			{
+				if (document.selparent.parent[i].value == document.selparent.parent2.value.substr(2)) {document.selparent.parent[i].checked = true;};
+			};
+			#}
+		{/if}
+		document.selparent.blocks.value=1;
+		document.selparent.submit();
+	};
+	if (bpressed != '') {
+		TrRightClick(s);
+	}
+	return false;
+};
+</SCRIPT>
+
+
+
+						<H1>Структура папок</H1>
+						{set:error}<font color="#800000">'.{prerror}.'</font><br><br>'){/set}
+
+						<TABLE width="100%" border="0" cellpadding="2" cellspacing="0">
+							<form name="selparent" action="cat_edit.php" method="get">
+							<input type="hidden" name="id" value="0">
+							<input type="hidden" name="blocks" value="0">
+							<input type="hidden" name="del" value="0">
+							<input type="hidden" name="toup" value="0">
+							<input type="hidden" name="todown" value="0">
+							<input type="hidden" name="parent2" value="tr{parent}">
+							<input type="hidden" name="copy" value="0">
+							<input type="hidden" name="move" value="0">
+							<input type="hidden" name="copymove" value="0">
+							<input type="hidden" name="hide" value="0">
+
+
+{set:user_is:1}
+							<TR onMouseMove="javascript:TrMove(this);" onMouseOut="javascript:TrOut(this);" onMouseOver="javascript:TrOver(this);" oncontextmenu="TrRightClick(this);return false;" onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:hand" id="tr0">
+{/set}
+{mis:user_is:1}
+							<TR  id="tr0">
+{/mis}
+
+								<TD width="18px"><IMG border=0 src="{base_url}img/ico-site.gif" width="16" height="16"></TD>
+								<TD colspan="100">Корень сайта</TD>
+								<TD><input style="height:11px;width=11px;visibility:hidden" class="input" type="radio" name="parent" value="0"{set:parent:0} checked{/set}></TD>
+							</TR>
+
+
+
+							{mask:item}
+							<!--
+							<TR {# onMouseMove="javascript:TrMove(this);" onMouseOut="javascript:TrOut(this);" onMouseOver="javascript:TrOver(this);" onclick="javascript:if (bpressed != '') {onclickEditbl(this);};" oncontextmenu="javascript:TrRightClick(this);return false;" onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:hand" #} id="tr{r[id]}">
+							//-->
+							<TR {# onMouseMove="javascript:TrMove(this);" onMouseOut="javascript:TrOut(this);" onMouseOver="javascript:TrOver(this);" onclick="javascript:TrRightClick(this);return false;" onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:hand" #} id="tr{r[id]}">
+
+
+									{mask:item2}
+									<TD width=18px id=td{php}{td}{/php}><script>document.all('td{td}').background = imTD{l}{set:show_plus}_plus{/set}{set:show_minus}_minus{/set}.src;</script>
+									{set:show_plus_minus}
+									<a style="text-decoration:none" href="index.php?unhide={set:show_minus}-{/set}{r[id]}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									{/set}
+									{mis:show_plus_minus}&nbsp;{/mis}</TD>
+									{/mask}
+
+									<TD width=1%><IMG{set:r[visible]:0} style="filter:alpha(opacity=20) gray;"{/set} border=0 src="{base_url}img/{r2_lev}.gif" width="16" height="16"></TD>
+
+									<TD width=100% nowrap colspan="{colspan}">
+									{if:{cl} == 't1'} <b> {/if}
+									{php}strip_tags({r[name]}){/php} 
+									{if:{cl} == 't1'} </b> {/if}
+									{set:user_is_super} {php}htmlspecialchars({r[key]}){/php} {/set} - {r[template]} - {r[id]}
+									</TD>
+
+									<TD><input style="height:11px;width=11px;visibility:hidden" class="input" type="radio" name="parent" value="{r[id]}" {if:{parent} == {r[id]} }  checked {/if}></TD>
+								</TR>
+							{/mask}
+
+
+							<input style="display:none" type="radio" name="parent" value="-1">
+							</form>
+						</TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+
+
+
+
+			<div oncontextmenu="javascript:divHide();return false;" onmouseout="javascript:divOut();" onmouseover="javascript:divOver();" style="position:absolute;visibility:hidden;width=135px;height:1px;border-width:1;border-style:solid;left:10px;top:10px" id="popup">
+
+		{#
+			<script language="JavaScript" type="text/javascript">
+			divInv = 0;
+			function pTrOver(n) {
+				n.style.backgroundColor = '0A246A';
+				wascolor = n.style.color;
+				n.style.color = '#FFFFFF';
+			}
+			function pTrOut(n) {
+				n.style.backgroundColor = '';
+				n.style.color = wascolor;
+			}
+			function divOver() {
+				if (divInv > 0) {clearInterval(divInv); divInv=0;};
+			}
+			function divOut() {
+				if (divInv == 0) {
+					divInv = setInterval("divHide()", 300);
+				};
+			}
+			function divHide() {
+				clearInterval(divInv);
+				divInv = 0;
+				popup.style.visibility = 'hidden';
+				popup.style.left = '10px';
+				popup.style.top = '10px';
+				if (bpressed == '') document.all(document.selparent.parent2.value).style.backgroundColor = "";
+			}
+			</script>
+		#}
+
+
+			<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
+				<TR>
+					<TD height="18px" class="small" bgcolor="#666666">&nbsp;&nbsp;&nbsp;&nbsp;<img border=0 src="{base_url}img/spacer.gif" width=9 height=1><FONT color="#FFFFFF"><B>Действие</B></FONT></TD>
+				</TR>
+				<TR>
+					<TD height="1px" bgcolor="#000000"><img src="{base_url}img/spacer.gif" border=0 width=1 height=1></TD>
+				</TR>
+				<TR valign=top>
+					<TD bgcolor="D4D0C8">
+						<TABLE width="100%" border="0" cellspacing="0" cellpadding="2">
+
+							<TR style="cursor:default" id="aAdd" onclick="javascipt:if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanaddcat}){/php}) {  document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iAdd" border=0 src="{base_url}img/ico-add.gif" width=9 height=9></TD>
+								<TD>Создать новую</TD>
+							</TR>
+
+							<TR style="cursor:default" id="aEdit" onclick="javascript:if ((document.selparent.parent[0].checked == false){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanedit}){/php})   { document.selparent.id.value=1; document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iEdit" border=0 src="{base_url}img/ico-edit.gif" width=9 height=9></TD>
+								<TD>Редактировать</TD>
+							</TR>
+
+
+							<TR style="cursor:default" id="aEditbl" onclick="javascript:return onclickEditbl('');" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iEditbl" border=0 src="{base_url}img/ico-editbl.gif" width=9 height=9></TD>
+								<TD>Блоки</TD>
+							</TR>
+
+							<TR style="cursor:default" id="aMove" onclick="javascript:{if:{tree_count} > 1} if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanmove}){/php}) { bpress('move'); }; {/if} return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								
+								<TD>&nbsp;&nbsp;<img id="iMove" border=0 src="{base_url}img/ico-move.gif" width=9 height=9></TD>
+								<TD>Переместить</TD>
+							</TR>
+
+
+							<TR style="cursor:default" id="aHide" onclick="javascript:if ((document.selparent.parent[0].checked == false){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanhide}){/php}) { document.selparent.hide.value=1;document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iHide" border=0 src="{base_url}img/ico-hide.gif" width=9 height=9></TD>
+								<TD>Скрыть/показать</TD>
+							</TR>
+
+						  <TR style="display:none" style="cursor:default" id="aCopy" onclick="javascript:{if:{tree_count} > 1}  if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scancopy}){/php}) { bpress('copy'); }; {/if} return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iCopy" border=0 src="{base_url}img/ico-edit-s.gif" width=9 height=9></TD>
+								<TD>Копировать</TD>
+							</TR>
+
+							<TR style="cursor:default" id="aDel" onclick="javascript:if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scandel}){/php}) { if (confirm('Вы действительно хотите удалить папку?')) { document.selparent.del.value=1; document.selparent.submit(); }; };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);">
+								<TD>&nbsp;&nbsp;<img id="iDel" border=0 src="{base_url}img/ico-del.gif" width=9 height=9></TD>
+								<TD>Удалить</TD>
+							</TR>
+
+						</TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+			</div>
+
+			
+			<div style="position:absolute;visibility:hidden;" id="divcursor"><img onclick="javascript:TrMove(document.all(document.selparent.parent2.value));" id="im" border=0 style="cursor:hand;filter:alpha(opacity=100)" src="{base_url}img/spacer.gif"></div>
+
+
+
+	<table >
+		<tr><td>
+	
+{/mask}

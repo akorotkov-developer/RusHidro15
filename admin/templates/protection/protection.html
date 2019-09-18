@@ -1,0 +1,106 @@
+{reduce:space}
+{mask:main}
+
+    <h1>Настройки защиты</h1>
+
+    <form method="post" name="settings">
+        <input type="hidden" name="settings" value="1" />
+
+        <table class="settable">
+            <tr>
+                <td>
+                    Блокировать IP пользователя при неудачных попытках входа:
+                </td>
+                <td>
+                    <input type="checkbox" name="auth_lock" id="auth_lock" value="1" {set:auth_lock:1}checked{/} />
+                    <label for="auth_lock">Да</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Уведомлять на e-mail о неудачных попытках входа:
+                </td>
+                <td>
+                    <input type="checkbox" name="auth_email_send" id="auth_email_send" value="1" {set:auth_email_send:1}checked{/} />
+                    <label for="auth_email_send">Да</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail для уведомлений о неудачных попытках входа<br />(несколько e-mail указываются через запятую):
+                </td>
+                <td>
+                    <input type="text" name="auth_email" value="{auth_email}" class="input_large" /><br />
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Количество возможных неудачных попыток входа:
+                </td>
+                <td>
+                    <select name="auth_count">
+                        {mask:auth_counts}
+                        <option value="{value}" {set:selected}selected{/}>{value}</option>
+                        {/mask}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Период блокировки:
+                </td>
+                <td>
+                    <input type="text" name="auth_lock_period" value="{auth_lock_period}" class="input_short" />
+                    минут
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Никогда не блокировать доступ в систему администрирования для IP<br />(несколько ip указываются через запятую):
+                </td>
+                <td>
+                    <input type="text" name="auth_ip" value="{auth_ip}" class="input_large" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Всегда блокировать доступ в систему администрирования для IP<br />(несколько ip указываются через запятую):
+                </td>
+                <td>
+                    <input type="text" name="auth_ip_lock" value="{auth_ip_lock}" class="input_large" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Всегда блокировать доступ к сайту для IP<br />(несколько ip указываются через запятую):
+                </td>
+                <td>
+                    <input type="text" name="auth_ip_lock_site" value="{auth_ip_lock_site}" class="input_large" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" value="Сохранить" class="button_large" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    
+    {set:locked_ips}
+        <h3>Временно заблокированные ip</h3>
+        <table class="locked-ip-table">
+            {mask:locked_ips}
+            <tr>
+                <td>{ip}</td>
+                <td>(<a href="{//page_url}?unlock_ip={ip}">разблокировать</a>)</td>
+            </tr>
+            {/mask}
+        </table>
+    {/}
+
+
+{/mask}

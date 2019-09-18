@@ -1,0 +1,23 @@
+{reduce:space}
+{mask:main}
+
+		{set:item}
+		<ul>
+			{item}
+		</ul>  
+		{/set}
+
+{/mask}
+
+
+			{mask:item}
+			<li>
+				<a href="{url}">{name}</a>
+				{set:item}
+				<ul>									
+					{item}								
+				</ul>
+				{/set}								
+			</li>   
+			{/mask}
+

@@ -1,0 +1,371 @@
+{reduce:space} {mask:main}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+
+<HEAD>
+<TITLE>Система администрирования сайта - SoftMajor - 1</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="styles/main.css" rel="stylesheet" type="text/css">
+<LINK href="styles/styles.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/dropfile.css"/>
+<script type="text/javascript" src="js/jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="js/scripts.js?v=2"></script>
+<script language="javascript">
+_jQuery = jQuery.noConflict(true);
+<!--
+{#
+var divInv='';
+
+
+XY = {x:0, y:0};
+
+function getElementPosition(elemId)
+{
+
+    var elem_1 = document.getElementById(elemId);
+
+	//alert (elem_1);
+	//return;
+
+    var w_1 = elem_1.offsetWidth;
+    var h_1 = elem_1.offsetHeight;
+
+    var l_1 = 0;
+    var t_1 = 0;
+
+    while (elem_1)
+    {
+        l_1 += elem_1.offsetLeft;
+        t_1 += elem_1.offsetTop;
+        elem_1 = elem_1.offsetParent;
+    }
+
+    return {"left":l_1, "offsetY":t_1, "width": w_1, "height":h_1};
+}
+
+
+
+function mousePageXY(e)
+{
+  var x = 0, y = 0;
+
+  if (!e) e = window.event;
+
+  if (e.pageX || e.pageY)
+  {
+    x = e.pageX;
+    y = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+  {
+    x = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft) - document.documentElement.clientLeft;
+    y = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop) - document.documentElement.clientTop;
+	//y = y +  document.body.scrollTop;
+  }
+
+	//offY = e.offsetY;
+
+  return {"x":x, "y":y};
+}
+
+
+
+
+function tmove(n)
+{
+
+	offXY = getElementPosition(n.id);
+
+	 $('divcursor').style.top = XY.y; // + document.body.scrollTop - offXY.offsetY;
+	 xx = XY.x - 27;
+	 if (xx < 15) xx = 15;
+
+	yy = XY.y - offXY.offsetY;
+
+	 if (yy < 7)	{ $('im').src= 'img/bg-top.gif'; $('divcursor').style.top = XY.y - 2; }
+	 if (yy > 15)	{ $('im').src= 'img/bg-bottom.gif'; $('divcursor').style.top = XY.y - 10;  }
+	 $('divcursor').style.left =xx;
+
+	/*
+	 $('divcursor').style.top = event.y + document.body.scrollTop - event.offsetY+3;
+	 xx = event.x - 27;
+	 if (xx < 15) xx = 15;
+	 if (event.offsetY < 7)$('im').src= 'img/bg-top.gif';
+	 if (event.offsetY > 7 && event.offsetY<20)$('im').src= 'img/bg-bottom.gif';
+	 $('divcursor').style.left =xx;
+	 */
+}
+
+function move()
+{
+  contexthide();
+  $('divcursor').style.display = '';
+  $('mblockparent').value = $('blockid').value;
+}
+
+
+// ---------------------------------------
+// Центральная функция определения.
+// ---------------------------------------
+function $(id)
+{
+   return document.getElementById(id);
+}
+
+// ---------------------------------------
+// Стилевые функции.
+// ---------------------------------------
+function pTrOver(n)
+{
+	n.style.backgroundColor = '#f7f7f7';
+	wascolor = n.style.color;
+	n.style.color = '000000';
+}
+function pTrOut(n)
+{
+	n.style.backgroundColor = '';
+	n.style.color = wascolor;
+}
+// ---------------------------------------
+// Контекстное меню.
+// ---------------------------------------
+function context(id)
+{
+  $('blockid').value = $(id).id; // Выдаём на редактирование блок id
+  $('popup').style.left = XY.x-10;// + document.body.scrollTop;
+  $('popup').style.top = XY.y-10;
+  $('popup').style.display = '';
+  /*
+  $('blockid').value = $(id).id; // Выдаём на редактирование блок id
+  $('popup').style.left = y-40;
+  $('popup').style.top = x-10;
+  $('popup').style.display = '';
+  */
+}
+function contexthide()
+{
+  $('popup').style.display = 'none';
+}
+// ---------------------------------------
+// Создание нового блока.
+// ---------------------------------------
+function add_new()
+{
+
+ location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&action=add&blockid='+$('blockid').value+'&parent='+$('parent').value
+}
+function edit()
+{
+ location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&action=edit&blockid='+$('blockid').value+'&parent='+$('parent').value
+}
+function hide_block()
+{
+ location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&action=hide&blockid='+$('blockid').value+'&parent='+$('parent').value
+}
+function del()
+{
+ if(window.confirm('Вы действительно хотите удалить блок?'))location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&action=del&blockid='+$('blockid').value+'&parent='+$('parent').value
+}
+
+function press(id)
+{
+
+	offXY = getElementPosition(id);
+	yy = XY.y - offXY.offsetY;
+
+
+ $('blockid').value = $(id).id; // Выдаём на редактирование блок id
+ if($('divcursor').style.display=='' && $('mblockparent').value!==id)
+ {
+  	 if (yy < 7)location.href='item_edit.php?blockparent='+$('blockparent').value+'&template='+$('template').value+'&action=mup&copymove=0&mblockparent='+$('mblockparent').value+'&blockid='+$('blockid').value+'&parent='+$('parent').value
+	 if (yy > 15) location.href='item_edit.php?blockparent='+$('blockparent').value+'&copymove=1&template='+$('template').value+'&action=mdown&mblockparent='+$('mblockparent').value+'&blockid='+$('blockid').value+'&parent='+$('parent').value
+ }
+
+
+
+
+ $('mblockparent').value='';
+  $('divcursor').style.display='none';
+}
+//-->
+#}
+
+
+document.onmousemove = function(event) {
+      var event = event || window.event;
+	  XY = mousePageXY(event);
+      //document.body.innerHTML = "x = " + mousePageXY(event).x + ", y = " + mousePageXY(event).y;
+}
+function resize() {
+	if (parent.document.getElementById('itemframe{template}'))
+	parent.document.getElementById('itemframe{template}').height = $('divtable').offsetHeight+150;
+}
+</script>
+
+</HEAD>
+<body  onload="resize();" bgcolor="#e4e4e4" style="background: #fff url(../img/e.gif); width:100%; min-width:400px;">
+
+
+
+<table class="center" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+    	<td class="cont"  style="padding:5px">
+			<div id="div_cont" style="padding:0px">
+
+<table class="in_cont" cellpadding="0" cellspacing="0" border="0" style="width:100%; padding-top:0px; margin-top:0px"  >
+<tr>
+<td align="center" class="{set://packet}dropzone{/}" style="width:100%; padding:0px" valign="top">
+
+<div class="with_page"  style="padding:0px" >
+{set://packet}<div id="dropzone"><span>перетащите изображения сюда</span></div>{/}
+
+
+
+<form method="get" id="itemsform">
+<input type="hidden" name="blockid" id="blockid">
+<input type="hidden" name="parent" id="parent" value="{parent}">
+<input type="hidden" name="template" id="template" value="{template}">
+<input type="hidden" name="blockparent" id="blockparent" value="{blockparent}">
+<input type="hidden" name="mblockparent" id="mblockparent" >
+{set://packet}<input type="hidden" name="packet" value="true"/>{/}
+
+<div class="blue">
+
+	<p style="text-align:left">
+		<input type="button" value="Создать вложенный блок" onClick="add_new(); dropzoneSize();">{set://packet} или перетащите изображения сюда{/}
+	</p>
+<TABLE  style="width:100%; margin:0; padding:0" border="0" cellspacing="0" cellpadding="1" id="divtable">
+<tr><td>{if:!{blockparent}}Для создания вложений необходимо сохранить блок {/if}</td></tr>
+{if:{blockparent}}
+{set:blocklist}
+<tr>
+	<th nowrap="nowrap" style="background: #e7e7e7; width: 30px !important"></th>
+	{if:{//superadmin}}
+	<th style="background: #e7e7e7;">
+	id
+	</th>
+	{/if}
+{mask:table_hr}
+<th nowrap="nowrap" style="background: #e7e7e7; {set:_last}width:90%{/set}" >{title}
+</th>
+{/mask}
+<th nowrap="nowrap" style="background:#e7e7e7">&nbsp;</th>
+</tr>
+{mask:blocklist}
+<tr id="{id}" {if:{//canedit}} oncontextmenu="context(this.id); return false" onClick="press(this.id)"{/if} onMouseMove="tmove(this)"   onMouseOver="pTrOver(this); contexthide()" onMouseOut="pTrOut(this);" style="cursor:pointer">
+
+	<td nowrap="nowrap">
+		{if:{visible}!="1"}
+		<img src="img/ico_file_g.gif" align="center" width="16" height="20" alt="" onClick="{if:{//canedit}}$('blockid').value = '{id}'; edit();{/if} return false;" />
+		{/if}
+		{if:{visible}=="1"}
+		<img src="img/ico_file.gif" align="center" width="16" height="20" alt="" onClick="{if:{//canedit}}$('blockid').value = '{id}'; edit();{/if} return false;" />
+		{/if}
+	</td>
+
+	{if:{//superadmin}}
+	<td nowrap="nowrap">
+	<p class="id">{id}</p>
+	</td>
+	{/if}
+
+{mask:table_name}
+	<td  nowrap="nowrap">
+	<p><a {if:{../visible}!="1"}class="gray"{/if}>{data}</a>
+	{mis:data}&nbsp;{/mis}
+	</p>
+	</td>
+{/mask}
+	<td>&nbsp;</td>
+</tr>
+{/mask}
+{/set}
+{if:{//packet}}
+<tr id="packet-tpl" class="load" style="cursor: pointer; display:none;">
+    <td nowrap="nowrap">
+        {if:{visible}!="1"}
+        <img src="img/ico_file_g.gif" align="center" width="16" height="20" alt="" onClick="{if:{//canedit}}$('blockid').value = '{id}'; edit();{/if} return false;" />
+        {/if}
+        {if:{visible}=="1"}
+        <img src="img/ico_file.gif" align="center" width="16" height="20" alt="" onClick="{if:{//canedit}}$('blockid').value = '{id}'; edit();{/if} return false;" />
+        {/if}
+    </td>
+
+    {if:{//superadmin}}
+    <td nowrap="nowrap">
+        <p class="id">{id}</p>
+    </td>
+    {/if}
+    {mask:../table_hr}
+    <td nowrap="nowrap">
+        {if:{key}=={//packet_field}}<img class="preview" src="img/noimg.jpg" align="center"/>{/}
+        {if:{key}!={//packet_field}}
+        <input disabled type="text" name="packet_field[{key}]" value="" class="dropzoneInput"/>
+        {/}
+    </td>
+    {/mask}
+    <input disabled type="hidden" name="packet_field[sort]" value="" class="dropzoneInput"/>
+    <td><a href="#"><img src="img/preload.gif" style="outline: none;"></a></td>
+</tr>
+<script>
+    var packet_config = {
+        field: '{packet_field}',
+        def: {
+        {mask:packet_default}
+            {key}:'{php}addslashes({val}){/}'{mis:_last},{/}
+        {/mask}
+        },
+        increment: '{packet_increment}'
+    };
+</script>
+{/}
+{/if}
+</TABLE>
+<input disabled type="hidden" value="{packet_sort}" id="packet_sort" />
+<p class="bottomText" style="display:none">Прикреплено: <span class="pf_count">0</span> <span class="pf_word">файла</span> из <span class="pf_amount">0</span></p>
+</form>
+
+
+
+
+</div>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+
+					<div style="position:absolute;display:none;" id="divcursor"><img id="im" border=0 style="cursor:hand;filter:alpha(opacity=100)" src="img/bg-top.gif"></div>
+
+					 <div style="position:absolute;display:none;width=135px;left:10px;top:10px" id="popup" class="service">
+
+                                             <div class="bg">
+                                                <div class="bg2">
+
+												{if:{canedit}}
+                                                    <div onClick="edit();" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Редактировать</a></div>
+												{/if}
+												{if:{canmove}}
+													<div onClick="move();return false;" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Переместить</a></div>
+												{/if}
+												{if:{cancopy}}
+                                                    <div onClick="copy();return false;" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Создать копию</a></div>
+												{/if}
+												{if:{canhide}}
+                                                    <div onClick="hide_block();" onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="#" title="" onClick="return false;">Скрыть/показать</a></div>
+                                                {/if}
+												{if:{candel}}
+                                                    <div class="last"  onclick="del();"  onMouseOver="pTrOver(this)" onMouseOut="pTrOut(this);"><a href="" title="" onClick="return false;">Удалить</a></div>
+												{/if}
+                                                </div>
+                                            </div>
+
+
+
+			</div>
+			</BODY>
+</HTML>
+{/mask}

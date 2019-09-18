@@ -1,0 +1,104 @@
+
+
+.path {
+	width: 90%;	
+	overflow: hidden
+	}
+	
+.path div {	
+	padding: 2px 0 0 0; 
+	font-size: 12px;	
+	height: 19px; 
+	text-align: right
+	}
+
+.path div.last a, .path div.last span { margin-right: 10px; }
+.path div.first a, .path div.first span { margin-left: 2px; }
+
+.block-new { }
+.block-new a { 
+	display: inline-block; 
+	background: #60a209 url(../img/plus.png) no-repeat 10px 50%; 
+	border-radius: 12px; 
+	margin-top: 5px;
+	color: #fff; 
+	font: 14px Arial, Helvetica, sans-serif; 
+	text-decoration: none; 	
+	padding: 4px 15px 6px 28px; 	
+	}
+.block-new a span { border-bottom: 1px dashed #fff; }	
+.block-new a:hover span { border: none }
+
+
+.type-list a { 
+	font-size: 13px; 
+	display: inline-block; 
+	vertical-align: middle; 
+	border: 1px solid #60a209; 
+	margin: 0 9px 10px 0; 
+	color: #60a209; 
+	padding: 3px 11px 5px 11px; 
+	text-decoration: none; border-radius: 14px 
+	}
+.type-list a.active { background: #60a209; color: #fff }
+.type-list a span { background: url(../img/dash.png) repeat-x 0 100% }
+.type-list a.zero { border-color: #898989; color: #898989 }
+.type-list a.zero span { background: none }
+.type-list a:hover span { background: none }
+
+.type-list { padding: 0 0 0 90px; position: relative; text-align: left; margin-top: 25px; font-size: 0 }
+.type-list .title { position: absolute; top: 4px; left: 0; font-size: 13px } 
+
+.with_page .table-list { margin: 0; border-collapse: collapse }
+.with_page .table-list td { padding: 4px 5px 4px 5px }
+.with_page .table-list th { background: #e7e7e7; padding: 4px 5px 4px 5px }
+.table-list tr:hover td { background-color: #e0f3bb !important }
+.table-list tr.checked td { background: #e7e7e7 }
+.table-list .move { width: 20px; padding: 0; }
+.table-list .move span { display: block; background: url(../img/move.png) no-repeat 50% 50%; width: 20px; height: 20px; cursor: grab }
+
+.table-list .block-options { font-size: 0; width: 240px; text-align: right; white-space: nowrap; }
+.table-list .block-options a { display: inline-block; width: 17px; height: 17px; margin-right: 15px; cursor: pointer }
+
+.table-list .block-options a.redact { background: url(../img/blockscons.png) no-repeat 0 100% }
+.table-list tr:hover .block-options a.redact { background: url(../img/blockscons.png) no-repeat 0 0 }
+
+.table-list .block-options a.hide { background: url(../img/blockscons.png) no-repeat -33px 100% }
+.table-list tr:hover .block-options a.hide { background: url(../img/blockscons.png) no-repeat -33px 100% }
+.table-list tr:hover .block-options a.hide/*.hidden */{ background: url(../img/blockscons.png) no-repeat -33px 0 }
+
+.table-list .block-options a.copy { background: url(../img/blockscons.png) no-repeat -66px 100% }
+.table-list tr:hover .block-options a.copy { background: url(../img/blockscons.png) no-repeat -66px 0 }
+
+.table-list .block-options a.delete { background: url(../img/blockscons.png) no-repeat -101px 100% }
+.table-list tr:hover .block-options a.delete { background: url(../img/blockscons.png) no-repeat -101px 0 }   
+
+.with_page .table-list .id { width: 40px; padding: 4px 0 4px 7px }
+.with_page .table-list .check { width: 30px; text-align: right }
+
+
+/*support*/
+.support-block { background: #d3eaf7; border-radius: 8px; padding: 30px; width: 90%; box-sizing: border-box; margin-top: 30px }
+.support-block .info { margin-bottom: 30px }
+.support-block .info .item { font-size: 0; border-bottom: 1px solid #d3eaf7 }
+.support-block .info .item span { display: inline-block; vertical-align: top; font-size: 13px; padding: 7px 10px; background: #e5f4fc; }
+.support-block .info .item .name { width: 100px; text-align: right; border-right: 1px solid #d3eaf7 }
+.support-block .info .item .data { width: 250px }
+
+.support-block .subtitle { border-bottom: 2px solid #fff; padding-bottom: 14px; font-size: 18px }
+.support-block .support-list { padding-top: 16px; border-bottom: 2px solid #fff; padding-bottom: 30px; margin-bottom: 30px }
+.support-block .support-list .title { display: block; font-size: 14px; padding-bottom: 15px }
+.support-block .support-list .item { margin-bottom: 15px }
+.support-block .support-list .item .date { background: #feed63; border-bottom: 1px solid #d3eaf7; padding: 7px 12px; overflow: hidden }
+.support-block .support-list .item .date .name { float: right }
+.support-block .support-list .item .text { padding: 7px 12px 18px 12px; background: #fff; margin-bottom: 10px }
+.support-block .support-list .item.answer { margin-left: 50px }
+.support-block .support-list .item.answer .date { background: #60a209; color: #fff; }
+.support-block .support-list .item .file { text-align: right }
+.support-block .support-list .item .file i { background: url(../img/dfile.png) no-repeat 0 0; display: inline-block; vertical-align: middle; width: 11px; height: 12px; vertical-align: middle; margin-right: 4px;  }
+
+.support-block .support-form {}
+.support-block .support-form .item { overflow: hidden; padding-bottom: 20px }
+.support-block .support-form .item .name { float: left; width: 60px; margin-top: 4px }
+.support-block .support-form .item .input { float: left; width: 570px }
+.support-block .support-form .item .input textarea { width: 100%; padding: 10px; height: 180px; box-sizing: border-box; font: 14px Arial }

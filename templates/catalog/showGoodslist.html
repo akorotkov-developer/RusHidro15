@@ -1,0 +1,44 @@
+{reduce:space}
+{mask:main}
+
+
+		{set:img}<img src="/images/1/{img}" alt="" class="img-lft" />{/}
+	   
+		{html}
+	   
+		{set:item}
+		<table class="table catalog">
+			<tr>
+				<th></th>
+				<th>Наименование</th>
+				<th>Артикул</th>
+				<th>Цена, руб.</th>
+			</tr>
+			{mask:item}
+			<tr>
+				<td class="img">{set:img}<a href="{url}"><img src="/images/1/{img}" alt="{title}" /></a>{/}</td>
+				<td><a href="{url}">{title}</a></td>
+				<td>{article}</td>
+				<td>{if: {price} > 0}{price_format0}{/}</td>
+			</tr>
+			{/mask}
+		</table>  
+		{/}
+
+
+		{set:navigation}        
+		<div class="pages">
+			<span class="title">Страницы:</span>
+			{mask:navigation}
+				{mis:current}<span><a href="{url}">{title}</a></span>{/}
+				{set:current}<span class="active"><a>{title}</a></span>{/}
+			{/mask}
+		</div>
+		
+		<div class="prevnext">
+			{set:url_prev}<span class="prev"></span><a href="{url_prev}">Предыдущая</a>{set:url_next}<span class="cp"></span>{/}{/}{set:url_next}<a href="{url_next}">Следующая</a><span class="next"></span>{/}
+		</div>
+		{/set}
+		
+		
+{/mask}

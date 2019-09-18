@@ -1,0 +1,50 @@
+{reduce:space}
+{mask:main}
+
+    <div class="teaser">
+      	<span class="topc"><span><span></span></span></span>
+        <div class="body"> 
+        	<div id="teaser-descr">      
+			{mask:item}		
+        	<div class="teaser-text">
+        		<span class="title">{title}</span>
+            	{text}             
+			</div>
+			{/}
+			</div>
+        </div>
+		{set:item}
+        <span class="botc"><span><span></span></span></span>       
+		<div class="teaserBlock" id="teaser">
+			<span class="arrleft prev"></span>
+			<span class="arrright next"></span>         
+			
+			<div class="teaserBlockIn">            
+			
+				            	
+				{mask:item}
+					<div class="item"><a href="{link}" title="{title}"><img src="/images/1/{img}" alt="{title}" /></a></div>
+				{/mask}
+				
+				
+			</div>
+		</div>
+        {/set}    
+    </div>
+	
+	
+	{#
+	<script src="/scripts/jquery.cycle.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$(function() {		
+		$(".teaserBlockIn,#teaser-descr").cycle({
+			timeout: 0, 
+		    next:   '.next', 
+		    prev:   '.prev'
+		});
+	})
+
+	</script>
+	#}
+
+{/mask}

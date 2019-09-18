@@ -1,0 +1,138 @@
+{reduce:space}
+{mask:main}
+
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div >
+												<h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />{if:{id}>0}Редактирование{/if}{if:{id} < 1}Добавление{/if}&nbsp;пользователя</h1>
+												
+												<h2></h2>
+												
+												<div class="nav">
+													
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+
+
+
+        	<table cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td class="block_work">
+                    	<div >
+            				<div class="blue" >
+
+                                <img class="blue_tl" src="img/blue_tl.gif" width="10" height="10" alt="" />
+                                <img class="blue_tr" src="img/blue_tr.gif" width="10" height="10" alt="" />
+                                <img class="blue_bl" src="img/blue_bl.gif" width="10" height="10" alt="" />
+                                <img class="blue_br" src="img/blue_br.gif" width="10" height="10" alt="" />
+
+	{#
+	<form name="form1" action="admins_edit.php" method="post" enctype="multipart/form-data" onsubmit="javascript:if (document.form1.password.value != document.form1.password2.value) {alert('Пароли не совпадают. Введите, пожалуйста, еще раз.');return false;} else return true;">
+	#}
+
+	<table cellpadding="0" cellspacing="0" border="0">
+
+	<input type="hidden" name="parent" value="{parent}">
+	{set:adduser}<input type="hidden" name="adduser" value="1">{/}
+
+
+	<tr  >
+		<th><label for="name">Имя:</label></th>
+		<td ><input size=70 class="input" type="text" name="name" id="name" maxlength=255 value="{php}htmlspecialchars( {cr[admin_name]} ){/php}"></td>
+	</tr>
+	<tr >
+		<th><label for="password">Пароль:</label></th>
+		<td ><input size=70 class="input" type="password" name="password" id="password" value=""></td>
+	</tr>
+	<tr  >
+		<th><label for="password2">Подтверждение пароля:</label></th>
+		<td ><input size=70 class="input" type="password" name="password2" id="password2" value=""></td>
+	</tr>
+	<tr  >
+		<th><label for="email">E-mail:</label></th>
+		<td ><input size=70 class="input" type="text" name="email" id="email" value="{php}htmlspecialchars( {cr[admin_email]} ){/php}"></td>
+	</tr>
+
+	{set:user_is_super}
+	<tr  >
+		<th><label for="super">Супер администратор:</label></th>
+		<td ><input class="input" type="checkbox" name="super" id="super" value="1" {set:super:1}checked{/set} {if:{parent} == {admin_id}} disabled{/if}></td>
+	</tr>
+	{set:enabled_cats}
+    <tr  >
+		<th><label for="moder">Модератор:</label></th>
+		<td ><input class="input" type="checkbox" name="is_moder" id="is_moder" value="1" {set:cr[is_moder]:1}checked{/set}></td>
+	</tr>
+	{/set}
+	{/set}
+	
+    {mis:user_is_super}
+	   {set:modermode}
+        	<input type="hidden" name="is_moder" value="1">
+       {/set}
+	{/}
+
+	{if: {user_is_super} || {modermode}}
+    {set:enabled_cats}
+    <tr  >
+		<th><label for="moder">Доступ:</label></th>
+		<td >{enabled_cats}</td>
+	</tr>
+	{/set}
+	{/if}
+
+
+
+	</table>
+
+<p></p>
+                                <a name="bottom_page"></a>
+								<table align="center" style="width:150px">
+									<tr>
+									<td>
+                                	<div class="save" ><input type="submit"  name="add" value="{if:{id} > 0} {if:{makecopy} < 1}Сохранить{/if} {/if}   {if:{id}<1}Добавить{/if}" /></div>
+									</td>
+
+
+									<td>
+									{if: {user_is_super} || {modermode}}
+                                	<div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="javascript:location.href='admins.php?parent={parent}';return false;" /></div>
+									{/if}
+									{if: !{user_is_super} && !{modermode}}
+                                	<div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="javascript:location.href='index.php';return false;" /></div>
+									{/if}
+
+									</td>
+
+									</tr>
+								</table>
+	</form>
+
+		</div>
+		</div>
+	</td>
+                    <td class="block" style="width:10%">
+            		</td>
+	</tr>
+	</table>
+
+{/mask}

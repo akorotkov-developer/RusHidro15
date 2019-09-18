@@ -1,0 +1,26 @@
+{reduce:space}
+{mask:main}
+
+      <div class="mmenuCont">
+          <div class="mmenu">
+          {mask:item}  
+            <a href="{url}" {set:item}rel="popup{_rank}"{/} class="{set:_last}last{/} {mis:link:link}sel{/mis}"><span><span>{name}</span></span></a>
+		  {/mask}
+          </div>
+          
+          <div class="popupMenu">
+          {mask:item}	
+			{set:item}
+            <div id="popup{_rank}" style="display: none" class="popup"><div>
+				{mask:item}
+            	<span {set:last}class="last"{/}><a href="{url}">{name}</a></span>
+				{/mask}
+            </div></div>
+			{/set}
+		  {/mask}
+           
+          </div>
+          
+      </div>
+
+{/mask}

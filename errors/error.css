@@ -1,0 +1,94 @@
+DIV.brd {
+	background: url(brd2.gif) repeat-y 0 0;
+	padding: 0 0 0 20px;
+	margin-left: -20px;
+}
+DIV.sm {
+	font-size: 10px;
+	color: #999;
+	position: absolute;
+	right: 25px;
+	top: 25px;
+}
+/*  */
+TABLE.parent {
+	width: 100%; 
+	height: 100%;
+}
+TABLE.parent TD.pd {
+	width: 25%;
+}
+TABLE.parent TD.content {
+	width: 50%;
+	padding: 50px 0 50px 55px;
+	vertical-align: middle;
+}
+/* Переопределения */
+* { -moz-box-sizing: border-box; box-sizing: border-box; }
+HTML {
+	height: 100%;
+}
+BODY {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 85%;
+}
+ /* TABLE, TD { border: none; } */
+TD, TH {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	padding: 0;
+	font-size: '85%';
+}
+P {
+	margin: 0;
+	padding: 0.5em 0; 
+}
+HR {
+}
+UL {
+	list-style: circle inside;
+	margin: 0;
+	padding: 1em 40px;
+}
+STRONG { font-weight: bold; }
+EM { font-style: italic; }
+A {
+	color: #1255DE !important;
+}
+/* Заголовки */
+H1 {
+	margin: 0;
+	padding: 1.2em 0 .4em;
+	clear: left;
+	font-size: 35px;
+	font-weight: normal;
+	color: #E00404;
+}
+H1.e404 {
+	background: url(where.gif) no-repeat 76px 1px;	
+}
+H1.e403 {
+	background: url(closed.gif) no-repeat 76px 1px;	
+}
+H1.e500 {
+	background: url(auch.gif) no-repeat 76px 1px;	
+}
+H2 {
+	margin: 0;
+}
+H3 {
+	margin: 0;
+}
+/* Формы */
+FORM { padding: 0; margin: 0; }
+.large { width: 100%; }
+.medium { width: 60%; }
+.small { width: 40%; }
+.smallest { width: 20%; }
+INPUT, SELECT, TEXTAREA { }
+/* Отступы у изображений */
+IMG { border: none; }
+IMG.left { margin: 0 15px 2px 0; float: left; }
+IMG.right { margin: 0 0 2px 15px; float: right; }

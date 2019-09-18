@@ -1,0 +1,28 @@
+ETSa:2:{s:7:"0reduce";i:2;s:4:"main";a:1:{s:5:"2:932";s:906:"
+
+<form action="index.php" method="post" id="loginform">
+    <div class="login" id="login">
+        <div class="bg">
+            <input name="authentification_name" type="text" value="" placeholder="Логин" title="Логин" style="height:38px" /><br />
+            <input name="authentification_password" type="password" value="" placeholder="Пароль" title="Пароль" style="height:38px" /><br />
+            <div class="save"><input class="submit" type="submit" value="Войти" /></div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+_jQuery(document).ready(function(){
+	_jQuery('#loginform').validate({
+		rules: {
+			authentification_name: 'required',
+			authentification_password: 'required'
+		},
+		messages: {
+			authentification_name: "Обязательное поле",
+			authentification_password: "Обязательное поле"
+		}
+	});
+});
+</script>
+
+";}}

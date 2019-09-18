@@ -1,0 +1,17 @@
+{reduce:space}
+{mask:main}
+	{mis:item}<div style='font-size: 20px; color:green;'>В Вашей корзине нет товара.</div>{/mis}
+	<a href='/catalog'> Перейти в каталог</a><br><br>
+	{set:item}<a href='/ajax/basketclear.php'> Очистить карзину</a><br><br>
+		<a href='/order'>Оформить заказ</a><br><br>
+	{/set}
+	{mask:item}
+	
+		<div><img src='/images/1/{img}'/></div>
+		<div>{title}</div>
+		<div> Цена: {price} р.</div>
+		<div>Количество: <input type='text' id='col{id}' size='4' value='{col}' onkeyup='basketchange({id});'/></div>
+		<div><a href='/basket' onclick='basketdel({id});'>Удалить из корзины</a></div>
+		<br><br>
+	{/mask}
+{/mask}

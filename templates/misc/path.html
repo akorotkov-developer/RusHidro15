@@ -1,0 +1,19 @@
+{reduce:space}
+{mask:main}
+
+	<div class="path">
+		<a href="/">Главная</a>
+		{mis:noshow:1}
+		{mask:item}
+			{mis:_last}<span class="inter"></span><a href="{url}">{name}</a>{/}
+			{set:_last}
+			{choose}
+			{when: {//oper}=="view"}<span class="inter"></span> <a href="{url}">{name}</a>{/when}
+			{else}{/}
+			{/choose}
+			{/set}
+		{/mask}
+		{/}
+	</div>
+
+{/mask}

@@ -1,0 +1,51 @@
+{reduce:space}
+{mask:main}
+{#
+<script>
+	$(document).ready(function(){
+		$('#remform').validate({
+			rules:{
+				email:{
+					required: true,
+					email:true
+				}
+			},
+			messages:{
+				email:{
+					required: "Введите email",
+					email:"Неправильно введен адрес электронной почты"
+				}
+			}
+		});
+	});
+</script>
+<style>
+label.error{
+	color:red;
+	size:4;
+}
+</style>
+#}
+						{set:message:1}<font color='green' size='4'>На данный адрес выслано письмо с инструкцией</font>{/set}
+						{set:message:2}<font color='green' size='4'>На ваш адрес электронной почты выслан новый пароль</font>{/set}
+						{mis:remember:1}
+						{set:message:0}<font size='4' color='red'>Такого адреса электронной почты не зарегистрирован</font>{/set}
+							<form method="post" action="" name="remform" id='remform'>
+								<table class="feedback">
+									<tr>
+										<td class="left">Введите email <span class="red">*</span></td>
+										<td class="right">
+											<input type="text" name="email" id='email' value="{email}" maxlength="" />
+										</td>
+									</tr>
+																
+									<tr>
+										<td class="left"></td>
+										<td class="right">
+											<input type="submit" class="submit" name="" value="Отправить" />
+										</td>
+									</tr>
+								</table>
+							</form>
+						{/mis}
+{/mask}

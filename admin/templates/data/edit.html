@@ -1,0 +1,87 @@
+{reduce:space}
+{mask:main}
+
+
+        	<div class="options">
+				<div class="bg_b">
+					<div class="bg_l">
+						<div class="bg_r">
+							<div class="bg_tr">
+								<div class="bg_tl">
+
+									<div class="bg_bl">
+										<div class="bg_br">
+											<div >
+												<h1 style="width:60%; "><img src="img/ico_file.gif" width="16" height="20" alt="" />{if:{id}>0}Редактирование{/if}{if:{id} < 1}Добавление{/if}&nbsp;типа&nbsp;данных</h1>
+												
+												<h2></h2>
+												
+												<div class="nav">
+													
+
+												</div>
+												<span class="clear"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+
+        	<table cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td class="block_work">
+                    	<div >
+            				<div class="blue">
+
+                                <img class="blue_tl" src="img/blue_tl.gif" width="10" height="10" alt="" />
+                                <img class="blue_tr" src="img/blue_tr.gif" width="10" height="10" alt="" />
+                                <img class="blue_bl" src="img/blue_bl.gif" width="10" height="10" alt="" />
+                                <img class="blue_br" src="img/blue_br.gif" width="10" height="10" alt="" />
+
+	<table cellpadding="0" cellspacing="0" border="0">			
+
+	<form action="s_datatempl_edit.php" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="parent" value="{parent}">
+	<input type="hidden" name="makecopy" value="{makecopy}">
+	<tr >
+		<th><label for="name">Название:</label></th>
+		<td ><input size=70 class="input" type="text" name="name" id="name" maxlength=255 value="{php}htmlspecialchars({cr[name]}){/php}"></td>
+	</tr>
+	<tr >
+		<th><label for="key">Ключ:</label></th>
+		<td ><input size=70 class="input" type="text" name="key" id="key" value="{php}htmlspecialchars({cr[key]}){/php}"></td>
+	</tr>
+
+
+	</table>
+
+	                                <a name="bottom_page"></a>
+								<table align="center" style="width:150px">
+									<tr>
+									<td>
+                                	<div class="save" ><input type="submit"  name="add" value="{if:{id}>0}Сохранить{/if} {if:{id} < 1}Добавить{/if}" /></div>
+									</td>
+
+
+
+									<td>
+                                	<div class="cancel"><input name="Submit2" type="button" value="Отмена" onclick="javascript:location.href='s_datatempl.php?parent={parent}';return false;" /></div>
+									</td>
+
+									</tr>
+								</table>
+	</form>
+					</div></td>
+
+                   <td class="block" style="width:10%">
+            		</td>
+                </tr>
+            </table>
+
+{/mask}

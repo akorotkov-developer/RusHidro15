@@ -1,0 +1,15 @@
+{reduce:space}
+{mask:main}
+
+		<div class="footerMenu">
+			{mask:item}
+			<span>
+				{set:link:link}<a href="{url}">{name}</a>{/}
+				{set:link:nolink}{name}{/}
+				{set:link:stronglink}<a href="{url}" class="sel">{name}</a>{/}
+			</span>
+			{/mask}
+			<span class="map"><a href="/map/">Карта сайта</a></span>
+		</div>
+
+{/mask}

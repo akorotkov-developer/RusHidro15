@@ -1,0 +1,87 @@
+{reduce:space}
+{mask:main}
+
+{#
+<script type="text/javascript" src="/scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#contactform').validate({
+		rules:{
+			fio:'required',
+			email:{
+				required: true,
+				email:true
+			},
+			message:'required',
+			captcha:'required'
+		},
+		messages:{
+			fio:"Обязательное поле",
+			email:{
+				required: "Обязательное поле",
+				email:"Неправильно заполнено поле E-mail"
+			},
+			message:"Обязательное поле",
+			captcha:"Обязательное поле"
+		}
+	});
+});
+</script>
+<style>
+label.error { color: #f00; font-size: 12px; display: block; margin: 0; padding: 0; }
+</style>
+#}
+
+
+		{text}                    
+
+		<a name="map"></a>                    
+		<div class="gmap">
+		{code}
+		</div>
+		
+		<a name="sendform"></a>
+		{set:sended}<h3>Сообщение успешно отправлено</h3>{/}
+		
+		{mis:sended}
+		<h3>Отправить сообщение</h3>
+		{set:error}<h3 style="color: #f00;">{error}</h3>{/set}
+		<form method="post" action="#sendform" name="contactform" id="contactform">
+			<div class="formBlock">
+				
+				<p><span class="star">*</span> — поля, обязательные для заполнения</p>
+					
+				<div class="formLine">
+					<span class="name">ФИО <span class="star">*</span></span>                                
+					<span class="input"><input type="text" name="fio" value="{post[fio]}" /></span>
+				</div>
+				
+				<div class="formLine">
+					<span class="name">E-mail <span class="star">*</span></span>                                
+					<span class="input"><input type="text" name="email" value="{post[email]}" /></span>
+				</div>                                
+			   
+				<div class="formLine">
+					<span class="name">Телефон</span>                                
+					<span class="input"><input type="text" name="phone" value="{post[phone]}" /></span>
+				</div>
+				
+				<div class="formLine textarea">
+					<span class="name">Текст сообщения <span class="star">*</span></span>                                
+					<span class="input"><textarea name="message">{post[message]}</textarea></span>
+				</div>
+				
+				<div class="formLine captcha">
+					<span class="name">Введите код с картинки <span class="star">*</span></span>
+					<span class="input"><img src="/libs/captcha/captcha.php" alt="" /><input type="text" name="captcha" /></span>                               
+				</div>
+				
+				<div class="formButton">
+					<span class="button" onclick="$('#contactform').submit();">Отправить<span></span></span>                               
+				</div>
+				
+			</div>
+		</form>
+		{/mis}
+
+{/mask}

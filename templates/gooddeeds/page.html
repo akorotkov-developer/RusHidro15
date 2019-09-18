@@ -1,0 +1,65 @@
+{mask:main}	
+	<div class="landing-page" id="good-deeds">
+	
+		<!--<div class="header-title">Добрые дела</div>-->
+		
+		<div class="dynasty-page-bg" id="good-deeds-bg"></div>
+		
+		<div class="dynasty-block">
+			
+			<div class="dynasty-content">
+				{set:item}
+				<div class="owl-carousel" id="gooddeedsSlider">
+					{mask:item}
+					<div class="dynasty-content-item" data-link="{url}">
+						<div class="dynasty-content-in{set:_first} first{/}">
+							<div class="dynasty-title gt">{title}</div>
+							<div class="dynasty-scroll-gt flexcroll">
+							{html}
+							</div>
+						</div>
+						{mis:_first}{set:gallery}						
+						<div class="gallery-ajax">
+						{*
+							<div class="gallery-right">
+								<div class="gallery-right-in">
+									{mask:gallery}
+									<div class="gallery-right-item" style="background-image: url(/images/1/{img})"><a href="/images/2/{img}" class="fancybox" title="{title}"></a></div>
+									{/mask}
+								</div>							
+							</div>
+							{mis:alone:1}
+							<div class="gallery-right-nav">
+								<div class="gallery-nav-prev disabled"><i></i></div>
+								<div class="gallery-nav-counter">
+									<span>01</span> / <span>{gsize}</span>
+								</div>
+								<div class="gallery-nav-next"><i></i></div>
+							</div>
+							{/mis}
+						*}	
+						</div>	
+						{/}{/mis}
+					</div>
+					{/mask}						
+				</div>
+				{/set}
+			</div>
+			
+			<div class="dynasty-list">			
+				<div class="dynasty-list-in">
+					{set:item}
+					<div class="owl-carousel" id="gooddeeds-list">
+						{mask:item}
+						<div class="dynasty-list-item{set:_first} active{/}"><span>{subtitle}</span><i></i></div> 						
+						{/mask}						
+						<div class="dynasty-list-dots"></div>
+					</div>	
+					{/set}
+				</div>
+			</div>
+			
+		</div>	
+		
+	</div>
+{/mask}	

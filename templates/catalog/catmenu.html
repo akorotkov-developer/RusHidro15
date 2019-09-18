@@ -1,0 +1,27 @@
+{reduce:space}
+{mask:main}
+
+		{set:item}		
+		<div class="subMenu">
+			<span class="title">{mis:root}<a href="/catalog/">{/}Продукция{mis:root}</a>{/}</span>
+			
+			{item}
+
+		</div>
+		{/set}
+
+{/mask}
+
+			{mask:item}
+				{set:link:link}<span><b></b><a href="{url}">{name}</a></span>{/}
+				{set:link:nolink}<span class="active"><b></b>{name}</span>{/}
+				{set:link:stronglink}<span class="active"><b></b><a href="{url}">{name}</a></span>{/}
+
+				{mis:link:link}
+					{set:item}
+					<div class="subMenu">
+						{item}
+					</div>	
+					{/}				
+				{/}
+			{/mask}

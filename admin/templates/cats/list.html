@@ -1,0 +1,294 @@
+{reduce:space}
+{mask:main}
+
+<SCRIPT language="JavaScript" type="text/JavaScript">
+
+
+
+{#
+function TrClick(n) {
+	id = n.id.substr(2);
+	n.style.backgroundColor = "#e7e7e7";
+#}
+
+	{if:{tree_count} > 0}
+		for (i = 0; i <= {tree_count}; i++) 
+		{#
+		{	
+			if (document.selparent.parent[i].value == id) {
+				document.selparent.parent[i].checked = true;
+			};
+		};
+		#}
+	{/if}
+
+
+	if ((id != 0){scaneditbl}) {
+		document.all('aEditbl').style.color = "#000000";
+		document.getElementById('iEditbl').className = "";
+	} else {
+		document.all('aEditbl').style.color = "#808080";
+		document.getElementById('iEditbl').className = "none_active";
+	};
+
+	if (true{scandel}) {
+		document.all('aDel').style.color = "#000000";
+		document.getElementById('iDel').className = "";
+	} else {
+		document.all('aDel').style.color = "#808080";
+		document.getElementById('iDel').className = "none_active";
+	};
+
+	if (true{scanaddcat}) {
+		document.all('aAdd').style.color = "#000000";
+		document.getElementById('iAdd').className = "";
+	} else {
+		document.all('aAdd').style.color = "#808080";
+		document.getElementById('iAdd').className = "none_active";
+	};
+
+	if ((id != 0){scanedit}) {
+		document.all('aEdit').style.color = "#000000";
+		document.getElementById('iEdit').className = "";
+
+		//document.all('iEdit').src = imEdit.src;
+	} else {
+		document.all('aEdit').style.color = "#808080";
+		document.getElementById('iEdit').className = "none_active";
+		//document.all('iEdit').src = imEditS.src;
+	};
+
+	if ((id != 0){scanhide}) {
+		document.all('aHide').style.color = "#000000";
+		document.getElementById('iHide').className = "";
+	} else {
+		document.all('aHide').style.color = "#808080";
+		document.getElementById('iHide').className = "none_active";
+	};
+
+
+	/*
+	if ((id != 0){scancopy}{scancopy_22}) {
+		document.all('aCopy').style.color = "#000000";
+		document.getElementById('iCopy').className = "";
+		document.all('iCopy').src = imCopy.src;
+	} else {
+		document.all('aCopy').style.color = "#808080";
+		document.getElementById('iCopy').className = "none_active";
+	};
+	*/
+
+
+
+	if ((id != 0){scanmove}{scanmove_22}) {
+		document.all('aMove').style.color = "#000000";
+		document.getElementById('iMove').className = "";
+	} else {
+		document.all('aMove').style.color = "#808080";
+		document.getElementById('iMove').className = "none_active";
+	};
+}
+
+function view_span(id)		{
+	//document.getElementById(id).style.display = 'inline-block';
+}
+function noview_span(id)		{
+	//document.getElementById(id).style.display = 'none';
+}
+
+
+function onclickEditbl(s) {
+	if ((bpressed == '') && (document.selparent.parent2.value.substr(2) != 0){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scaneditbl}){/php}) {
+
+		{if:{tree_count} > 0}
+			for (i = 0; i <= {tree_count}; i++) 
+			{#
+			{
+				if (document.selparent.parent[i].value == document.selparent.parent2.value.substr(2)) {document.selparent.parent[i].checked = true;};
+			};
+			#}
+		{/if}
+
+
+		document.selparent.blocks.value=1;
+
+		//alert (document.selparent.blocks.value);
+
+		document.selparent.action='/admin/cat_edit.php'; 
+		document.selparent.target='parent_window';
+
+		document.selparent.submit();
+	};
+	if (bpressed != '') {
+		TrRightClick(s);
+	}
+	return false;
+};
+</SCRIPT>
+
+
+
+						
+						{set:error}<font color="#800000">{prerror}</font><br><br>{/set}
+
+						<TABLE  width="100%" border="0" cellpadding="2" cellspacing="0">
+							<form name="selparent" action="cat_edit.php" method="get">
+							<input type="hidden" name="id" value="0">
+							<input type="hidden" name="blocks" value="0">
+							<input type="hidden" name="del" value="0">
+							<input type="hidden" name="toup" value="0">
+							<input type="hidden" name="todown" value="0">
+							<input type="hidden" name="parent2" value="tr{parent}">
+							<input type="hidden" name="copy" value="0">
+							<input type="hidden" name="move" value="0">
+							<input type="hidden" name="copymove" value="0">
+							<input type="hidden" name="hide" value="0">
+							<input type="hidden" name="enabled" value="0">
+
+
+{set:user_is:1}
+							<TR onMouseMove="javascript:TrMove(this);" onMouseOut="javascript:TrOut(this);" onMouseOver="javascript:TrOver(this);" oncontextmenu="TrRightClick(this);return false;" onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:pointer" id="tr0">
+{/set}
+{mis:user_is:1}
+							<TR  id="tr0">
+{/mis}
+
+								<TD width="18px"><IMG border=0 src="<!--base_url//-->img/ico-site.gif" width="16" height="16"></TD>
+								<TD colspan="100">Корень сайта</TD>
+								<TD><input style="height:11px;width=11px;visibility:hidden" class="input" type="radio" name="parent" value="0"{set:parent:0} checked{/set}></TD>
+							</TR>
+
+
+
+							{mask:item}
+							<!--
+							<TR {# onMouseMove="javascript:TrMove(this);" #} onMouseOut="javascript:TrOut(this); if (bpressed == '') noview_span('spantr_{r[id]}');" onMouseOver="javascript:TrOver(this);  if (bpressed == '') view_span('spantr_{r[id]}'); " onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:pointer"  id="tr{r[id]}" onclick="if (bpressed != '') { onclickEditbl(this); };" oncontextmenu="TrRightClick(this);return false;">
+							-->
+							<TR {# onMouseMove="javascript:TrMove(this);" #} onMouseOut="javascript:TrOut(this); if (bpressed == '') noview_span('spantr_{r[id]}');" onMouseOver="javascript:TrOver(this);  if (bpressed == '') view_span('spantr_{r[id]}'); " onDrag="return false;" onDragStart="return false;" onSelectStart="return false;" style="cursor:pointer"  id="tr{r[id]}" {mis:r[disabled]}onclick="if (bpressed != '') { onclickEditbl(this); };" oncontextmenu="TrRightClick(this);return false;"{/mis}{set:r[disabled]}oncontextmenu="return false;"{/set}>
+
+
+
+									{mask:item2}
+									<TD width="18px" id="td{php}{td}{/php}" >
+									
+									<script>document.getElementById('td{td}').style.background = 'url('+ imTD{l}{set:show_plus}_plus{/set}{set:show_minus}_minus{/set}.src + ')';
+									//+ ') no-repeat 0 0';
+									
+									//alert (imTD{l}{set:show_plus}_plus{/set}{set:show_minus}_minus{/set}.src);
+									//imTD{l}{set:show_plus}_plus{/set}{set:show_minus}_minus{/set}.src;
+									</script>
+
+									{set:show_plus_minus}
+									<a style="text-decoration:none" href="index.php?unhide={set:show_minus}-{/set}{r[id]}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									{/set}
+									{mis:show_plus_minus}&nbsp;{/mis}</TD>
+									{/mask}
+
+									<TD width=1%><IMG{if: {r[visible]}==0 || {r[disabled]} || {r[enabled]}==0} style="filter:alpha(opacity=20) gray;"{/if} border=0 src="<!--base_url//-->img/{r2_lev}.gif" width="16" height="16"></TD>
+
+									<TD width="100%" colspan="{colspan}" nowrap {if: {r[visible]} == 0 || {r[disabled]} || {r[enabled]} == 0}style="color:#b0b0b0"{/if} >
+									{if:{cl} == 't1'} <b> {/if} {if: {r[enabled]} == 0}<s>{/if}
+									{php}strip_tags({r[name]}){/php} 
+									{if:{cl} == 't1'} </b> {/if}
+									{if: {r[enabled]} == 0}</s>{/if}
+	
+									{set:user_is_super} {php}htmlspecialchars({r[key]}){/php}  - {r[template]} - {r[id]} {/set}
+									
+									<!--
+										кнопка для оперы 
+									<span id="spantr_{r[id]}" style="display:none; background-color:#eee " onClick="javascript:  TrRightClick(document.getElementById('tr{r[id]}')); return false;">(меню)</span>
+									//-->
+									</TD>
+
+									<TD><input style="height:11px;width=11px; display:none" class="input" type="radio" name="parent" value="{r[id]}" {if:{parent} == {r[id]} }  checked {/if}></TD>
+								</TR>
+							{/mask}
+
+
+							<table><tr><td><table><tr><td><input style="display:none" type="radio" name="parent" value="-1"></td></tr></table></td></tr></table>
+							</form>
+						</TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+
+
+
+
+			<div oncontextmenu="javascript:divHide();return false;" onmouseout="javascript:divOut();" onmouseover="javascript:divOver();" style="position:absolute;visibility:hidden;width=135px;left:10px;top:10px" id="popup" class="service">
+
+		{#
+			<script language="JavaScript" type="text/javascript">
+			divInv = 0;
+			function pTrOver(n) {
+				n.style.backgroundColor = '0A246A';
+				wascolor = n.style.color;
+				n.style.color = '#FFFFFF';
+			}
+			function pTrOut(n) {
+				n.style.backgroundColor = '';
+				n.style.color = wascolor;
+			}
+			function divOver() {
+				if (divInv > 0) {clearInterval(divInv); divInv=0;};
+			}
+			function divOut() {
+				if (divInv == 0) {
+					divInv = setInterval("divHide()", 300);
+				};
+			}
+			function divHide() {
+				clearInterval(divInv);
+				divInv = 0;
+				popup.style.visibility = 'hidden';
+				popup.style.left = '10px';
+				popup.style.top = '10px';
+				if (bpressed == '') document.all(document.selparent.parent2.value).style.backgroundColor = "";
+			}
+			</script>
+		#}
+
+
+                                        
+                                            <div class="bg">
+                                                <div class="bg2">
+                                                    <div id="aAdd" onclick="javascipt:if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanaddcat}){/php}) { 
+							document.selparent.action='/admin/cat_edit.php'; document.selparent.target='parent_window'; document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);"><a id="iAdd" href="#" title="" onClick="return false;">Создать новую</a></div>
+                                                    <div id="aEdit" onclick="javascript:if ((document.selparent.parent[0].checked == false){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanedit}){/php})   { document.selparent.id.value=1; document.selparent.action='/admin/cat_edit.php'; document.selparent.target='parent_window'; document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);"><a href="#"  id="iEdit"  onClick="return false;">Редактировать</a></div>
+
+                                                    <div id="aEditbl" onclick="javascript:return onclickEditbl('');" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);"><a href="#" title="" id="iEditbl" onClick="return false;">Блоки</a></div>
+
+                                                    <div  id="aMove" onclick="javascript:{if:{tree_count} > 1} if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanmove}){/php}) { bpress('move'); }; {/if} return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);"><a href="#" title="" id="iMove" onClick="return false;">Переместить</a></div>
+
+                                                    <div id="aHide" onclick="javascript:if ((document.selparent.parent[0].checked == false){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanhide}){/php}) { document.selparent.hide.value=1;document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);"><a href="#" title="" id="iHide" onClick="return false;">Скрыть/показать</a></div>
+                                                    <div id="aEnabled" onclick="javascript:if ((document.selparent.parent[0].checked == false){php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scanenabled}){/php}) { document.selparent.enabled.value=1;document.selparent.submit(); };return false;" onMouseOver="javascript:pTrOver(this);"><a href="#" title="" id="iEnabled" onClick="return false;">Вкл/Выкл</a></div>
+
+													<div class="last" id="aDel" onclick="javascript:if (true{php}str_replace("id", "document.selparent.parent2.value.substr(2)", {scandel}){/php}) { if (confirm('Вы действительно хотите удалить папку?')) { document.selparent.del.value=1; document.selparent.submit(); }; };return false;" onMouseOver="javascript:pTrOver(this);" onMouseOut="javascript:pTrOut(this);"><a href="#" title="" id="iDel" onClick="return false;">Удалить</a></div>
+                                                </div>
+                                            </div>
+                                        
+
+
+
+			</div>
+
+			
+			<div style="position:absolute;visibility:hidden;" id="divcursor">
+			<img onclick="javascript:TrMove(document.all(document.selparent.parent2.value));" id="im" border=0 style="cursor:hand;filter:alpha(opacity=100)" src="<!--base_url//-->img/spacer.gif"></div>
+
+
+<script>
+
+document.onmousemove = function(event) {
+      var event = event || window.event;
+	  XY = mousePageXY(event);
+      //document.body.innerHTML = "x = " + mousePageXY(event).x + ", y = " + mousePageXY(event).y;
+}
+
+</script>
+
+
+	<table >
+		<tr><td>
+	
+{/mask}

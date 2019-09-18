@@ -1,0 +1,161 @@
+{reduce:space}
+{mask:main}
+
+<h1>Голосование</h1>
+
+<script>
+{#
+$(function(){
+	$('body').on('click','.voting-item-button', function(){
+		vid = $(this).data('id');
+		genre = $(this).data('genre');
+		vparent = $('#'+vid);	
+		if(!vparent.hasClass('voted')) {
+			$('.voting-video').hide();		
+			$('#voting-popup').fadeIn(); 
+			$('.voting-alert').show();
+		}
+	})
+	
+	$('#vsubmit').on('click',function(){
+		
+		$(this).parent().hide(); 	
+		popupdestroy();
+		tid = vid.replace('vote','');		
+		data = {'id':tid,'genre':genre};
+		$.ajax({
+			type: "POST", 
+			url: "/ajax/voteadd.php", 
+			data: data,
+			dataType: 'json',
+			success: function(data) {
+				if(data['bcount']) { vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');}
+				else {alert(data['message'])}
+				console.log(data)
+			}
+		});			
+		
+	})
+	
+	$('.voting-item-image').on('click',function(){
+		data = {'id':$(this).data('id')};
+		$.ajax({
+			type: "POST", 
+			url: "/ajax/voteinfo.php", 
+			data: data,
+			dataType: 'json',
+			success: function(data) {							
+				$('#ajaxData').html(data);
+			}
+		});			
+	
+		$('#voting-popup').fadeIn(); 
+		$('.voting-video').show();		
+	})
+	
+	
+})	
+
+function popupdestroy() {
+	$('#voting-popup').fadeOut(); 
+	$('.voting-video').hide();	
+	$('#ajaxData').html('');
+}
+
+#}
+</script>
+
+<div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
+
+	<div class="voting-alert">
+		<div class="voting-alert-title">Вы уверены, что хотите<br>проголосовать за этого участника?</div>
+		<a id="vsubmit">Да</a>
+		<a class="vclose" onclick="$(this).parent().hide(); popupdestroy()">Нет</a>
+	</div>
+	
+	<div class="voting-video">
+		<div class="voting-close" onclick="popupdestroy()"></div>
+		<div id="ajaxData"></div>		
+	</div>
+	
+</div></div>
+
+{set:text}
+<div class="voting-text">	
+	{text}
+</div>
+{/set}
+
+{set:dance}
+<div class="voting-nomination">
+	<div class="voting-title">Номинация: Танец</div>
+	
+	<div class="voting-list">
+		{mask:dance}
+		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
+			<div class="voting-item-info">
+				<div class="voting-item-name">
+					{fio}
+					<div class="voting-item-count"><span>{count}</span><i></i></div>
+				</div>
+				<div class="voting-item-link">
+					<a href="{org_link}">{org}</a>
+					<div class="voting-item-button" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
+				</div>
+			</div>			
+		</div>
+		{/mask}
+	</div>
+</div>
+{/set}
+
+{set:song}
+<div class="voting-nomination">
+	<div class="voting-title">Номинация: Песня</div>
+	
+	<div class="voting-list">
+		{mask:song}
+		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
+			<div class="voting-item-info">
+				<div class="voting-item-name">
+					{fio}
+					<div class="voting-item-count"><span>{count}</span><i></i></div>
+				</div>
+				<div class="voting-item-link">
+					<a href="{org_link}">{org}</a>
+					<div class="voting-item-button" data-id="vote{id}" data-genre="1"><i></i><span>Голосовать</span></div>
+				</div>
+			</div>			
+		</div>
+		{/mask}
+	</div>
+</div>
+{/set}
+
+{set:original}
+<div class="voting-nomination">
+	<div class="voting-title">Номинация: Оригинальный жанр</div>
+	
+	<div class="voting-list">
+		{mask:original}
+		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
+			<div class="voting-item-info">
+				<div class="voting-item-name">
+					{fio}
+					<div class="voting-item-count"><span>{count}</span><i></i></div>
+				</div>
+				<div class="voting-item-link">
+					<a href="{org_link}">{org}</a>
+					<div class="voting-item-button" data-id="vote{id}" data-genre="3"><i></i><span>Голосовать</span></div>
+				</div>
+			</div>			
+		</div>
+		{/mask}
+	</div>
+</div>
+{/set}
+
+{/mask}

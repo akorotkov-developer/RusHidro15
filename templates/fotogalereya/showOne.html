@@ -1,0 +1,35 @@
+{reduce:space}
+{mask:main}
+
+<div class="command-list"><div class="command-list_in">	
+	
+	{mask:item}{if: {img}}     	
+	<div class="command-one">
+		<div class="command-image"><a href="/images/0/{img}" class="fancybox" rel="gallery" title="{title}"><figure><img src="/images/1/{img}" alt=""/></figure></a></div>
+		<div class="foto-title">{title}</div>
+	</div>
+	{/}{/mask}	
+	
+
+	<!--<div class="foto-list"><div class="foto-list_in">
+		{mask:item}{if: {img}}
+		<div class="command-image"><a href="/images/0/{img}" class="fancybox" rel="gallery" title="{title}"><img src="/images/1/{img}" alt="" /></a></div>
+        <div class="foto-title">{title}</div>
+		{/}{/mask}-->
+	</div></div>
+
+	<!--<div class="pager">
+		{set:navigation}
+			{mask:navigation}
+			{set:current}<a class="active">{title}</a>{/}
+			{mis:current}<a href="{url}">{title}</a>{/}
+			{/mask}
+		{/set}
+		&nbsp;
+	</div>-->
+	<div class="back-link rightpos">
+		<a href="{backurl}"><span></span> К списку альбомов</a>
+	</div>
+
+
+{/mask}

@@ -1,0 +1,44 @@
+{mask:main}	
+	<div class="landing-page" id="dynasty-page">
+	
+		<!--<div class="header-title">Трудовые династии</div>-->
+		
+		<div class="dynasty-page-bg" id="dynasty-page-bg"></div>
+		
+		<div class="dynasty-block">
+			
+			<div class="dynasty-content">
+				{set:item}
+				<div class="owl-carousel" id="dynastySlider">
+					{mask:item}
+					<div class="dynasty-content-item" data-link="{url}">
+						<div class="dynasty-content-in{set:_first} first{/}">
+							<div class="dynasty-title">{title} {mis:_first}<span>{region}</span>{/}</div>
+							<div class="dynasty-subt">{set:exp}<b>{exp}</b> - общий трудовой стаж{/}</div>
+							<div class="dynasty-scroll">
+							{set:_first}{html}{/}
+							{mis:_first}{text}<div class="show-more"><a href="{url}">Подробнее</a></div>{/}
+							</div>
+						</div>						
+					</div>
+					{/mask}						
+				</div>
+				{/set}
+			</div>
+			
+			<div class="dynasty-list">			
+				<div class="dynasty-list-in">
+					{set:item}
+					<div class="owl-carousel" id="dynasty-list">
+						{mask:item}
+						<div class="dynasty-list-item{set:_first} active{/}"><span>{dynasty}</span> {region}</div> 
+						{/mask}						
+					</div>	
+					{/set}
+				</div>
+			</div>
+			
+		</div>	
+		
+	</div>
+{/mask}	

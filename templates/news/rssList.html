@@ -1,0 +1,31 @@
+{mask:main}<?xml version="1.0" encoding="windows-1251"?>
+<rss version="2.0">
+<channel>
+	<title>{name} - {site_name}</title>
+	<link>{url}</link>
+	<description>{description}</description>
+	<language>ru</language>
+	<copyright>Copyright 2014</copyright>
+	<title>{name} - {site_name}</title>
+
+
+	{mask:item}
+	<item>
+		<title>{title}</title>
+		<link>{url}</link>
+		<description>
+			<![CDATA[
+				<p>
+					{description}
+				</p>
+			]]>
+		</description>
+		<pubDate>{date}</pubDate>
+	</item>
+	{/mask}
+		
+</channel>
+</rss>
+
+
+{/mask}

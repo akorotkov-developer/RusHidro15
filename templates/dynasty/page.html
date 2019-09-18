@@ -1,0 +1,66 @@
+{mask:main}	
+	<div class="landing-page" id="dynasty-page">
+	
+		<!--<div class="header-title">Трудовые династии</div>-->
+		
+		<div class="dynasty-page-bg" id="dynasty-page-bg"></div>
+		
+		<div class="dynasty-block">
+			
+			<div class="dynasty-content">
+				{set:item}
+				<div class="owl-carousel" id="dynastySlider">
+					{mask:item}
+					<div class="dynasty-content-item" data-link="{url}">
+						<div class="dynasty-content-in{set:_first} first{/}">
+							<div class="dynasty-title">{title} {mis:_first}<span>{region}</span>{/}</div>
+							<div class="dynasty-subt">{set:exp}<b>{exp}</b> - общий трудовой стаж{/}</div>
+							<div class="dynasty-scroll flexcroll">
+							{html}
+							</div>
+						</div>
+						{mis:_first}{set:gallery}
+						<div class="gallery-ajax">
+							{*
+							<div class="gallery-right">
+								<div class="gallery-right-in">
+									{mask:gallery}
+									<div class="gallery-right-item{set:video} video{/}" style="background-image: url(/images/1/{img})"><a href="/images/2/{img}" class="fancybox" title="{title}"></a></div>
+									{/mask}
+								</div>							
+							</div>
+							{mis:alone:1}
+							<div class="gallery-right-nav">
+								<div class="gallery-nav-prev disabled"><i></i></div>
+								<div class="gallery-nav-counter">
+									<span>01</span> / <span>{gsize}</span>
+								</div>
+								<div class="gallery-nav-next"><i></i></div>
+							</div>
+							{/mis}
+							*}
+						</div>
+						{/set}{/mis}
+					</div>
+					{/mask}						
+				</div>
+				{/set}
+			</div>
+			
+			<div class="dynasty-list">			
+				<div class="dynasty-list-in">
+					{set:item}
+					<div class="owl-carousel" id="dynasty-list">
+						{mask:item}
+						<div class="dynasty-list-item{set:_first} active{/}"><span>{dynasty}</span> {region}<i></i></div> 
+						{/mask}
+						<div class="dynasty-list-dots"></div>
+					</div>	
+					{/set}
+				</div>
+			</div>
+			
+		</div>	
+		
+	</div>
+{/mask}	

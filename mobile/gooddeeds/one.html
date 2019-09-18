@@ -1,0 +1,24 @@
+{mask:main}
+	
+	<div class="stations-popup-in nopadd">
+		<div class="stations-popup-close"></div>
+		<div class="stations-popup-text">
+			<h3>{title}</h3>
+			{html}
+			{set:gallery}
+			<div class="addpopup-gallery">
+				<div class="owl-carousel" id="addpopupGallery">
+				{mask:gallery}
+					<div class="addpopup-gallery-item" style="background-image: url(/images/1/{img})"><a href="/images/2/{img}" class="fancybox" title="{title}"></a></div>
+				{/mask}
+				</div>
+				<div class="addpopup-gallery-counter">
+					<div><span>01</span> / <span>{gsize}</span></div>
+				</div>
+			</div>
+			{/set}			
+		</div>
+	</div>	
+	
+	
+{/mask}

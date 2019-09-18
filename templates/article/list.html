@@ -1,0 +1,29 @@
+{reduce:space}
+{mask:main}
+
+			{mask:item} 
+			<table class="dataTable">
+				<tr>
+					<td>                            	
+						<span class="link"><a href="{url}">{title}</a></span>
+						{description}
+					</td>
+				</tr>
+			</table>
+			{/mask}                    
+                    
+            {set:navigation}        
+			<div class="pages">
+				<span class="title">Страницы:</span>
+				{mask:navigation}
+					{mis:current}<span><a href="{url}">{title}</a></span>{/}
+					{set:current}<span class="active"><a>{title}</a></span>{/}
+				{/mask}
+			</div>
+			
+			<div class="prevnext">
+				{set:url_prev}<span class="prev"></span><a href="{url_prev}">Предыдущая</a>{set:url_next}<span class="cp"></span>{/}{/}{set:url_next}<a href="{url_next}">Следующая</a><span class="next"></span>{/}
+			</div>
+			{/set}
+
+{/mask}	

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<!--#misc::head#-->
+</head>
+
+<body>   
+  
+<div class="container">	
+
+	<div class="fixed-top">
+		<a class="logo"></a>	
+		<div class="menu-hamburger" onclick="hamburgerPopup.addClass('active'); $('body').addClass('noscroll');"><span></span><span></span><span></span></div>
+	</div>
+	
+	<div class="menu-hamburger-popup" id="hamburger-popup" >
+		<div class="menu-hamburger-close" onclick="hamburgerPopup.removeClass('active'); $('body').removeClass('noscroll');" ><span></span><span></span></div>
+		<div class="menu-hamburger-content">
+			<div class="menu-hamburger-item"><a href="#page1">РусГидро в цифрах</a></div>
+			<div class="menu-hamburger-item"><a href="#page2">История РусГидро</a></div>
+			<div class="menu-hamburger-item"><a href="#page3">Компания сегодня</a></div>
+			<div class="menu-hamburger-item"><a href="#page4">Добрые дела</a></div>
+			<div class="menu-hamburger-item"><a href="#page5">Трудовые династии</a></div>
+			<div class="menu-hamburger-link"><a href="/news?mobile=1">Новости</a></div>
+			<div class="menu-hamburger-link"><a href="/konkursy?mobile=1">Конкурсы</a></div>
+		</div>
+	</div>
+	
+	<div class="stations-popup" id="directorSpeech">		
+		<div class="stations-popup-in nopadd">
+			<div class="stations-popup-close"></div>	
+			<div class="stations-popup-title">Обращение генерального директора</div>
+			
+			<div class="stations-popup-text">
+				<div class="stations-popup-img"><img src="/tmp/director.jpg" /></div>
+				<div class="stations-popup-speech">
+					<h3><b>Шульгинов Н. Г.</b><br>Председатель Правления – Генеральный директор</h3>
+					<div class="stations-speech-text" >
+						<!--#misc::showvar# var=director_text -->
+					</div>
+				</div>	
+			</div>			
+		</div>
+	</div>		
+	
+	<a name="page1"></a>
+	<div class="landing-page" id="start-page">
+	
+		<div class="header">			
+			
+			<div class="top-text"><!--#misc::showvar# var=slogan --></div>
+			
+			<div class="top-reliz">
+				<a><span class="top-reliz-image" style="background-image: url(/tmp/topreliz.jpg)"></span>Обращение генерального директора</a>
+			</div>
+			
+		</div>
+		
+		<div class="column">
+			
+			<div class="info-block">			
+				
+				<!--#misc::topinfo#-->
+				
+				<!--#news::mainblock#-->
+				
+			</div>
+			
+			<div class="footer-block">
+				<div class="footer-block-in">
+					<!--#contest::mainlist#-->
+				</div>
+				<div class="footer-block-in">
+					<!--#news::mainlist#-->
+				</div>				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<a name="page2"></a>
+	<!--#history::page#-->
+	<a name="page3"></a>
+	<!--#statuspage::page#-->	
+	<a name="page4"></a>
+	<!--#gooddeeds::page#-->
+	<a name="page5"></a>
+	<!--#dynasty::page#-->
+	
+	
+	
+</div>
+  
+<!--#misc::showvar# var=counters -->
+  
+</body>
+</html>

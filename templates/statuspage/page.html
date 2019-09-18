@@ -1,0 +1,79 @@
+{mask:main}
+	<div class="landing-page" id="status-page">	
+		
+		<!--<div class="header-title">РусГидро сегодня</div>-->
+		
+		<div class="status-select">
+			<div class="status-select-title">Показать объекты: <span>все</span></div>
+			<div class="status-select-drop"><div class="status-select-drop-in" id="status-select">
+				<div class="status-select-drop-item active"><span>Все</span></div>				
+				<div class="status-select-drop-item" data-type="100"><span>Центральный офис</span></div>
+				<div class="status-select-drop-item" data-type="1"><span>Гидроэлектростанции</span></div>
+				<div class="status-select-drop-item" data-type="3"><span>Строящиеся гидроэлектростанции</span></div>				
+				<div class="status-select-drop-item" data-type="5"><span>Тепловые электростанции</span></div>
+				<div class="status-select-drop-item" data-type="6"><span>Строящиеся тепловые электростанции</span></div>
+				<div class="status-select-drop-item" data-type="2"><span>Геотермальные электростанции</span></div>
+				<div class="status-select-drop-item" data-type="10"><span>Солнечные электростанции</span></div>
+				<div class="status-select-drop-item" data-type="8"><span>Ветровые электростанции</span></div>
+				<div class="status-select-drop-item" data-type="7"><span>Приливная электростанция</span></div>
+				<div class="status-select-drop-item" data-type="4"><span>Сбытовые компании</span></div>
+				<div class="status-select-drop-item" data-type="11"><span>Электросетевые компании</span></div>				
+				<div class="status-select-drop-item" data-type="9"><span>Научно-исследовательские и проектные организации</span></div>
+				<div class="status-select-drop-item" data-type="12"><span>Подконтрольные организации, совмещающие генерацию, передачу и сбыт электроэнергии</span></div>
+			</div></div>
+		</div>
+		
+		<div class="stations-block">
+			
+			<div class="stations-map">
+				<img alt="" src="/styles/img/map.jpg" id="stationsImg" />
+				<div class="stations-map-points" id="stations-map">
+					
+					{mask:item}
+					<div class="stations-map-points-item type{icon}" style="left: {left}%; top: {top}%" id="station{id}">
+						<div class="stations-map-points-dot"></div>
+						<div class="stations-map-info">
+							<a href="{url}" class="stations-map-link"></a>
+							<div class="stations-map-info-in">
+								<div class="stations-map-image" style="background-image:url(/images/1/{img})"></div>
+								<div class="stations-map-title">{title}</div>
+								<div class="stations-map-descr">{description}<a>Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					{/mask}				
+					
+					<!--
+					<div class="stations-map-points-item type6" style="left: 794px; top: 422px">
+						<div class="stations-map-points-dot">68</div>
+						<div class="stations-map-info"><div class="stations-map-info-in"><div class="stations-map-image" style="background-image:url(sovetsk_gavan.jpg)"></div><div class="stations-map-title">ТЭЦ Советская Гавань</div></div>
+					</div>
+					<div class="stations-map-points-item type6" style="left: 823px; top: 433px">
+						<div class="stations-map-points-dot">69</div>
+						<div class="stations-map-info"><div class="stations-map-info-in"><div class="stations-map-image" style="background-image:url(sahalinsk2.jpg)"></div><div class="stations-map-title">Сахалинская ГРЭС-2</div></div>
+					</div>
+					-->
+					
+				</div>
+			</div>
+			
+			<div class="stations-list">
+				<div class="stations-list-title">Крупнейшие объекты генерации, МВт</div>
+				<div class="stations-list-in">
+					{set:objects}
+					<div class="owl-carousel" id="stations-list">
+						{mask:objects}						
+						<div class="stations-list-item{set:gres:1} gres{/}" data-id="station{bid}" ><span>{power}</span> {title}</div>
+						{/mask}		
+					</div>
+					{/set}
+				</div>
+			</div>
+			
+		</div>	
+		
+	</div>
+	
+	<div class="stations-popup" id="stationsPopup"></div>		
+	
+{/mask}

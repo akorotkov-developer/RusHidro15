@@ -1,0 +1,16 @@
+{reduce:space}
+{mask:main}
+
+		{mask:item}     
+		<table class="photoMain">
+			<tr>
+				{set:img}<td class="image"><a href="{url}"><img src="/images/1/{img}" alt="{title}" /></a></td>{/}
+				<td>
+					<a href="{url}">{title}</a>
+					{set:description}<br />{description}{/}
+				</td>
+			</tr>
+		</table>
+		{/mask} 
+
+{/mask}

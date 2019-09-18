@@ -1,0 +1,27 @@
+{mask:main}
+
+	<div class="gallery-right">
+		<div class="gallery-right-in">		
+			{mask:gallery}
+			<div class="gallery-right-item{set:video} video{/}">
+				<div class="gallery-right-item-in" style="background-image: url(/images/1/{img})"></div>
+				{mis:video}<a rel="dinastygallery" href="/images/2/{img}" class="fancybox" title="{title}" ></a>{/}
+				{set:video}
+					<a rel="dinastygallery" class="fancyboxvideo" title="{title}" id="fboxvideo{//bid}{_index}" href='{video}' ></a>					
+				{/}
+				<img src="/styles/img/preloader.gif" alt="" />
+			</div>
+			{/mask}
+		</div>							
+	</div>
+	{mis:alone:1}
+	<div class="gallery-right-nav">
+		<div class="gallery-nav-prev disabled"><i></i></div>
+		<div class="gallery-nav-counter">
+			<span>01</span> / <span>{gsize}</span>
+		</div>
+		<div class="gallery-nav-next"><i></i></div>
+	</div>
+	{/mis}
+
+{/mask}

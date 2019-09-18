@@ -1,0 +1,46 @@
+{mask:main}
+	<div class="landing-page" id="history-page">
+	
+		<div id="landing-page-bg">
+			{mask:item}
+			{*<div class="landing-page-bg{set:_first} active{/}" style="background-image: url(/images/2/{image})" ></div>*}
+			{/mask}
+		</div>
+		
+		<div class="header">
+			<div class="header-title">История РусГидро</div>
+		</div>		
+		
+		<div class="history-wrapper">
+			
+			<div class="history-wrapper-slider">
+				<div class="owl-carousel" id="history-slider">																									
+					{mask:item}
+					<div class="history-wrapper-slider-item">
+						<div class="history-wrapper-slider-scroll flexcroll">							
+							<h2>{title}</h2>
+							{html}							
+						</div>
+					</div>
+					{/mask}
+				</div>
+			</div>
+			
+			<div class="history-dots-over"><div class="history-dots-over-scroll">
+				<div class="history-cursor"></div>
+				<div class="history-dots-wrapper">
+					{mask:item}
+					<div class="history-dot{set:_first} start{/}">{set:_first}&nbsp;{/}{mis:_first}<span>{date}</span>{/}</div>					
+					{/mask}
+				</div>
+			</div></div>
+			
+			<div class="history-dots-nav">
+				<div class="history-dots-nav-next active"></div>
+				<div class="history-dots-nav-prev"></div>
+			</div>
+			
+		</div>
+		
+	</div>
+{/mask}

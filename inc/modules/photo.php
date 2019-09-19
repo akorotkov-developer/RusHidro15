@@ -98,7 +98,26 @@ class photo extends metamodule
         $page->navigation = $list->navigation;
         $page->url_prev = $list->url_prev;
         $page->url_next = $list->url_next;
-        
+
+        foreach ($page->item as $key => $item) {
+            $arrCounts = array();
+            $count = '';
+
+            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $item->id . '"';
+            $res = $sql->query($query);
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrCounts[] = $arr['vote_count'];
+            }
+            if (count($arrCounts) > 0) {
+                $count = max($arrCounts);
+            }
+
+            $page->item[$key]->voteCount = $count;
+
+            if ($_GET['tst'] == "tst") {
+                $page->item[$key]->test = "true";
+            }
+        }
 
         $html = $this->sprintt($page, $this->_tplDir()."showOne.html");
 

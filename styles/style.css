@@ -812,8 +812,8 @@ figure img {
 .voting-close:after { content: ''; width: 2px; height: 100%; background: #000; position: absolute; top: 0; left: 50%; transform: rotate(45deg) }
 
 .voting-brd { height: 1px; background: #f9dcc7; max-width: 780px; margin-top: 0; position: relative } 
-.voting-brd:after { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: #cdd9e7 } 
- 
+.voting-brd:after { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: #cdd9e7 }
+
  
  
  

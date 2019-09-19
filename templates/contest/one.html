@@ -1,9 +1,141 @@
 {reduce:space}
 {mask:main}
-		
+
+{if: {isVote}}
+	<script>
+		{#
+				$(function(){
+			$('body').on('click','.voting-item-button', function(){
+				vid = $(this).data('id');
+				genre = $(this).data('genre');
+				vparent = $('#'+vid);
+				if(!vparent.hasClass('voted')) {
+					$('.voting-video').hide();
+					$('#voting-popup').fadeIn();
+					$('.voting-alert').show();
+				}
+			})
+
+			$('#vsubmit').on('click',function(){
+
+				$(this).parent().hide();
+				popupdestroy();
+				tid = vid.replace('vote','');
+				data = {'id':tid,'genre':genre, 'votephoto':'yes'};
+				$.ajax({
+					type: "POST",
+					url: "/ajax/voteadd.php",
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						if(data['bcount']) { vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');}
+						else {alert(data['message'])}
+					}
+				});
+
+			})
+
+			$('.voting-item-image').on('click',function(){
+				data = {'id':$(this).data('id')};
+				$.ajax({
+					type: "POST",
+					url: "/ajax/voteinfo.php",
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						$('#ajaxData').html(data);
+					}
+				});
+
+				$('#voting-popup').fadeIn();
+				$('.voting-video').show();
+			})
+
+
+		})
+
+			function popupdestroy() {
+				$('#voting-popup').fadeOut();
+				$('.voting-video').hide();
+				$('#ajaxData').html('');
+			}
+
+			#}
+	</script>
+
+	<div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
+
+		<div class="voting-alert">
+			<div class="voting-alert-title">Вы уверены, что хотите<br>проголосовать за этого участника?</div>
+			<a id="vsubmit">Да</a>
+			<a class="vclose" onclick="$(this).parent().hide(); popupdestroy()">Нет</a>
+		</div>
+
+		<div class="voting-video">
+			<div class="voting-close" onclick="popupdestroy()"></div>
+			<div id="ajaxData"></div>
+		</div>
+
+	</div></div>
+{/}
+
+
 		<h1>{title}</h1>
 
-		<div class="news-text">{html}</div>
+		<div class="news-text">
+			{if: {isVote}}
+				<style>
+					.voting-item-image {
+						display: none;
+					}
+					.voting-item-name {
+						position: relative;
+						padding-right: 50px;
+						font-size: 20px;
+						font-weight: 300;
+						padding-left: 16px;
+						left: 25px;
+						padding-bottom: 5px;
+					}
+					.foto-title {
+						/*padding: 20px 20px 1px 20px!important;*/
+					}
+					.voting-item {
+						width: 92%;
+						margin-right: 5%;
+						margin-bottom: 4px;
+					}
+					.voting-item-count {
+						top: -12px;
+						right: -34px;
+					}
+					.voting-item-button {
+						top: 5px;
+						right: -60px;
+					}
+				</style>
+
+				{if: {test}}
+					<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+						<div class="voting-item-image" data-id={id} ><a></a></div>
+						<div class="voting-item-info">
+							<div class="voting-item-name">
+								<div style="display: none">
+									{title}
+								</div>
+								<div class="voting-item-count"><span>{voteCount}</span><i></i></div>
+							</div>
+							<div class="voting-item-link">
+								<a href="{org_link}">{org}</a>
+								<div class="voting-item-button" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
+							</div>
+						</div>
+					</div>
+				{/}
+			{/}
+
+			{html}
+		</div>
 		
 		<!--{set:gallery}
 		<div class="inner-gallery">

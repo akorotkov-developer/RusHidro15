@@ -4,15 +4,15 @@
 
 <script>
 	{#
-			$(function(){
-		$('body').on('click','.voting-item-button', function(){
-			vid = $(this).data('id');
-			genre = $(this).data('genre');
-			vparent = $('#'+vid);
-			if(!vparent.hasClass('voted')) {
-				$('.voting-video').hide();
-				$('#voting-popup').fadeIn();
-				$('.voting-alert').show();
+		$(function(){
+			$('body').on('click','.voting-item-button', function(){
+				vid = $(this).data('id');
+				genre = $(this).data('genre');
+				vparent = $('#'+vid);
+				if(!vparent.hasClass('voted')) {
+					$('.voting-video').hide();
+					$('#voting-popup').fadeIn();
+					$('.voting-alert').show();
 			}
 		})
 
@@ -21,7 +21,7 @@
 			$(this).parent().hide();
 			popupdestroy();
 			tid = vid.replace('vote','');
-			data = {'id':tid,'genre':genre};
+			data = {'id':tid,'genre':genre, 'votephoto':'yes'};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/voteadd.php",
@@ -84,13 +84,13 @@
 
 
 <div class="command-list"><div class="command-list_in">	
-	{mask:item}{if: {img}}
-	<!-- TODO делать сдесь -->
+	{mask:item}
+	{if: {img}}
 	<div class="command-one">
 		<div class="command-image"><a href="/images/0/{img}" class="fancybox" rel="gallery" title="{title}"><figure><img src="/images/1/{img}" alt="" title=""/></figure></a></div>
 		<div class="foto-title">
 			{title}
-			<div class="hide">
+			{if: {test}}
 				<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
 					<div class="voting-item-image" data-id={id} ><a></a></div>
 					<div class="voting-item-info">
@@ -98,7 +98,7 @@
 							<div style="display: none">
 								{title}
 							</div>
-							<div class="voting-item-count"><span>{count}</span><i></i></div>
+							<div class="voting-item-count"><span>{voteCount}</span><i></i></div>
 						</div>
 						<div class="voting-item-link">
 							<a href="{org_link}">{org}</a>
@@ -106,13 +106,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			{/}
 		</div>
 
 		<style>
-			.hide {
-				display: none;
-			}
 			.voting-item-image {
 				display: none;
 			}
@@ -132,6 +129,13 @@
 				width: 92%;
 				margin-right: 5%;
 				margin-bottom: 4px;
+			}
+			.voting-item-count {
+				top: -12px;
+			}
+			.voting-item-button {
+				top: 5px;
+				right: -25px;
 			}
 		</style>
 

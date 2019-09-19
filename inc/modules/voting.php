@@ -78,7 +78,6 @@ class voting extends metamodule
 		
         $html = $this->sprintt($page, $this->_tplDir() . "list.html");
 
-		mail("89065267799@mail.ru", "Тема письма", print_r($html, true));
         //сохраняем кэш
         set_cache($_cn, $html);
         return $html;
@@ -114,7 +113,48 @@ class voting extends metamodule
 		
         return $addHtml;
     }
-	
+
+    function voteaddphoto($bid)
+    {
+        global $control;
+        global $config;
+        global $sql;
+
+        //Ищем голосовал ли наш пользователь уже или нет
+        $arrData = array();
+        $remote = $_SERVER['REMOTE_ADDR'];
+        $query = 'SELECT * FROM vote_table WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
+        $res = $sql->query($query);
+        while ($arr = $sql->fetch_assoc($res)) {
+            $arrData[] = $arr;
+        }
+
+        if (count($arrData) > 0) {
+            //Если нашлась запись, значит наш пользователь уже голосовал
+            $data->message = 'Вы можете проголосовать за одну работу раз';
+        } else {
+            //Если запись не нашлась, то ищем все голоса за эту картинку, получаем максимальное значение и прибавляем 1
+            $arrCounts = array();
+            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $bid . '"';
+            $res = $sql->query($query);
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrCounts[] = $arr['vote_count'];
+            }
+            if (count($arrCounts) > 0) {
+                $count = max($arrCounts) + 1;
+            } else {
+                $count = 1;
+            }
+
+            $query = 'INSERT INTO vote_table (vote_id, vote_ipadress, vote_count) VALUES ("' . $bid . '", "' . $remote . '", " ' . $count . ' ")';
+            $sql->query($query);
+
+            $data->bcount = $count;
+        }
+
+        return $data;
+    }
+
 	function voteadd($bid,$genre)
     {
         global $control;
@@ -148,7 +188,7 @@ class voting extends metamodule
 			if($smfilter['genre'][$genre]===NULL) $smfilter['genre'][$genre] = $votemax;
 			
 			if($smfilter['genre'][$genre]>0) {
-				
+
 				if(!$smfilter['bid'][$bid]) {
 					$smfilter['bid'][$bid] = 1; 
 					$ip_text = $ip_text.$pref.$remote; 

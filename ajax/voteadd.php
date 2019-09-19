@@ -9,9 +9,14 @@ $sql->connect();
 
 $id = $_POST['id'];
 $genre = $_POST['genre'];
+$votePhoto = $_POST['votephoto'];
 
 $voting = new voting();
-$data = $voting->voteadd($id,$genre);
+if ($votePhoto != "") {
+    $data = $voting->voteaddphoto($id);
+} else {
+    $data = $voting->voteadd($id, $genre);
+}
 
 echo json_encode($data);
 

@@ -110,6 +110,29 @@ class contest extends metamodule
 			if($block->gsize==1) $block->alone = 1;
 
         }
+        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21) {
+            $isvote = false;
+        } else {
+            $isvote = true;
+        }
+
+        if ($isvote) {
+            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $bid . '"';
+            $res = $sql->query($query);
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrCounts[] = $arr['vote_count'];
+            }
+            if (count($arrCounts) > 0) {
+                $count = max($arrCounts);
+            }
+
+            $block->voteCount = $count;
+            $block->isVote = 'true';
+        }
+
+        if ($_GET['tst'] == 'tst') {
+            $block->test = 'test';
+        }
 
         $html = $this->sprintt($block, $this->_tplDir() . "one.html");
 

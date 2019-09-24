@@ -7,8 +7,11 @@
 		$(function(){
 			$('body').on('click','.voting-item-button', function(){
 				vid = $(this).data('id');
+                work_name = $(this).parent().parent().find('.voting-item-name').find('div').html();
+                work_name = work_name.replace('<br>', '');
 				genre = $(this).data('genre');
 				vparent = $('#'+vid);
+				sect = "photo";
 				if(!vparent.hasClass('voted')) {
 					$('.voting-video').hide();
 					$('#voting-popup').fadeIn();
@@ -20,37 +23,24 @@
 
 			$(this).parent().hide();
 			popupdestroy();
+
 			tid = vid.replace('vote','');
-			data = {'id':tid,'genre':genre, 'votephoto':'yes'};
+			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/voteadd.php",
 				data: data,
 				dataType: 'json',
 				success: function(data) {
-					if(data['bcount']) { vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');}
+					if(data['bcount']) {
+					    vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');
+					}
 					else {alert(data['message'])}
 				}
 			});
 
+
 		})
-
-		$('.voting-item-image').on('click',function(){
-			data = {'id':$(this).data('id')};
-			$.ajax({
-				type: "POST",
-				url: "/ajax/voteinfo.php",
-				data: data,
-				dataType: 'json',
-				success: function(data) {
-					$('#ajaxData').html(data);
-				}
-			});
-
-			$('#voting-popup').fadeIn();
-			$('.voting-video').show();
-		})
-
 
 	})
 
@@ -80,6 +70,17 @@
 
 
 
+
+<!-- Результаты голосования -->
+<style>
+    .results {
+        margin-bottom: 40px;
+        border: 1px solid;
+        padding: 10px;
+    }
+</style>
+
+    {results}
 
 
 

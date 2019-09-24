@@ -73,6 +73,7 @@ class photo extends metamodule
         global $config;
         global $sql;
 
+
         //попытка загрузить из кэша
         $_cn = sprintf("%s_%s_%s",get_class($this), 'showOne',  cache_key()); 
         $html = get_cache($_cn);
@@ -117,6 +118,28 @@ class photo extends metamodule
             if ($_GET['tst'] == "tst") {
                 $page->item[$key]->test = "true";
             }
+        }
+
+        if ($_GET['results'] == "y") {
+            $query = "SELECT DISTINCT work_name FROM vote_table WHERE sectioncolumn = ' photo '";
+            $res = $sql->query($query);
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrData[] = $arr;
+            }
+
+            $content = "<div class=\"results\">";
+            foreach ($arrData as $item) {
+                if (!empty($item["work_name"])) {
+                    $query = "SELECT * FROM vote_table WHERE work_name = '" . $item["work_name"] . "' ORDER BY vote_count DESC LIMIT 1";
+                    $res = $sql->query($query);
+                    while ($arr = $sql->fetch_assoc($res)) {
+                        $content .= "<b>" . $arr["work_name"] . "</b> - голосов " . $arr["vote_count"] . "<br>";
+                    }
+                }
+            }
+            $content .=  "</div>";
+
+            $page->results = $content;
         }
 
         $html = $this->sprintt($page, $this->_tplDir()."showOne.html");

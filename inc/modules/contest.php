@@ -110,7 +110,7 @@ class contest extends metamodule
 			if($block->gsize==1) $block->alone = 1;
 
         }
-        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21) {
+        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21 or $bid == 4) {
             $isvote = false;
         } else {
             $isvote = true;
@@ -133,6 +133,29 @@ class contest extends metamodule
         if ($_GET['tst'] == 'tst') {
             $block->test = 'test';
         }
+
+        if ($_GET['results'] == "y") {
+            $query = "SELECT DISTINCT work_name FROM vote_table WHERE sectioncolumn = ' text '";
+            $res = $sql->query($query);
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrData[] = $arr;
+            }
+
+            $content = "<div class=\"results\">";
+            foreach ($arrData as $item) {
+                if (!empty($item["work_name"])) {
+                    $query = "SELECT * FROM vote_table WHERE work_name = '" . $item["work_name"] . "' ORDER BY vote_count DESC LIMIT 1";
+                    $res = $sql->query($query);
+                    while ($arr = $sql->fetch_assoc($res)) {
+                        $content .= "<b>" . $arr["work_name"] . "</b> - голосов " . $arr["vote_count"] . "<br>";
+                    }
+                }
+            }
+            $content .=  "</div>";
+
+            $block->results = $content;
+        }
+
 
         $html = $this->sprintt($block, $this->_tplDir() . "one.html");
 

@@ -10,10 +10,13 @@ $sql->connect();
 $id = $_POST['id'];
 $genre = $_POST['genre'];
 $votePhoto = $_POST['votephoto'];
+$useragent = $_POST['useragent'];
+$sect = $_POST["sect"];
+$work_name = $_POST['work_name'];
 
 $voting = new voting();
 if ($votePhoto != "") {
-    $data = $voting->voteaddphoto($id);
+    $data = $voting->voteaddphoto($id, $useragent, $sect, $work_name);
 } else {
     $data = $voting->voteadd($id, $genre);
 }

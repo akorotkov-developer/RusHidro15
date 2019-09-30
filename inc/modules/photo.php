@@ -114,10 +114,6 @@ class photo extends metamodule
             }
 
             $page->item[$key]->voteCount = $count;
-
-            if ($_GET['tst'] == "tst") {
-                $page->item[$key]->test = "true";
-            }
         }
 
         if ($_GET['results'] == "y") {

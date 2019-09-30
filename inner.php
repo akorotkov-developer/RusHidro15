@@ -29,8 +29,16 @@ if (count($_POST) == 0) {
     */
 
 //Настройка склейки (301 редирект) страниц со слешем и без  - УНИВЕРСАЛЬНЫЙ ВАРИАНТ
-
     $uriarr_get = explode("?", $_SERVER['REQUEST_URI']);
+    if ($uriarr_get[0] == "/konkursy/raboty/") {
+        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/konkursy/literaturnyy-detskiy-konkurs/");
+        exit();
+    }
+    if ($uriarr_get[0] == "/konkursy/fotogalereya/") {
+        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/konkursy/konkurs-detskogo-risunka/");
+        exit();
+    }
+
     $uriarr = explode("_", $uriarr_get[0]);
     if (substr($uriarr[0], -1) != '/') {
         $uri = str_replace('//', '/', $uriarr[0] . '/');

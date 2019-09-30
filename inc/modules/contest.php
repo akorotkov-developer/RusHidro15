@@ -110,7 +110,7 @@ class contest extends metamodule
 			if($block->gsize==1) $block->alone = 1;
 
         }
-        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21 or $bid == 4) {
+        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21 or $bid == 4 or $bid == 2) {
             $isvote = false;
         } else {
             $isvote = true;
@@ -128,10 +128,6 @@ class contest extends metamodule
 
             $block->voteCount = $count;
             $block->isVote = 'true';
-        }
-
-        if ($_GET['tst'] == 'tst') {
-            $block->test = 'test';
         }
 
         if ($_GET['results'] == "y") {
@@ -192,6 +188,8 @@ class contest extends metamodule
 
         //сохраняем кэш
         set_cache($_cn, $html);
+
+
 
         return $html;
     }

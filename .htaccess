@@ -19,3 +19,5 @@ ErrorDocument 500 /500.php
 RewriteRule ^$ inner.php
 RewriteRule ^(.+str=.*)$ inner.php?path=$1 [L]
 RewriteRule ^([^\.]+)$ inner.php?path=$1 [QSA]
+
+

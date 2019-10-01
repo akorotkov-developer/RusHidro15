@@ -20,4 +20,12 @@ RewriteRule ^$ inner.php
 RewriteRule ^(.+str=.*)$ inner.php?path=$1 [L]
 RewriteRule ^([^\.]+)$ inner.php?path=$1 [QSA]
 
-
+SetEnvIf Request_URI ^/concursresults/litra/index.php|^/concursresults/photo/index.php require_auth=true
+AuthUserFile /home/rushydro15/rushydro15.ru/www/.htpasswd
+AuthName "Need Password"
+AuthType Basic
+Order Deny,Allow
+Deny from all
+Satisfy any
+Require valid-user
+Allow from env=!require_auth

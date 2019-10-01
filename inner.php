@@ -28,7 +28,7 @@ if (count($_POST) == 0) {
         }
     */
 
-//Настройка склейки (301 редирект) страниц со слешем и без  - УНИВЕРСАЛЬНЫЙ ВАРИАНТ
+    //Настройка склейки (301 редирект) страниц со слешем и без  - УНИВЕРСАЛЬНЫЙ ВАРИАНТ
     $uriarr_get = explode("?", $_SERVER['REQUEST_URI']);
     if ($uriarr_get[0] == "/konkursy/raboty/") {
         header("Location: http://" . $_SERVER['SERVER_NAME'] . "/konkursy/literaturnyy-detskiy-konkurs/");
@@ -38,6 +38,20 @@ if (count($_POST) == 0) {
         header("Location: http://" . $_SERVER['SERVER_NAME'] . "/konkursy/konkurs-detskogo-risunka/");
         exit();
     }
+
+    //Http авторизация для результатов конкурса
+   //mail("89065267799@mail.ru", "Тема письма", print_r($uriarr_get, true));
+/*    if ($uriarr_get[0] == "/concursresults/photo/") {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Текст, отправляемый в том случае,если пользователь нажал кнопку Cancel';
+            exit;
+        } else {
+            echo "<p>Hello {$_SERVER['PHP_AUTH_USER']}.</p>";
+            echo "<p>Вы ввели пароль {$_SERVER['PHP_AUTH_PW']}.</p>";
+        }
+    }*/
 
     $uriarr = explode("_", $uriarr_get[0]);
     if (substr($uriarr[0], -1) != '/') {

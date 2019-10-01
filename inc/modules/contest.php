@@ -110,7 +110,8 @@ class contest extends metamodule
 			if($block->gsize==1) $block->alone = 1;
 
         }
-        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or $bid == 21 or $bid == 4 or $bid == 2) {
+        if ($bid == 16 or $bid == 17 or $bid == 18 or $bid == 19 or $bid == 20 or
+            $bid == 21 or $bid == 4 or $bid == 2 or $bid == 3 or $bid == 5  or $bid == 6) {
             $isvote = false;
         } else {
             $isvote = true;
@@ -129,50 +130,6 @@ class contest extends metamodule
             $block->voteCount = $count;
             $block->isVote = 'true';
         }
-
-        /*Записываем результаты конкурса*/
-        if (true) {
-            $query = "SELECT DISTINCT work_name FROM vote_table WHERE sectioncolumn = ' text '";
-            $res = $sql->query($query);
-            while ($arr = $sql->fetch_assoc($res)) {
-                $arrData[] = $arr;
-            }
-
-
-            $i = 0; $arrContent = array();
-            foreach ($arrData as $item) {
-                if (!empty($item["work_name"])) {
-                    $query = "SELECT * FROM vote_table WHERE work_name = '" . $item["work_name"] . "' ORDER BY vote_count DESC LIMIT 1";
-                    $res = $sql->query($query);
-                    while ($arr = $sql->fetch_assoc($res)) {
-                        $arrContent[$i]["vote"] = $arr["vote_count"];
-                        $arrContent[$i]["text"] = "<b>" . $arr["work_name"] . "</b> - голосов " . $arr["vote_count"] . "<br>";
-                    }
-                }
-                $i++;
-            }
-
-            //По убыванию:
-            function cmp_function($a, $b){
-                return ($a['vote'] < $b['vote']);
-            }
-            uasort($arrContent, 'cmp_function');
-
-            $content = "<div class=\"results\">";
-            foreach ($arrContent as $item) {
-                $content .= $item["text"];
-            }
-            $content .=  "</div>";
-
-            $resultFile = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/concursresults/litra/index.php');
-            $resultFile = preg_replace('|(<!--begin-litra-->).+(<!--end-litre-->)|isU', "$1".$content."$2",$resultFile);
-
-            $fp = fopen($_SERVER['DOCUMENT_ROOT'] ."/concursresults/litra/index.php", "w"); // Открываем файл в режиме записи
-            fwrite($fp, $resultFile); // Запись в файл
-            fclose($fp); //Закрытие файла*/
-        }
-        /***************************************/
-
 
         $html = $this->sprintt($block, $this->_tplDir() . "one.html");
 

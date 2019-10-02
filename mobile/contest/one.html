@@ -51,6 +51,34 @@
 		#}
 </script>
 
+<script>
+	{#
+		$( document ).ready(function() {
+			data = {useragent: navigator.userAgent};
+			$.ajax({
+				type: "POST",
+				url: "/ajax/setvotegrey.php",
+				data: data,
+				dataType: 'json',
+				success: function(data) {
+					let arrId = [];
+					$.each(data,function(index,value){
+						arrId.push(value.vote_id);
+					});
+
+					$('.news-text').each(function(i,elem) {
+						$.each(arrId,function(index,value){
+							if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
+								$(elem).addClass("voted");
+							}
+						});
+					});
+				}
+			});
+		});
+	#}
+</script>
+
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
 
 	<div class="voting-alert">

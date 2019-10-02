@@ -51,6 +51,34 @@
 		#}
 </script>
 
+<script>
+	{#
+		$( document ).ready(function() {
+			data = {useragent: navigator.userAgent};
+			$.ajax({
+				type: "POST",
+				url: "/ajax/setvotegrey.php",
+				data: data,
+				dataType: 'json',
+				success: function(data) {
+					let arrId = [];
+					$.each(data,function(index,value){
+						arrId.push(value.vote_id);
+					});
+
+					$('.item').each(function(i,elem) {
+						$.each(arrId,function(index,value){
+							if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
+								$(elem).addClass("voted");
+							}
+						});
+					});
+				}
+			});
+		});
+	#}
+</script>
+
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
 
 	<div class="voting-alert">
@@ -104,7 +132,13 @@
 						position: relative;
 						top: -19px;
 					}
+					.item {
+						margin-bottom: 30px;
+					}
 				</style>
+
+				<a href="/images/2/{img}" rel="gallery" title="{title}"><img src="/images/1/{img}" alt="{title}" /></a>
+				<span>{title}</span>
 
 				<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
 					<div class="voting-item-image" data-id={id} ><a></a></div>
@@ -121,9 +155,6 @@
 						</div>
 					</div>
 				</div>
-
-				<a href="/images/2/{img}" rel="gallery" title="{title}"><img src="/images/1/{img}" alt="{title}" /></a>
-				<span>{title}</span>
 			</div>
 			{/mask}        
 

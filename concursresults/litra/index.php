@@ -18,7 +18,7 @@
             exit();
         }
 
-        $query = "Select *, max(vote_count) From vote_table WHERE sectioncolumn = ' text ' group by work_name ";
+        $query = "Select *, max(vote_count) From vote_tablenew WHERE sectioncolumn = ' text ' group by work_name ";
 
         //$query = "SELECT *, MAX(vote_count) FROM vote_table GROUP BY work_name";
         $result = $mysqli->query($query);
@@ -33,6 +33,45 @@
             return ($a['max(vote_count)'] < $b['max(vote_count)']);
         }
         uasort($arrItems, 'cmp_function');
+
+
+
+
+
+
+
+        if ($_GET["tst"] == "tst") {
+            //Заполним таблицу новыми данными
+/*            $query = "TRUNCATE TABLE vote_tablenew";
+            $result = $mysqli->query($query);
+
+            foreach ($arrItems as $item) {
+                if ($item["sectioncolumn"] == " text ") {
+                    $voteid = $item['vote_id'] . 'litra';
+                } else {
+                    $voteid = $item['vote_id'];
+                }
+                $query = "INSERT INTO vote_tablenew (vote_id, vote_ipadress, vote_count, work_name, sectioncolumn) VALUES
+                            ('" . $voteid . "','" . $item['vote_ipadress'] . "','" . $item['max(vote_count)'] . "','" . $item['work_name'] . "','" . $item['sectioncolumn'] . "')";
+
+                $result = $mysqli->query($query);
+            }*/
+
+/*            $query = "SELECT * FROM vote_tablenew";
+            //$query = "SELECT *, MAX(vote_count) FROM vote_table GROUP BY work_name";
+            $result = $mysqli->query($query);
+
+
+            $arrIte = array();
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $arrIte[] = $row;
+            }
+            echo "<pre>";
+            var_dump($arrIte);
+            echo "</pre>";*/
+
+        }
+
 
         $content = "<div class=\"results\">";
         foreach ($arrItems as $item) {

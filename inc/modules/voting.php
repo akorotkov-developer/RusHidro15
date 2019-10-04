@@ -114,7 +114,7 @@ class voting extends metamodule
         return $addHtml;
     }
 
-    function voteaddphoto($bid, $useragent, $sect, $work_name)
+    function voteaddphoto($bid, $useragent, $sect, $work_name, $islitra)
     {
         global $control;
         global $config;
@@ -126,19 +126,23 @@ class voting extends metamodule
         $useragent = str_replace($vowels, "", $useragent);
 
         $remote = $_SERVER['REMOTE_ADDR'].$useragent;
+        if ($islitra != "true") {
+            $bid = str_replace("litra", "", $bid);
+        }
 
-        $query = 'SELECT * FROM vote_table WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
+        $query = 'SELECT * FROM vote_tablenew WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {
             $arrData[] = $arr;
         }
+
         if (count($arrData) > 0) {
             //Если нашлась запись, значит наш пользователь уже голосовал
             $data->message = 'Вы можете проголосовать за одну работу раз';
         } else {
             //Если запись не нашлась, то ищем все голоса за эту картинку, получаем максимальное значение и прибавляем 1
             $arrCounts = array();
-            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $bid . '"';
+            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $bid . '"';
             $res = $sql->query($query);
             while ($arr = $sql->fetch_assoc($res)) {
                 $arrCounts[] = $arr['vote_count'];
@@ -149,7 +153,7 @@ class voting extends metamodule
                 $count = 1;
             }
 
-            $query = 'INSERT INTO vote_table (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . $work_name . ' ", " ' . $count . ' ")';
+            $query = 'INSERT INTO vote_tablenew (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . $work_name . ' ", " ' . $count . ' ")';
             $sql->query($query);
 
             $data->bcount = $count;

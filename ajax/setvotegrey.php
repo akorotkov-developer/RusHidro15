@@ -19,7 +19,7 @@ $vowels = array(";", "(", ")", "/", ",");
 $useragent = str_replace($vowels, "", $useragent);
 $remote = $_SERVER['REMOTE_ADDR'].$useragent;
 
-$query = "SELECT * FROM vote_table WHERE vote_ipadress = '" . $remote ."'";
+$query = "SELECT * FROM vote_tablenew WHERE vote_ipadress = '" . $remote ."'";
 $result = $mysqli->query($query);
 
 /* ассоциативный массив */

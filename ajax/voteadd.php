@@ -13,10 +13,11 @@ $votePhoto = $_POST['votephoto'];
 $useragent = $_POST['useragent'];
 $sect = $_POST["sect"];
 $work_name = $_POST['work_name'];
+$islitra = $_POST['islitra'];
 
 $voting = new voting();
 if ($votePhoto != "") {
-    $data = $voting->voteaddphoto($id, $useragent, $sect, $work_name);
+    $data = $voting->voteaddphoto($id, $useragent, $sect, $work_name, $islitra);
 } else {
     $data = $voting->voteadd($id, $genre);
 }

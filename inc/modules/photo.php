@@ -104,7 +104,7 @@ class photo extends metamodule
             $arrCounts = array();
             $count = '';
 
-            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $item->id . '"';
+            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $item->id . '"';
             $res = $sql->query($query);
             while ($arr = $sql->fetch_assoc($res)) {
                 $arrCounts[] = $arr['vote_count'];

@@ -118,7 +118,7 @@ class contest extends metamodule
         }
 
         if ($isvote) {
-            $query = 'SELECT * FROM vote_table WHERE vote_id = "' . $bid . '"';
+            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $bid . 'litra"';
             $res = $sql->query($query);
             while ($arr = $sql->fetch_assoc($res)) {
                 $arrCounts[] = $arr['vote_count'];
@@ -126,6 +126,8 @@ class contest extends metamodule
             if (count($arrCounts) > 0) {
                 $count = max($arrCounts);
             }
+
+            $block->idforvote = $bid;
 
             $block->voteCount = $count;
             $block->isVote = 'true';

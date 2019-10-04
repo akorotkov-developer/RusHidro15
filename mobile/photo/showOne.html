@@ -23,7 +23,9 @@
 			popupdestroy();
 
 			tid = vid.replace('vote','');
-			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect};
+			tid = tid + "litra";
+			islitra = "true";
+			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, islitra: islitra};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/voteadd.php",
@@ -54,7 +56,7 @@
 <script>
 	{#
 		$( document ).ready(function() {
-			data = {useragent: navigator.userAgent};
+			data = {useragent: navigator.userAgent, litra: 'true'};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/setvotegrey.php",

@@ -23,7 +23,6 @@
 			popupdestroy();
 
 			tid = vid.replace('vote','');
-			tid = tid + "litra";
 			islitra = "true";
 			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, islitra: islitra};
 			$.ajax({
@@ -56,7 +55,7 @@
 <script>
 	{#
 		$( document ).ready(function() {
-			data = {useragent: navigator.userAgent, litra: 'true'};
+			data = {useragent: navigator.userAgent};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/setvotegrey.php",
@@ -70,6 +69,10 @@
 
 					$('.item').each(function(i,elem) {
 						$.each(arrId,function(index,value){
+							var find = 'litra';
+							var re = new RegExp(find, 'g');
+
+							value = value.replace(re, '');
 							if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
 								$(elem).addClass("voted");
 							}

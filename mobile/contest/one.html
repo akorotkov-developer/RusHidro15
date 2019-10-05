@@ -25,7 +25,9 @@
 			$(this).parent().hide();
 			popupdestroy();
 			tid = vid.replace('vote','');
-			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect};
+			tid = tid + "litra";
+			islitra = "true";
+			data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, islitra: islitra};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/voteadd.php",
@@ -68,6 +70,10 @@
 
 					$('.news-text').each(function(i,elem) {
 						$.each(arrId,function(index,value){
+							var find = 'litra';
+							var re = new RegExp(find, 'g');
+
+							value = value.replace(re, '');
 							if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
 								$(elem).addClass("voted");
 							}

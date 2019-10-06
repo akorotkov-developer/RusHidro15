@@ -68,8 +68,21 @@ class voting extends metamodule
 		}	
 	
 		$ar = 0;
+		$i = 0;
 		foreach($list->item as $item) {
-			
+            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $item->id . 'video"';
+            $res = $sql->query($query);
+            $arrCounts = array();
+            while ($arr = $sql->fetch_assoc($res)) {
+                $arrCounts[] = $arr['vote_count'];
+            }
+            if (count($arrCounts) > 0) {
+                $count = max($arrCounts);
+                $item->count = $count;
+            } else {
+                $item->count = "";
+            }
+
 			if($item->genre == 1) { $page->song[$ar] = $item; }
 			if($item->genre == 2) { $page->dance[$ar] = $item; }
 			if($item->genre == 3) { $page->original[$ar] = $item; }
@@ -101,12 +114,25 @@ class voting extends metamodule
 		} else {
 			$addHtml ='<div class="voting-video-player"><video width="100%" height="350" controls="controls" poster="" ><source src="/files/voting/'.$page->video_link.'" type="video/mp4" /></video></div>';
 		}
+
+        $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $bid . 'video"';
+        $res = $sql->query($query);
+        $arrCounts = array();
+        while ($arr = $sql->fetch_assoc($res)) {
+            $arrCounts[] = $arr['vote_count'];
+        }
+        if (count($arrCounts) > 0) {
+            $count = max($arrCounts);
+            $page->count = $count;
+        } else {
+            $page->count = "";
+        }
 		
 		$addHtml .= '<div class="voting-video-info'.$voted.'">';
 		if($page->photo) $addHtml .= '<img class="voting-video-person" src="/images/1/'.$page->photo.'" alt="" />';
 		$addHtml .= '<div class="voting-item-info">';
-		$addHtml .= '<div class="voting-item-name">'.$page->fio.'<div class="voting-item-count"><span>'.$page->count.'</span><i></i></div></div>';
-		$addHtml .= '<div class="voting-item-link"><a href="'.$page->org_link.'">'.$page->org.'</a><div class="voting-item-button" data-id="vote'.$page->id.'" data-genre="'.$page->genre.'"><i></i><span>Голосовать</span></div></div>';
+		$addHtml .= '<div class="voting-item-name"><div class="work_name">'.$page->fio.'</div><div class="voting-item-count"><span>'.$page->count.'</span><i></i></div></div>';
+		$addHtml .= '<div class="voting-item-link"><p><b>'.$page->org.'</b></p><div class="voting-item-button" data-id="vote'.$page->id.'" data-genre="'.$page->genre.'"><i></i><span>Голосовать</span></div></div>';
 		$addHtml .= '<div class="voting-item-text">'.$page->about.'</div>';
 		$addHtml .= '</div>';
 		$addHtml .= '</div>';
@@ -114,7 +140,7 @@ class voting extends metamodule
         return $addHtml;
     }
 
-    function voteaddphoto($bid, $useragent, $sect, $work_name, $islitra)
+    function voteaddphoto($bid, $useragent, $sect, $work_name, $islitra, $isvideo)
     {
         global $control;
         global $config;
@@ -126,8 +152,15 @@ class voting extends metamodule
         $useragent = str_replace($vowels, "", $useragent);
 
         $remote = $_SERVER['REMOTE_ADDR'].$useragent;
-        if ($islitra != "true") {
+        if ($islitra != "true" and $isvideo != "true") {
             $bid = str_replace("litra", "", $bid);
+            $bid = str_replace("video", "", $bid);
+        }
+        if ($isvideo == "true") {
+            $bid = str_replace("litra", "", $bid);
+        }
+        if ($islitra == "true") {
+            $bid = str_replace("video", "", $bid);
         }
 
         $query = 'SELECT * FROM vote_tablenew WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';

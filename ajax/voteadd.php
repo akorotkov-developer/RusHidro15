@@ -14,14 +14,15 @@ $useragent = $_POST['useragent'];
 $sect = $_POST["sect"];
 $work_name = $_POST['work_name'];
 $islitra = $_POST['islitra'];
+$isvideo = $_POST['isvideo'];
 
 $voting = new voting();
+
 if ($votePhoto != "") {
-    $data = $voting->voteaddphoto($id, $useragent, $sect, $work_name, $islitra);
+    $data = $voting->voteaddphoto($id, $useragent, $sect, strip_tags($work_name), $islitra, $isvideo);
 } else {
     $data = $voting->voteadd($id, $genre);
 }
 
 echo json_encode($data);
-
 ?>

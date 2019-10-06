@@ -72,6 +72,7 @@
 								var re = new RegExp(find, 'g');
 
 								value = value.replace(re, '');
+								console.log(value);
 								if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
 									$(elem).addClass("voted");
 								}

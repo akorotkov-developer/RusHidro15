@@ -9,33 +9,39 @@ $(function(){
 	$('body').on('click','.voting-item-button', function(){
 		vid = $(this).data('id');
 		genre = $(this).data('genre');
-		vparent = $('#'+vid);	
+		work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
+
+		work_name = work_name.replace('<br>', '');
+		vparent = $('#'+vid);
+		sect = "video";
+
 		if(!vparent.hasClass('voted')) {
-			$('.voting-video').hide();		
-			$('#voting-popup').fadeIn(); 
+			$('.voting-video').hide();
+			$('#voting-popup').fadeIn();
 			$('.voting-alert').show();
 		}
-	})
-	
+	});
+
 	$('#vsubmit').on('click',function(){
-		
-		$(this).parent().hide(); 	
+
+		$(this).parent().hide();
 		popupdestroy();
-		tid = vid.replace('vote','');		
-		data = {'id':tid,'genre':genre};
+		tid = vid.replace('vote','');
+		tid = tid + "video";
+		isvideo = "true";
+		data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, isvideo: isvideo};
 		$.ajax({
-			type: "POST", 
-			url: "/ajax/voteadd.php", 
+			type: "POST",
+			url: "/ajax/voteadd.php",
 			data: data,
 			dataType: 'json',
 			success: function(data) {
 				if(data['bcount']) { vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');}
 				else {alert(data['message'])}
-				console.log(data)
 			}
-		});			
-		
-	})
+		});
+
+	});
 	
 	$('.voting-item-image').on('click',function(){
 		data = {'id':$(this).data('id')};
@@ -63,6 +69,38 @@ function popupdestroy() {
 }
 
 #}
+</script>
+
+<script>
+	{#
+		$( document ).ready(function() {
+			data = {useragent: navigator.userAgent};
+			$.ajax({
+				type: "POST",
+				url: "/ajax/setvotegrey.php",
+				data: data,
+				dataType: 'json',
+				success: function(data) {
+					let arrId = [];
+					$.each(data,function(index,value){
+						arrId.push(value.vote_id);
+					});
+
+					$('.voting-item').each(function(i,elem) {
+						$.each(arrId,function(index,value){
+							var find = 'video';
+							var re = new RegExp(find, 'g');
+
+							value = value.replace(re, '');
+							if ($(elem).attr("id") == "vote" + value) {
+								$(elem).addClass("voted");
+							}
+						});
+					});
+				}
+			});
+		});
+	#}
 </script>
 
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
@@ -96,11 +134,11 @@ function popupdestroy() {
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
-					{fio}
+					<div class="work_name">{fio}</div>
 					<div class="voting-item-count"><span>{count}</span><i></i></div>
 				</div>
 				<div class="voting-item-link">
-					<a href="{org_link}">{org}</a>
+					<p><b>{org}</b></p>
 					<div class="voting-item-button" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			
@@ -120,11 +158,11 @@ function popupdestroy() {
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
-					{fio}
+					<div class="work_name">{fio}</div>
 					<div class="voting-item-count"><span>{count}</span><i></i></div>
 				</div>
 				<div class="voting-item-link">
-					<a href="{org_link}">{org}</a>
+					<p><b>{org}</b></p>
 					<div class="voting-item-button" data-id="vote{id}" data-genre="1"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			
@@ -144,11 +182,11 @@ function popupdestroy() {
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
-					{fio}
+					<div class="work_name">{fio}</div>
 					<div class="voting-item-count"><span>{count}</span><i></i></div>
 				</div>
 				<div class="voting-item-link">
-					<a href="{org_link}">{org}</a>
+					<p><b>{org}</b></p>
 					<div class="voting-item-button" data-id="vote{id}" data-genre="3"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			

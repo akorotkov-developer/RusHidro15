@@ -83,9 +83,18 @@ class voting extends metamodule
                 $item->count = "";
             }
 
-			if($item->genre == 1) { $page->song[$ar] = $item; }
-			if($item->genre == 2) { $page->dance[$ar] = $item; }
-			if($item->genre == 3) { $page->original[$ar] = $item; }
+			if($item->genre == 1) {
+                $item->nomination = "song";
+			    $page->song[$ar] = $item;
+			}
+			if($item->genre == 2) {
+                $item->nomination = "dance";
+			    $page->dance[$ar] = $item;
+			}
+			if($item->genre == 3) {
+                $item->nomination = "original";
+			    $page->original[$ar] = $item;
+			}
 			$ar ++;
 		}
 		
@@ -140,7 +149,7 @@ class voting extends metamodule
         return $addHtml;
     }
 
-    function voteaddphoto($bid, $useragent, $sect, $work_name, $islitra, $isvideo)
+    function voteaddphoto($bid, $useragent, $sect, $work_name, $islitra, $isvideo, $nomination)
     {
         global $control;
         global $config;
@@ -165,6 +174,18 @@ class voting extends metamodule
 
         if (!$isvideo and !$islitra) return "Голосование закрыто";
 
+        $query = 'Select *, max(vote_count) From vote_tablenew WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '" AND nomination = " ' . $nomination . ' "  group by work_name ';
+
+        $res = $sql->query($query);
+        while ($arr = $sql->fetch_assoc($res)) {
+            $arItems[] = $arr;
+        }
+
+        if (count($arItems) >= 6) {
+            $data->message = 'Вы не можете голосовать больше чем за 6 работ в одной наминации';
+            return $data;
+        }
+
         $query = 'SELECT * FROM vote_tablenew WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {
@@ -188,7 +209,7 @@ class voting extends metamodule
                 $count = 1;
             }
 
-            $query = 'INSERT INTO vote_tablenew (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . $work_name . ' ", " ' . $count . ' ")';
+            $query = 'INSERT INTO vote_tablenew (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count, nomination) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . addslashes($work_name) . ' ", " ' . $count . ' ", " ' . $nomination . ' ")';
             $sql->query($query);
 
             $data->bcount = $count;

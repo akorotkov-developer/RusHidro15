@@ -15,11 +15,12 @@ $sect = $_POST["sect"];
 $work_name = $_POST['work_name'];
 $islitra = $_POST['islitra'];
 $isvideo = $_POST['isvideo'];
+$nomination = $_POST['nomination'];
 
 $voting = new voting();
 
 if ($votePhoto != "") {
-    $data = $voting->voteaddphoto($id, $useragent, $sect, strip_tags($work_name), $islitra, $isvideo);
+    $data = $voting->voteaddphoto($id, $useragent, $sect, strip_tags($work_name), $islitra, $isvideo, $nomination);
 } else {
     $data = $voting->voteadd($id, $genre);
 }

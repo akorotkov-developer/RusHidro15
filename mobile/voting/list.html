@@ -14,6 +14,7 @@ $(function(){
 		work_name = work_name.replace('<br>', '');
 		vparent = $('#'+vid);
 		sect = "video";
+		nomination = $(this).attr("data-nomination");
 
 		if(!vparent.hasClass('voted')) {
 			$('.voting-video').hide();
@@ -139,7 +140,7 @@ function popupdestroy() {
 				</div>
 				<div class="voting-item-link">
 					<p><b>{org}</b></p>
-					<div class="voting-item-button" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
+					<div class="voting-item-button" data-nomination="{nomination}" data-id="vote{id}" data-genre="2"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			
 		</div>
@@ -163,7 +164,7 @@ function popupdestroy() {
 				</div>
 				<div class="voting-item-link">
 					<p><b>{org}</b></p>
-					<div class="voting-item-button" data-id="vote{id}" data-genre="1"><i></i><span>Голосовать</span></div>
+					<div class="voting-item-button" data-nomination="{nomination}" data-id="vote{id}" data-genre="1"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			
 		</div>
@@ -187,7 +188,7 @@ function popupdestroy() {
 				</div>
 				<div class="voting-item-link">
 					<p><b>{org}</b></p>
-					<div class="voting-item-button" data-id="vote{id}" data-genre="3"><i></i><span>Голосовать</span></div>
+					<div class="voting-item-button" data-nomination="{nomination}" data-id="vote{id}" data-genre="3"><i></i><span>Голосовать</span></div>
 				</div>
 			</div>			
 		</div>

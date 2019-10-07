@@ -163,6 +163,8 @@ class voting extends metamodule
             $bid = str_replace("video", "", $bid);
         }
 
+        if (!$isvideo and !$islitra) return "Голосование закрыто";
+
         $query = 'SELECT * FROM vote_tablenew WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {

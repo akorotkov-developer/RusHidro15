@@ -72,7 +72,6 @@
 								var re = new RegExp(find, 'g');
 
 								value = value.replace(re, '');
-								console.log(value);
 								if ($(elem).find(".voting-item").attr("id") == "vote" + value) {
 									$(elem).addClass("voted");
 								}
@@ -151,7 +150,7 @@
 				</style>
 
 
-					<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+					<div class="voting-item{set:voted:1} voted{/set} voted" id="vote{id}">
 						<div class="voting-item-image" data-id={id} ><a></a></div>
 						<div class="voting-item-info">
 							<div class="voting-item-name">

@@ -158,6 +158,7 @@ class voting extends metamodule
         //Ищем голосовал ли наш пользователь уже или нет
         $arrData = array();
         $vowels = array(";", "(", ")", "/", ",");
+        $useragentStart = $useragent;
         $useragent = str_replace($vowels, "", $useragent);
 
         $remote = $_SERVER['REMOTE_ADDR'].$useragent;

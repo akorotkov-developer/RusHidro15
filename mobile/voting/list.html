@@ -30,7 +30,7 @@ $(function(){
 		tid = vid.replace('vote','');
 		tid = tid + "video";
 		isvideo = "true";
-		data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, isvideo: isvideo};
+		data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, isvideo: isvideo, nomination: nomination};
 		$.ajax({
 			type: "POST",
 			url: "/ajax/voteadd.php",

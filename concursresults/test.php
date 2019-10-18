@@ -6,6 +6,12 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
+<?
+echo "<pre>";
+var_dump($_SERVER['HTTP_USER_AGENT']);
+echo "</pre>";
+?>
+
 <script>
     $( document ).ready(function() {
         data = {useragent: navigator.userAgent};

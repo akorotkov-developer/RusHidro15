@@ -18,9 +18,6 @@
             exit();
         }
 
-        /*$query = "DELETE FROM vote_tablenew WHERE sectioncolumn = ' video '";
-        $result = $mysqli->query($query);*/
-
         $query = "Select *, max(vote_count) From vote_tablenew WHERE sectioncolumn = ' video ' group by work_name ";
 
         //$query = "SELECT *, MAX(vote_count) FROM vote_table GROUP BY work_name";

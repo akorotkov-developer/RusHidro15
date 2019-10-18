@@ -3,6 +3,7 @@
 <!--
 <h1>Голосование</h1>
 -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
 {#
 $(function(){
@@ -24,25 +25,57 @@ $(function(){
 	});
 	
 	$('#vsubmit').on('click',function(){
-		
-		$(this).parent().hide(); 	
+		$("#sendForm").trigger( "submit" );
+	});
+
+	$("#sendForm").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			type: "POST",
+			url: "/concursresults/video/captcha.php",
+			data: $("#sendForm").serialize(),
+			success: function(data){
+				var isCapcha;
+				isCapcha = $.trim(data);
+				if (isCapcha == "Y") {
+					sendVotingResponse();
+				}
+			}
+		});
+		return false;
+	});
+
+	function sendVotingResponse() {
+		$(this).parent().hide();
 		popupdestroy();
-		tid = vid.replace('vote','');
+		tid = vid.replace('vote', '');
 		tid = tid + "video";
 		isvideo = "true";
-		data = {'id':tid,'genre':genre, 'votephoto':'yes', useragent: navigator.userAgent, work_name: work_name, sect: sect, isvideo: isvideo, nomination: nomination};
+		data = {
+			'id': tid,
+			'genre': genre,
+			'votephoto': 'yes',
+			useragent: navigator.userAgent,
+			work_name: work_name,
+			sect: sect,
+			isvideo: isvideo,
+			nomination: nomination
+		};
 		$.ajax({
-			type: "POST", 
-			url: "/ajax/voteadd.php", 
+			type: "POST",
+			url: "/ajax/voteadd.php",
 			data: data,
 			dataType: 'json',
-			success: function(data) {
-				if(data['bcount']) { vparent.find('.voting-item-count span').text(data['bcount']); vparent.addClass('voted');}
-				else {alert(data['message'])}				
+			success: function (data) {
+				if (data['bcount']) {
+					vparent.find('.voting-item-count span').text(data['bcount']);
+					vparent.addClass('voted');
+				} else {
+					alert(data['message'])
+				}
 			}
-		});			
-		
-	});
+		});
+	}
 	
 	$('.voting-item-image').on('click',function(){
 		data = {'id':$(this).data('id')};
@@ -110,6 +143,10 @@ function popupdestroy() {
 		<div class="voting-alert-title">Вы уверены, что хотите<br>проголосовать за этого участника?</div>
 		<a id="vsubmit">Да</a>
 		<a class="vclose" onclick="$(this).parent().hide(); popupdestroy()">Нет</a>
+
+		<form method="post" id="sendForm" style="margin-top: 15px; margin-left: 30px;">
+			<div class="g-recaptcha" data-sitekey="6LekUb4UAAAAAIPu4bAeHHKyVDwZgGGtCN59T1nO"></div>
+		</form>
 	</div>
 	
 	<div class="voting-video">

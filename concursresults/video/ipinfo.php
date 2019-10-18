@@ -50,9 +50,10 @@ if ($_GET["work_name"]) {
         });
     </script>
     <?
-    echo '<a href="/concursresults/video/ipinfo.php" style="font-size: 24px; color: #447700; font-weight: bold; margin-bottom: 40px">< вернуться назад</a><br><br><br><br>';
+    echo '<a href="/concursresults/video/ipinfo.php" style="font-size: 24px; color: #447700; font-weight: bold; margin-bottom: 40px">< вернуться назад</a>';
 
     echo "<h3>Распределение голосов для " . $_GET["work_name"] . "</h3>";
+    echo "<h4>Всего голосов <span style='color: red'>" . $_GET["vote_count"] . "</span></h4><br><br>";
 
     $query = "SELECT * FROM vote_tablenew WHERE work_name LIKE '%" . $_GET["work_name"] . "%'";
     $result = $mysqli->query($query);
@@ -88,6 +89,7 @@ if ($_GET["work_name"]) {
     <table style="width:100%">
         <tr>
             <td>
+                <b>IP адреса с которых было больше 5 голосов:</b><br><br>
                 <?
                 foreach ($array as $key => $item) {
                     if ($item > 5) {
@@ -123,7 +125,7 @@ if ($_GET["work_name"]) {
     uasort($arrItems, 'cmp_function');
 
     foreach ($arrItems as $item) {
-        echo "<a href='?work_name=" . $item["work_name"] . "'>" . $item["work_name"] . "</a> - <b>" . $item["max(vote_count)"] . " голосов</b><br>";
+        echo "<a href='?work_name=" . $item["work_name"] . "&vote_count=" . $item["max(vote_count)"] . "'>" . $item["work_name"] . "</a> - <b>" . $item["max(vote_count)"] . " голосов</b><br>";
     }
 }
 

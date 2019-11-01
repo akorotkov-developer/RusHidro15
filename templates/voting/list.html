@@ -8,7 +8,7 @@
 {#
 $(function(){
 	$('body').on('click','.voting-item-button', function(){
-		vid = $(this).data('id');
+/*		vid = $(this).data('id');
 		genre = $(this).data('genre');
 		work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
 
@@ -21,7 +21,7 @@ $(function(){
 			$('.voting-video').hide();		
 			$('#voting-popup').fadeIn(); 
 			$('.voting-alert').show();
-		}
+		}*/
 	});
 	
 	$('#vsubmit').on('click',function(){
@@ -168,7 +168,8 @@ function popupdestroy() {
 	
 	<div class="voting-list">
 		{mask:dance}
-		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
+		<div class="voting-item voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -192,7 +193,8 @@ function popupdestroy() {
 	
 	<div class="voting-list">
 		{mask:song}
-		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
+		<div class="voting-item voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -216,7 +218,8 @@ function popupdestroy() {
 	
 	<div class="voting-list">
 		{mask:original}
-		<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">
+		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
+		<div class="voting-item voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">

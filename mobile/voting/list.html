@@ -130,7 +130,21 @@
 
 							value = value.replace(re, '');
 							if ($(elem).attr("id") == "vote" + value) {
-								$(elem).addClass("voted");
+								if ($(elem).hasClass('dance')) {
+									$('.dance').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
+								if ($(elem).hasClass('song')) {
+									$('.song').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
+								if ($(elem).hasClass('original')) {
+									$('.original').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
 							}
 						});
 					});

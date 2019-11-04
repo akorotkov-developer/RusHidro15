@@ -72,6 +72,27 @@
 							if (data['bcount']) {
 								vparent.find('.voting-item-count span').text(data['bcount']);
 								vparent.addClass('voted');
+								if (vparent.hasClass('dance')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('dance')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
+								if (vparent.hasClass('song')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('song')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
+								if (vparent.hasClass('original')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('original')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
 							} else {
 								alert(data['message'])
 							}
@@ -132,7 +153,21 @@
 
 							value = value.replace(re, '');
 							if ($(elem).attr("id") == "vote" + value) {
-								$(elem).addClass("voted");
+								if ($(elem).hasClass('dance')) {
+									$('.dance').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
+								if ($(elem).hasClass('song')) {
+									$('.song').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
+								if ($(elem).hasClass('original')) {
+									$('.original').each(function(q,divelem) {
+										$(divelem).addClass("voted");
+									});
+								}
 							}
 						});
 					});
@@ -188,7 +223,7 @@
 	<div class="voting-list">
 		{mask:dance}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item" id="vote{id}">
+		<div class="voting-item dance" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -213,7 +248,7 @@
 	<div class="voting-list">
 		{mask:song}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item" id="vote{id}">
+		<div class="voting-item song" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -238,7 +273,7 @@
 	<div class="voting-list">
 		{mask:original}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item" id="vote{id}">
+		<div class="voting-item original" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">

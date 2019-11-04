@@ -199,7 +199,7 @@ class voting extends metamodule
         }
 
         if (count($arItems) >= 1) {
-            $data->message = 'Вы не можете голосовать больше чем за 1 работу в одной наминации';
+            $data->message = 'Вы не можете голосовать больше чем за 1 работу в одной номинации';
             return $data;
         }
 

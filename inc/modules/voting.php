@@ -69,8 +69,16 @@ class voting extends metamodule
 	
 		$ar = 0;
 		$i = 0;
+
+        //Определим что мы находимся на странице победители
+        $isPobediteli = strpos($_SERVER['REQUEST_URI'], "/energiya-talanta/pobediteli/");
+
 		foreach($list->item as $item) {
-            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $item->id . 'video"';
+		    if ($isPobediteli) {
+                $query = 'SELECT * FROM vote_table_finalvoting WHERE vote_id = "' . $item->id . 'video"';
+            } else {
+                $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $item->id . 'video"';
+            }
             $res = $sql->query($query);
             $arrCounts = array();
             while ($arr = $sql->fetch_assoc($res)) {
@@ -97,6 +105,14 @@ class voting extends metamodule
 			}
 			$ar ++;
 		}
+
+        //Определим что мы находимся на странице победители
+        $isPobediteli = strpos($_SERVER['REQUEST_URI'], "/energiya-talanta/pobediteli/");
+        if ($isPobediteli) {
+            $page->isVotingTrue = true;
+        } else {
+            $page->noVoting = true;
+        }
 		
         $html = $this->sprintt($page, $this->_tplDir() . "list.html");
 
@@ -112,12 +128,12 @@ class voting extends metamodule
         global $control;
         global $config;
         global $sql;
-		
+
 		$page = All::b_data_all($bid, 'golosovanie');
 		$voted = '';
 		$smfilter = json_decode($_COOKIE['smfilter'],true);
 		if($smfilter && $smfilter['bid'][$bid]) $voted = ' voted';
-		
+
 		if(!$page->video_link) {
 			$addHtml ='<div class="voting-video-player"><video width="100%" height="350" controls="controls" poster="" ><source src="/files/'.$page->video.'" type="video/mp4" /></video></div>';
 		} else {
@@ -136,7 +152,7 @@ class voting extends metamodule
         } else {
             $page->count = "";
         }
-		
+
 		$addHtml .= '<div class="voting-video-info'.$voted.'">';
 		if($page->photo) $addHtml .= '<img class="voting-video-person" src="/images/1/'.$page->photo.'" alt="" />';
 		$addHtml .= '<div class="voting-item-info">';
@@ -145,7 +161,7 @@ class voting extends metamodule
 		$addHtml .= '<div class="voting-item-text">'.$page->about.'</div>';
 		$addHtml .= '</div>';
 		$addHtml .= '</div>';
-		
+
         return $addHtml;
     }
 
@@ -175,19 +191,19 @@ class voting extends metamodule
 
         if (!$isvideo and !$islitra) return "Голосование закрыто";
 
-        $query = 'Select *, max(vote_count) From vote_tablenew WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '" AND nomination = " ' . $nomination . ' "  group by work_name ';
+        $query = 'Select *, max(vote_count) From vote_table_finalvoting WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '" AND nomination = " ' . $nomination . ' "  group by work_name ';
 
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {
             $arItems[] = $arr;
         }
 
-        if (count($arItems) >= 6) {
-            $data->message = 'Вы не можете голосовать больше чем за 6 работ в одной наминации';
+        if (count($arItems) >= 1) {
+            $data->message = 'Вы не можете голосовать больше чем за 1 работу в одной наминации';
             return $data;
         }
 
-        $query = 'SELECT * FROM vote_tablenew WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
+        $query = 'SELECT * FROM vote_table_finalvoting WHERE vote_ipadress = "' . $remote . '" AND vote_id ="' . $bid . '"';
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {
             $arrData[] = $arr;
@@ -199,7 +215,7 @@ class voting extends metamodule
         } else {
             //Если запись не нашлась, то ищем все голоса за эту картинку, получаем максимальное значение и прибавляем 1
             $arrCounts = array();
-            $query = 'SELECT * FROM vote_tablenew WHERE vote_id = "' . $bid . '"';
+            $query = 'SELECT * FROM vote_table_finalvoting WHERE vote_id = "' . $bid . '"';
             $res = $sql->query($query);
             while ($arr = $sql->fetch_assoc($res)) {
                 $arrCounts[] = $arr['vote_count'];
@@ -210,7 +226,7 @@ class voting extends metamodule
                 $count = 1;
             }
 
-            $query = 'INSERT INTO vote_tablenew (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count, nomination) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . addslashes($work_name) . ' ", " ' . $count . ' ", " ' . $nomination . ' ")';
+            $query = 'INSERT INTO vote_table_finalvoting (vote_id, vote_ipadress, sectioncolumn, work_name, vote_count, nomination) VALUES ("' . $bid . '", "' . $remote . '", " ' . $sect . ' ", " ' . addslashes($work_name) . ' ", " ' . $count . ' ", " ' . $nomination . ' ")';
             $sql->query($query);
 
             $data->bcount = $count;

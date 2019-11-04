@@ -19,7 +19,13 @@ $vowels = array(";", "(", ")", "/", ",");
 $useragent = str_replace($vowels, "", $useragent);
 $remote = $_SERVER['REMOTE_ADDR'].$useragent;
 
-$query = "SELECT * FROM vote_tablenew WHERE vote_ipadress = '" . $remote ."'";
+$isPobediteli = strpos($_POST["urlString"], "/energiya-talanta/pobediteli/");
+
+if ($isPobediteli) {
+    $query = "SELECT * FROM vote_table_finalvoting WHERE vote_ipadress = '" . $remote . "'";
+} else {
+    $query = "SELECT * FROM vote_tablenew WHERE vote_ipadress = '" . $remote . "'";
+}
 $result = $mysqli->query($query);
 
 /* ассоциативный массив */

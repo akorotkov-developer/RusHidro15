@@ -4,106 +4,109 @@
 <h1>Голосование</h1>
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<script>
-{#
-$(function(){
-	$('body').on('click','.voting-item-button', function(){
-/*		vid = $(this).data('id');
-		genre = $(this).data('genre');
-		work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
+{if: {isVotingTrue}}
+	<script>
+		{#
+			$(function(){
+				$('body').on('click','.voting-item-button', function(){
+			/*		vid = $(this).data('id');
+					genre = $(this).data('genre');
+					work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
 
-		work_name = work_name.replace('<br>', '');
-		vparent = $('#'+vid);
-		sect = "video";
-		nomination = $(this).attr("data-nomination");
+					work_name = work_name.replace('<br>', '');
+					vparent = $('#'+vid);
+					sect = "video";
+					nomination = $(this).attr("data-nomination");
 
-		if(!vparent.hasClass('voted')) {
-			$('.voting-video').hide();
-			$('#voting-popup').fadeIn();
-			$('.voting-alert').show();
-		}*/
-	});
+					if(!vparent.hasClass('voted')) {
+						$('.voting-video').hide();
+						$('#voting-popup').fadeIn();
+						$('.voting-alert').show();
+					}*/
+				});
 
-	$('#vsubmit').on('click',function(){
-		$("#sendForm").trigger( "submit" );
-	});
+				$('#vsubmit').on('click',function(){
+					$("#sendForm").trigger( "submit" );
+				});
 
-	$("#sendForm").submit(function(e){
-		e.preventDefault();
-		$.ajax({
-			type: "POST",
-			url: "/concursresults/video/captcha.php",
-			data: $("#sendForm").serialize(),
-			success: function(data){
-				var isCapcha;
-				isCapcha = $.trim(data);
-				if (isCapcha == "Y") {
-					sendVotingResponse();
+				$("#sendForm").submit(function(e){
+					e.preventDefault();
+					$.ajax({
+						type: "POST",
+						url: "/concursresults/video/captcha.php",
+						data: $("#sendForm").serialize(),
+						success: function(data){
+							var isCapcha;
+							isCapcha = $.trim(data);
+							if (isCapcha == "Y") {
+								sendVotingResponse();
+							}
+						}
+					});
+					return false;
+				});
+
+				function sendVotingResponse() {
+					$(this).parent().hide();
+					popupdestroy();
+					tid = vid.replace('vote', '');
+					tid = tid + "video";
+					isvideo = "true";
+					data = {
+						'id': tid,
+						'genre': genre,
+						'votephoto': 'yes',
+						useragent: navigator.userAgent,
+						work_name: work_name,
+						sect: sect,
+						isvideo: isvideo,
+						nomination: nomination
+					};
+					$.ajax({
+						type: "POST",
+						url: "/ajax/voteadd.php",
+						data: data,
+						dataType: 'json',
+						success: function (data) {
+							if (data['bcount']) {
+								vparent.find('.voting-item-count span').text(data['bcount']);
+								vparent.addClass('voted');
+							} else {
+								alert(data['message']);
+							}
+							grecaptcha.reset();
+						}
+					});
 				}
-			}
-		});
-		return false;
-	});
 
-	function sendVotingResponse() {
-		$(this).parent().hide();
-		popupdestroy();
-		tid = vid.replace('vote', '');
-		tid = tid + "video";
-		isvideo = "true";
-		data = {
-			'id': tid,
-			'genre': genre,
-			'votephoto': 'yes',
-			useragent: navigator.userAgent,
-			work_name: work_name,
-			sect: sect,
-			isvideo: isvideo,
-			nomination: nomination
-		};
-		$.ajax({
-			type: "POST",
-			url: "/ajax/voteadd.php",
-			data: data,
-			dataType: 'json',
-			success: function (data) {
-				if (data['bcount']) {
-					vparent.find('.voting-item-count span').text(data['bcount']);
-					vparent.addClass('voted');
-				} else {
-					alert(data['message'])
-				}
-			}
-		});
-	}
-	
-	$('.voting-item-image').on('click',function(){
-		data = {'id':$(this).data('id')};
-		$.ajax({
-			type: "POST", 
-			url: "/ajax/voteinfo.php", 
-			data: data,
-			dataType: 'json',
-			success: function(data) {							
-				$('#ajaxData').html(data);
-			}
-		});			
-	
-		$('#voting-popup').fadeIn(); 
-		$('.voting-video').show();		
-	})
-	
-	
-})	
+				$('.voting-item-image').on('click',function(){
+					data = {'id':$(this).data('id')};
+					$.ajax({
+						type: "POST",
+						url: "/ajax/voteinfo.php",
+						data: data,
+						dataType: 'json',
+						success: function(data) {
+							$('#ajaxData').html(data);
+						}
+					});
 
-function popupdestroy() {
-	$('#voting-popup').fadeOut(); 
-	$('.voting-video').hide();	
-	$('#ajaxData').html('');
-}
+					$('#voting-popup').fadeIn();
+					$('.voting-video').show();
+				})
 
-#}
-</script>
+
+			})
+
+			function popupdestroy() {
+				$('#voting-popup').fadeOut();
+				$('.voting-video').hide();
+				$('#ajaxData').html('');
+			}
+
+		#}
+	</script>
+{/}
 
 <script>
 	{#
@@ -137,6 +140,18 @@ function popupdestroy() {
 	#}
 </script>
 
+{if: {noVoting}}
+	<script>
+		{#
+			$( document ).ready(function() {
+				$('.voting-item').each(function(i,elem) {
+					$(this).addClass("voted");
+				});
+			});
+		#}
+	</script>
+{/}
+
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
 
 	<div class="voting-alert">
@@ -169,7 +184,7 @@ function popupdestroy() {
 	<div class="voting-list">
 		{mask:dance}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item voted" id="vote{id}">
+		<div class="voting-item" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -194,7 +209,7 @@ function popupdestroy() {
 	<div class="voting-list">
 		{mask:song}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item voted" id="vote{id}">
+		<div class="voting-item" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -219,7 +234,7 @@ function popupdestroy() {
 	<div class="voting-list">
 		{mask:original}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item voted" id="vote{id}">
+		<div class="voting-item" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">

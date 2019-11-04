@@ -71,6 +71,27 @@
 							if (data['bcount']) {
 								vparent.find('.voting-item-count span').text(data['bcount']);
 								vparent.addClass('voted');
+								if (vparent.hasClass('dance')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('dance')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
+								if (vparent.hasClass('song')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('song')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
+								if (vparent.hasClass('original')) {
+									$('.voting-item').each(function(i,elem) {
+										if ($(elem).hasClass('original')) {
+											$(elem).addClass("voted");
+										}
+									});
+								}
 							} else {
 								alert(data['message']);
 							}

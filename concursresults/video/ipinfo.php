@@ -55,7 +55,7 @@ if ($_GET["work_name"]) {
     echo "<h3>Распределение голосов для " . $_GET["work_name"] . "</h3>";
     echo "<h4>Всего голосов <span style='color: red'>" . $_GET["vote_count"] . "</span></h4><br><br>";
 
-    $query = "SELECT * FROM vote_tablenew WHERE work_name LIKE '%" . $_GET["work_name"] . "%'";
+    $query = "SELECT * FROM vote_table_finalvoting WHERE work_name LIKE '%" . $_GET["work_name"] . "%'";
     $result = $mysqli->query($query);
 
     $arrItems = array();
@@ -106,7 +106,7 @@ if ($_GET["work_name"]) {
     <?
 } else {
 
-    $query = "Select *, max(vote_count) From vote_tablenew WHERE sectioncolumn = ' video ' group by work_name ";
+    $query = "Select *, max(vote_count) From vote_table_finalvoting WHERE sectioncolumn = ' video ' group by work_name ";
 
     //$query = "SELECT *, MAX(vote_count) FROM vote_table GROUP BY work_name";
     $result = $mysqli->query($query);

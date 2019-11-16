@@ -240,9 +240,9 @@ function parse_href($text)
     $ico['zip'] = '/img/icons/ico-zip.gif';
     $ico['rtf'] = '/img/icons/ico-rtf.gif';
     $ico['pps'] = '/img/icons/ico-pps.gif';
-    $ico['file'] = '/img/icons/ico-file.gif';
-    $tb = '<a href="{href}"><img src="{tmpimg}" /></a>&nbsp;';
-    $ta = '&nbsp;<small>(.{type},&nbsp;{size}Кб)</small>';
+    //$ico['file'] = '/img/icons/ico-file.gif';
+    //$tb = '<a href="{href}"><img src="{tmpimg}" /></a>&nbsp;';
+    //$ta = '&nbsp;<small>(.{type},&nbsp;{size}Кб)</small>';
 
     preg_match_all('/<a(.*) href="(.*)"(.*)>(.*)<\/a>/Uis', $text, $out);
 

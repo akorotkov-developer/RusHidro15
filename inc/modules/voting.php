@@ -191,7 +191,8 @@ class voting extends metamodule
 
         if (!$isvideo and !$islitra) return "Голосование закрыто";
 
-        $query = 'Select *, max(vote_count) From vote_table_finalvoting WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '" AND nomination = " ' . $nomination . ' "  group by work_name ';
+        //$query = 'Select *, max(vote_count) From vote_table_finalvoting WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '" AND nomination = " ' . $nomination . ' "  group by work_name ';
+        $query = 'Select *, max(vote_count) From vote_table_finalvoting WHERE sectioncolumn = " video " AND vote_ipadress = "' . $remote . '"  group by work_name ';
 
         $res = $sql->query($query);
         while ($arr = $sql->fetch_assoc($res)) {
@@ -199,7 +200,7 @@ class voting extends metamodule
         }
 
         if (count($arItems) >= 1) {
-            $data->message = 'Вы не можете голосовать больше чем за 1 работу в одной номинации';
+            $data->message = 'Вы не можете голосовать больше чем за 1 работу';
             return $data;
         }
 

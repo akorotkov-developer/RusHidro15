@@ -9,7 +9,7 @@
 		{#
 			$(function(){
 				$('body').on('click','.voting-item-button', function(){
-			/*		vid = $(this).data('id');
+					vid = $(this).data('id');
 					genre = $(this).data('genre');
 					work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
 
@@ -22,7 +22,7 @@
 						$('.voting-video').hide();
 						$('#voting-popup').fadeIn();
 						$('.voting-alert').show();
-					}*/
+					}
 				});
 
 				$('#vsubmit').on('click',function(){
@@ -71,27 +71,11 @@
 							if (data['bcount']) {
 								vparent.find('.voting-item-count span').text(data['bcount']);
 								vparent.addClass('voted');
-								if (vparent.hasClass('dance')) {
-									$('.voting-item').each(function(i,elem) {
-										if ($(elem).hasClass('dance')) {
-											$(elem).addClass("voted");
-										}
-									});
-								}
-								if (vparent.hasClass('song')) {
-									$('.voting-item').each(function(i,elem) {
-										if ($(elem).hasClass('song')) {
-											$(elem).addClass("voted");
-										}
-									});
-								}
-								if (vparent.hasClass('original')) {
-									$('.voting-item').each(function(i,elem) {
-										if ($(elem).hasClass('original')) {
-											$(elem).addClass("voted");
-										}
-									});
-								}
+
+								$('.voting-item').each(function(i,elem) {
+									$(elem).addClass("voted");
+								});
+
 							} else {
 								alert(data['message']);
 							}
@@ -132,7 +116,8 @@
 <script>
 	{#
 		$( document ).ready(function() {
-			data = {useragent: navigator.userAgent};
+			var urlString = window.location.href;
+			data = {useragent: navigator.userAgent, urlString};
 			$.ajax({
 				type: "POST",
 				url: "/ajax/setvotegrey.php",
@@ -151,21 +136,9 @@
 
 							value = value.replace(re, '');
 							if ($(elem).attr("id") == "vote" + value) {
-								if ($(elem).hasClass('dance')) {
-									$('.dance').each(function(q,divelem) {
-										$(divelem).addClass("voted");
-									});
-								}
-								if ($(elem).hasClass('song')) {
-									$('.song').each(function(q,divelem) {
-										$(divelem).addClass("voted");
-									});
-								}
-								if ($(elem).hasClass('original')) {
-									$('.original').each(function(q,divelem) {
-										$(divelem).addClass("voted");
-									});
-								}
+								$('.voting-item').each(function(q,divelem) {
+									$(divelem).addClass("voted");
+								});
 							}
 						});
 					});

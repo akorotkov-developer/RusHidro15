@@ -8,7 +8,7 @@
 {if: {isVotingTrue}}
 	<script>
 		{#
-			$(function(){
+/*			$(function(){
 				$('body').on('click','.voting-item-button', function(){
 					vid = $(this).data('id');
 					genre = $(this).data('genre');
@@ -102,13 +102,13 @@
 				})
 
 
-			})
+			})*/
 
-			function popupdestroy() {
+/*			function popupdestroy() {
 				$('#voting-popup').fadeOut();
 				$('.voting-video').hide();
 				$('#ajaxData').html('');
-			}
+			}*/
 
 		#}
 	</script>
@@ -116,7 +116,7 @@
 
 <script>
 	{#
-		$( document ).ready(function() {
+/*		$( document ).ready(function() {
 
 			var urlString = window.location.href;
 			data = {useragent: navigator.userAgent, urlString};
@@ -147,7 +147,7 @@
 					});
 				}
 			});
-		});
+		});*/
 	#}
 </script>
 
@@ -197,7 +197,7 @@
 	<div class="voting-list">
 		{mask:dance}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item dance" id="vote{id}">
+		<div class="voting-item dance voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -222,7 +222,7 @@
 	<div class="voting-list">
 		{mask:song}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item song" id="vote{id}">
+		<div class="voting-item song voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id} ><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">
@@ -247,7 +247,7 @@
 	<div class="voting-list">
 		{mask:original}
 		<!--<div class="voting-item{set:voted:1} voted{/set}" id="vote{id}">-->
-		<div class="voting-item original" id="vote{id}">
+		<div class="voting-item original voted" id="vote{id}">
 			<div class="voting-item-image" style="background-image: url(/images/2/{video_image})" data-id={id}><a></a></div>
 			<div class="voting-item-info">
 				<div class="voting-item-name">

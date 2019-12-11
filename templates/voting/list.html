@@ -8,8 +8,8 @@
 {if: {isVotingTrue}}
 	<script>
 		{#
-/*			$(function(){
-				$('body').on('click','.voting-item-button', function(){
+			$(function(){
+	/*			$('body').on('click','.voting-item-button', function(){
 					vid = $(this).data('id');
 					genre = $(this).data('genre');
 					work_name = $(this).parent().parent().find('.voting-item-name').find('.work_name').html();
@@ -84,31 +84,11 @@
 						}
 					});
 				}
-
-				$('.voting-item-image').on('click',function(){
-					data = {'id':$(this).data('id')};
-					$.ajax({
-						type: "POST",
-						url: "/ajax/voteinfo.php",
-						data: data,
-						dataType: 'json',
-						success: function(data) {
-							$('#ajaxData').html(data);
-						}
-					});
-
-					$('#voting-popup').fadeIn();
-					$('.voting-video').show();
-				})
+*/
 
 
-			})*/
 
-/*			function popupdestroy() {
-				$('#voting-popup').fadeOut();
-				$('.voting-video').hide();
-				$('#ajaxData').html('');
-			}*/
+			})
 
 		#}
 	</script>
@@ -162,6 +142,34 @@
 		#}
 	</script>
 {/}
+
+<script>
+	{#
+		function popupdestroy() {
+			$('#voting-popup').fadeOut();
+			$('.voting-video').hide();
+			$('#ajaxData').html('');
+		}
+
+		$(function(){
+			$('.voting-item-image').on('click',function(){
+				data = {'id':$(this).data('id')};
+				$.ajax({
+					type: "POST",
+					url: "/ajax/voteinfo.php",
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						$('#ajaxData').html(data);
+					}
+				});
+
+				$('#voting-popup').fadeIn();
+				$('.voting-video').show();
+			});
+		});
+	#}
+</script>
 
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
 

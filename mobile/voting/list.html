@@ -83,31 +83,12 @@
 						}
 					});
 				}
-
-				$('.voting-item-image').on('click',function(){
-					data = {'id':$(this).data('id')};
-					$.ajax({
-						type: "POST",
-						url: "/ajax/voteinfo.php",
-						data: data,
-						dataType: 'json',
-						success: function(data) {
-							$('#ajaxData').html(data);
-						}
-					});
-
-					$('#voting-popup').fadeIn();
-					$('.voting-video').show();
-				})*/
+*/
 
 
 			})
 
-			function popupdestroy() {
-				$('#voting-popup').fadeOut();
-				$('.voting-video').hide();
-				$('#ajaxData').html('');
-			}
+
 
 		#}
 	</script>
@@ -159,6 +140,36 @@
 		#}
 	</script>
 {/}
+
+<script>
+	{#
+
+		function popupdestroy() {
+			$('#voting-popup').fadeOut();
+			$('.voting-video').hide();
+			$('#ajaxData').html('');
+		};
+
+		$(function(){
+
+			$('.voting-item-image').on('click',function(){
+				data = {'id':$(this).data('id')};
+				$.ajax({
+					type: "POST",
+					url: "/ajax/voteinfo.php",
+					data: data,
+					dataType: 'json',
+					success: function(data) {
+						$('#ajaxData').html(data);
+					}
+				});
+
+				$('#voting-popup').fadeIn();
+				$('.voting-video').show();
+			});
+		});
+		#}
+</script>
 
 <div class="voting-popup" id="voting-popup"><div class="voting-popup-in">
 

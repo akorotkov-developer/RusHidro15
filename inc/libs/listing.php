@@ -76,7 +76,8 @@ class Listing
         if ($this->page) $this->start = 0 + $this->page * $this->limit;
         if ($this->type == 'blocks') {
             //echo "select * from prname_b_$this->template where $this->parent $this->critery `visible` = '1' "."order by ".($this->sortfield && $this->sortfield!=='sort'? (!stristr($this->sortfield,'date') && !stristr($this->sortfield,'shou') && !stristr($this->sortfield,'blockparent')?'binary UPPER('.$this->sortfield.')':$this->sortfield):'sort')." $this->sortby"."".($this->limit?' limit '.($this->start?$this->start:'0').', '.$this->limit:'')."";
-            $this->items = $sql->query("select * from prname_b_$this->template where $this->parent $this->critery `visible` = '1' " . "order by " . ($this->sortfield && $this->sortfield !== 'sort' ? (!stristr($this->sortfield, 'date') && !stristr($this->sortfield, 'shou') && !stristr($this->sortfield, 'blockparent') ? ' ' . $this->sortfield . ' ' : $this->sortfield) : 'sort') . " $this->sortby" . "" . ($this->limit ? ' limit ' . ($this->start ? $this->start : '0') . ', ' . $this->limit : '') . "");
+           $this->items = $sql->query("select * from prname_b_$this->template where $this->parent $this->critery `visible` = '1' " . "order by " . ($this->sortfield && $this->sortfield !== 'sort' ? (!stristr($this->sortfield, 'date') && !stristr($this->sortfield, 'shou') && !stristr($this->sortfield, 'blockparent') ? ' ' . $this->sortfield . ' ' : $this->sortfield) : 'sort') . " $this->sortby" . "" . ($this->limit ? ' limit ' . ($this->start ? $this->start : '0') . ', ' . $this->limit : '') . "");
+
         }
 
         if ($this->type == 'cats') {

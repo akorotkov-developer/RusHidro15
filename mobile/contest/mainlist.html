@@ -1,12 +1,12 @@
 {mask:main}
 
-<div class="contest-block-title"><span>Конкурсы</span></div>
-{mask:item}				
-<!--<div class="contest-block">
-	<div class="contest-block-image" style="background-image: url(/images/1/{img})"><a href="{mis:link}{url}?mobile=1{/}{set:link}{link}{/}" {set:link}target="_blank"{/}></a></div>
-	<div class="contest-block-link"><a href="{mis:link}{url}?mobile=1{/}{set:link}{link}{/}" {set:link}target="_blank"{/}>{subtitle}</a></div>					
-	{set:_last}<div class="contest-block-all"><a href="{../alink}?mobile=1">Все конкурсы</a></div>{/}
-</div>-->
+<div class="contest-block-title"><span>Юбилей</span></div>
+{mask:item}
+<div class="news-block">
+	<div class="news-block-date">{date_1}</div>
+	<div class="news-block-link"><a href="{url}?mobile=1">{title}</a></div>
+	{set:_last}<div class="news-block-all"><a href="/news?jubilee=y">Все новости</a></div>{/}
+</div>
 {/mask}
 
 

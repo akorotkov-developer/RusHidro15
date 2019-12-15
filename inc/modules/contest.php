@@ -158,7 +158,8 @@ class contest extends metamodule
         $list->limit = 2;
         $list->sortfield = 'date DESC, id';
         $list->sortby = 'desc';
-        $list->critery = "jubilee = '1' and";
+        //$list->critery = "jubilee = '1' and";
+        $list->critery = "jubilee = '1' and main_page = '1' and";
         $list->get_list();
         $list->get_item();
 

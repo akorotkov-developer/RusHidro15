@@ -65,6 +65,7 @@ class news extends metamodule
         $list->tmp_url = $list->all->get_url($control->cid); //для постранички
         $list->no_text_view = 1; //не обрабатывать HTML-содержимое
 
+        //Если get параметр jubilee равен 1, то выбираем из базы только элменты с установленной галкой Юбилей
         if ($_GET["jubilee"] == "y") {
             $list->critery = "jubilee = '1' and";
             $list->limit = 100;
@@ -72,6 +73,16 @@ class news extends metamodule
 
         $list->get_list();
         $list->get_item();
+
+        //Если у элемента новости лендинга не проставлена галка Юбилей, то удаляем этот элемент
+        if ($_GET["jubilee"] != "y") {
+            foreach ($list->item as $key => $item) {
+                if ($item->jubilee == "1") {
+                    unset($list->item[$key]);
+                }
+            }
+        }
+
         $page->item = $list->item;
 
         if ($_GET["jubilee"] != "y") {
@@ -223,14 +234,23 @@ class news extends metamodule
         $newsID = 404;			
 		
         $list = new Listing('news_landing', 'blocks', $newsID);
-        $list->limit = 2;
+        $list->limit = 10;
         $list->sortfield = 'date DESC, id';
-        $list->sortby = 'desc';        
+        $list->sortby = 'desc';
         $list->get_list();
         $list->get_item();
 
+        //Убираем с главной страницы элменты у которых устанвлено свойство Юбилей
+        $arListItems = array();
+        foreach ($list->item as $key => $item) {
+            if (count($arListItems) > 1) break;
+            if ($item->jubilee != "1") {
+                $arListItems[] = $item;
+            }
+        }
+
         $page = new stdClass();
-        $page->item = $list->item;
+        $page->item = $arListItems;
 		
         $html = $this->sprintt($page, $this->_tplDir() . "mainlist.html");
 

@@ -65,11 +65,18 @@ class news extends metamodule
         $list->tmp_url = $list->all->get_url($control->cid); //для постранички
         $list->no_text_view = 1; //не обрабатывать HTML-содержимое
 
+        if ($_GET["jubilee"] == "y") {
+            $list->critery = "jubilee = '1' and";
+            $list->limit = 100;
+        }
+
         $list->get_list();
         $list->get_item();
         $page->item = $list->item;
 
-        $page->navigation = $list->navigation;
+        if ($_GET["jubilee"] != "y") {
+            $page->navigation = $list->navigation;
+        }
         $page->url_prev = $list->url_prev;
         $page->url_next = $list->url_next;
 

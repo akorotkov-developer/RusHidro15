@@ -152,18 +152,19 @@ class contest extends metamodule
         $html = get_cache($_cn);
         if (!is_null($html)) return $html;
 
-        $newsID = 405;					
-		
-        $list = new Listing('contest', 'blocks', $newsID);
-        $list->limit = 2;        
+        $newsID = 404;
+
+        $list = new Listing('news_landing', 'blocks', $newsID);
+        $list->limit = 2;
+        $list->sortfield = 'date DESC, id';
+        $list->sortby = 'desc';
+        $list->critery = "jubilee = '1' and";
         $list->get_list();
         $list->get_item();
 
         $page = new stdClass();
         $page->item = $list->item;
-		
-		$page->alink = All::get_url($newsID);		
-		
+
         $html = $this->sprintt($page, $this->_tplDir() . "mainlist.html");
 
         //сохраняем кэш
